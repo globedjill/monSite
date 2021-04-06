@@ -1,0 +1,16 @@
+<header fxLayout='row'>
+    <div fxLayout='row'>
+        <img src="./../../../assets/images/logo_sph3rik.png" alt="logo" fxFlex='90px'>
+        <h1 fxFill fxLayoutAlign='center center'>Sph3rik</h1>
+    </div>
+
+    <nav mat-tab-nav-bar fxLayoutAlign='end end' fxFlex='1 0 auto'>
+        <a mat-tab-link *ngFor="let link of listeMenu" [routerLink]='link.lien' (click)="activeLink = link.lien" [active]='activeLink == link.lien'> {{ link.lien }}</a>
+    </nav>
+</header>
+<div>
+    <button mat-raised-button [matMenuTriggerFor]="menuRef">SeConnecter</button>
+    <mat-menu #menuRef="matMenu">
+        <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>
+    </mat-menu>
+</div>

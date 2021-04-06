@@ -1,0 +1,16 @@
+main {
+    & section {
+        h3 {
+            margin: 40px 0 20px 0 !important;
+            font-size: $fontSize_Titre !important;
+        }
+        div {
+            & .mat-card {
+                width: 500px;
+                & .imgBg {
+                    height: 150px;
+                }
+            }
+        }
+    }
+}

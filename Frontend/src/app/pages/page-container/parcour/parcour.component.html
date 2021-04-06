@@ -1,0 +1,52 @@
+<main id='parcour'>
+    <section>
+        <h3 fxLayoutAlign='center center'> Formation</h3>
+        <div fxLayout='row wrap' fxLayoutAlign='center start'>
+            <mat-card *ngFor='let formation of parcourTab'>
+                <mat-card-header>
+                    <mat-card-title>{{ formation.nomFormation }}</mat-card-title>
+                    <mat-card-subtitle>{{ formation.lieu }}</mat-card-subtitle>
+                </mat-card-header>
+                <img class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'>
+                <mat-card-content>
+                    <div fxLayout='row' fxLayoutAlign='space-around center'>
+                        <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>
+                        <p>Date de Sortie : {{ formation.dateSortie | date:'MM/y'}}</p>
+                    </div>
+                </mat-card-content>
+                <mat-card-content>
+                    <div>
+                        <p> Contennu de la formation : </p>
+                        <p> {{ formation.contenu}}</p>
+                        <mat-list dense>
+                            <mat-list-item *ngFor="let item of formation.liste">
+                                {{ item }}
+                            </mat-list-item>
+                        </mat-list>
+                    </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a href="{{ formation.lien}}" target='blank'><button mat-raised-button> En savoir plus</button></a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+    <section>
+        <h3 fxLayoutAlign='center center'>Expérience Professionnelle</h3>
+        <div fxLayout='row wrap' fxLayoutAlign='center start'>
+            <mat-card *ngFor='let xp of experienceTab'>
+                <mat-card-header>
+                    <mat-card-title>{{ xp.enseigne }}</mat-card-title>
+                    <mat-card-subtitle>{{xp.dateEntree | date: "MM/y"}} - {{xp.dateSortie | date: 'MM/y'}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class='imgBg' matCardImage src="{{xp.image}}">
+                <mat-card-content>
+                    {{ xp.fonction }}
+                </mat-card-content>
+                <mat-card-actions align="start">
+                    <button mat-raised-button>En Savoir plus</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </section>
+</main>

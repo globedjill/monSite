@@ -1,0 +1,17 @@
+//TABS
+.mat-tab-label {
+    color: $white !important;
+}
+
+//CARD
+.mat-card {
+    margin: 15px;
+    &-content {
+        margin: 15px;
+    }
+}
+
+//MENU
+.mat-menu {
+    height: 40px;
+}

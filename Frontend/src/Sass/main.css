@@ -1,0 +1,108 @@
+html,
+body {
+  height: 100%;
+  background-color: #03f8821f;
+  padding-top: 90px;
+}
+
+p {
+  text-align: justify;
+}
+
+.mat-tab-label {
+  color: white !important;
+}
+
+.mat-card {
+  margin: 15px;
+}
+
+.mat-card-content {
+  margin: 15px;
+}
+
+.mat-menu {
+  height: 40px;
+}
+
+header {
+  background-image: url("../../assets/images/bg_header.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 8px;
+  color: white !important;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 4;
+}
+
+header::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+
+header div img {
+  height: 100px;
+  width: 100px;
+  border: 1px solid #f3efef;
+  border-radius: 60%;
+  margin: 10px 30px;
+}
+
+header nav {
+  margin-left: 150px;
+}
+
+header nav .mat-tab-link {
+  font-size: 1.2em;
+  color: white;
+}
+
+header nav .mat-tab-label-active {
+  background-color: tomato;
+}
+
+header nav .mat-ink-bar {
+  height: 4px;
+}
+
+header nav a {
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+main section h3 {
+  margin: 40px 0 20px 0 !important;
+  font-size: 3em !important;
+}
+
+main section div .mat-card {
+  width: 500px;
+}
+
+main section div .mat-card .imgBg {
+  height: 150px;
+}
+
+.matCardSeCo {
+  max-width: 500px;
+}
+
+p {
+  min-width: 200px;
+}
+
+span {
+  margin-right: 4px;
+}
+
+img {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+/*# sourceMappingURL=main.css.map */

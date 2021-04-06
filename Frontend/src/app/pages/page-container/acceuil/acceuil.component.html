@@ -1,0 +1,42 @@
+<section id='acceuil'>
+    <mat-card fxLayoutAlign='center center' fxLayout='column'>
+        <mat-card-header>
+            <mat-card-title>Mes Infos</mat-card-title>
+            <mat-card-subtitle>Virgil MINGOT</mat-card-subtitle>
+        </mat-card-header>
+        <!-- <img matCardImage src="Card wide image source"> -->
+        <mat-card-content fxLayout='column'>
+            <p fxLayoutAlign='start center'><span class="material-icons">event</span> {{ dateDeNaissance }}</p>
+            <p fxLayoutAlign='start center'><span class="material-icons">
+              phone
+              </span> +33 6 18 83 28 20</p>
+            <p fxLayoutAlign='start center'><span class="material-icons">
+              alternate_email
+              </span> mingot.virgil@gmail.com</p>
+            <p fxLayoutAlign='start center'><span class="material-icons">
+              location_on
+              </span> 24000 PERIGUEUX</p>
+            <p fxLayoutAlign='start center' [routerLink]="['/portfolio']"> Portfolio </p>
+        </mat-card-content>
+        <mat-card-content fxLayout='row' fxLayoutGap='12px'>
+            <a href="https://www.facebook.com/vivi244"><span><img src="../../../../assets/images/facebook.png" alt="logoFacebook" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
+            <a href="https://twitter.com/DjillGlobe"><span><img src="../../../../assets/images/twitter.png" alt="logotwitter" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
+            <a href="https://www.linkedin.com/in/virgil-mingot/"><span><img src="../../../../assets/images/logo-linkedin.png" alt="logoLinkedin" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
+            <a href="https://www.instagram.com/sph3rik/?hl=fr"><span><img src="../../../../assets/images/instagram.png" alt="logoInstagramm" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
+        </mat-card-content>
+    </mat-card>
+</section>
+<section>
+    <mat-card fxLayoutAlign='center center' fxLayout='column'>
+        <mat-card-header>
+            <mat-card-title>A propos de moi</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <!-- <img matCardImage src="Card wide image source"> -->
+        <mat-card-content fxLayout='column'>
+            <p><span>A</span>De formation spécialisée en produits forestiers, j’ai évolué dans <strong>différents secteurs d’activités</strong> ce qui ma permis d’acquérir de nombreuses compétences et une <strong>expérience professionnelle diversifiée</strong>. Après  plus
+                de 10 ans d’activité dans le domaine du commerce j’ai fait le choix d’une reconversion professionnelle dans le domaine <strong>« digital »</strong> en tant que développeur Web.   Après 6 mois  d’une formation intensive j’ai obtenu mon
+                diplôme , formation qui  m’a permis de maîtriser le codage des différents langages informatiques et l’utilisation des outils nécessaire au développeur Web.<br> Pour la partie front-End <br><strong> - HTML <br>- CSS <br>- JavaScript </strong>                <br><br>Pour la partie Back-End<strong><br>- NodeJS <br>- Express -<br>-   MongoDB </strong><br></p>
+        </mat-card-content>
+    </mat-card>
+</section>
