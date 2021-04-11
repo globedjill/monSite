@@ -1,15 +1,9 @@
 const router = require('express').Router();
 const Formation = require('../database/models/formation.model');
 
-
 router.post('/', (req, res) => {
     const body = req.body;
-    console.log({ body });
-
     const newFormation = new Formation(body);
-
-    console.log(newFormation);
-
     newFormation.save()
         .then(formation => {
             console.log(formation);
@@ -20,5 +14,13 @@ router.post('/', (req, res) => {
             res.status(400).json(err);
         })
 });
+
+router.get('/', (req, res) => {
+    Formation.find({}).exec().then(response => {
+        res.json(response);
+    })
+})
+
+
 
 module.exports = router;

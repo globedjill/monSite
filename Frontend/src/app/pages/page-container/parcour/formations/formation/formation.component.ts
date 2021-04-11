@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Formation } from 'src/shared/modeles/formation.interface';
+import { ParcourService } from 'src/shared/services/parcour.service';
 
 @Component({
   selector: 'app-formation',
@@ -11,7 +12,9 @@ export class FormationComponent implements OnInit {
   parcourTab: Formation[];
 
 
-  constructor() {
+  constructor(
+    private parcourService: ParcourService
+  ) {
     this.parcourTab = [
       {
         nomFormation: 'Developpeur web FullStack',
@@ -83,6 +86,7 @@ export class FormationComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.parcourService.recupFormations();
   }
 
 }

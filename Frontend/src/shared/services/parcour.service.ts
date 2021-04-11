@@ -1,6 +1,7 @@
 import { Formation } from 'src/shared/modeles/formation.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Console } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,13 @@ export class ParcourService  {
     this.http.post<Formation>('/api/formations',formation).subscribe((formation)=>{
       console.log(formation);
     });
+  }
+
+  recupFormations(){
+    console.log('you are here');
+
+    this.http.get<Formation>('api/formations').subscribe((formations)=> {
+      console.log(formations);
+    })
   }
 }
