@@ -3,6 +3,7 @@ export interface Experience {
   dateSortie: Date;
   durée?: number;
   image?: string;
+  alt?: string;
   typeContrat: string;
   enseigne: string;
   lien?: string;

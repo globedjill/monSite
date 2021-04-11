@@ -16,7 +16,8 @@ var MODULES_LAYOUT = [
     common_1.CommonModule,
     forms_1.ReactiveFormsModule,
     flex_layout_1.FlexLayoutModule,
-    material_module_1.MaterialModule
+    material_module_1.MaterialModule,
+    forms_1.FormsModule
 ];
 var LayoutModule = /** @class */ (function () {
     function LayoutModule() {
@@ -24,7 +25,7 @@ var LayoutModule = /** @class */ (function () {
     LayoutModule = __decorate([
         core_1.NgModule({
             declarations: [],
-            imports: [MODULES_LAYOUT,],
+            imports: [MODULES_LAYOUT],
             exports: [MODULES_LAYOUT]
         })
     ], LayoutModule);

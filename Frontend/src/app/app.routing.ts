@@ -5,6 +5,10 @@ import { SeConnecterComponent } from './components/auth/se-connecter/se-connecte
 import { AcceuilComponent } from './pages/page-container/acceuil/acceuil.component';
 import { ContactComponent } from './pages/page-container/contact/contact.component';
 import { PageContainerComponent } from './pages/page-container/page-container.component';
+import { ExperienceFormComponent } from './pages/page-container/parcour/experiences/experience-form/experience-form.component';
+import { ExperienceComponent } from './pages/page-container/parcour/experiences/experience/experience.component';
+import { FormationFormComponent } from './pages/page-container/parcour/formations/formation-form/formation-form.component';
+import { FormationComponent } from './pages/page-container/parcour/formations/formation/formation.component';
 import { ParcourComponent } from './pages/page-container/parcour/parcour.component';
 
 const routes: Routes = [
@@ -12,7 +16,13 @@ const routes: Routes = [
   { path: 'acceuil', component: AcceuilComponent},
   { path: 'seConnecter', component: SeConnecterComponent},
   { path: 'sInscrire', component: SInscrireComponent},
+
   { path: 'parcour', component: ParcourComponent},
+  { path: 'formation', component: FormationComponent},
+  { path: 'formationForm', component: FormationFormComponent},
+  { path: 'experience', component: ExperienceComponent},
+  { path: 'experienceForm' , component:ExperienceFormComponent},
+
   { path: 'contact', component: ContactComponent},
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', component: PageContainerComponent }

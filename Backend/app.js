@@ -1,21 +1,24 @@
 var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 const morgan = require('morgan');
+var path = require('path');
 
 const app = express();
+const routing = require('./routes');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+require('./database/index.database')
+
 
 app.use(morgan('short'));
-app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencsoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '/../../public')));
+app.use(routing);
 
+app.use(express.static(path.join(__dirname, '/../public')));
 app.get('*', (req, res) => {
-    res.sendFile('../../public/index.html');
+    res.sendFile(path.join(__dirname + '/public/index.html'));
 });
+
 
 module.exports = app;

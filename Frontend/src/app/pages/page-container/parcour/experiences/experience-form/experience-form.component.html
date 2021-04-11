@@ -1,0 +1,80 @@
+<section fxLayoutAlign='center center'>
+    <form [formGroup]='experienceForm' (ngSubmit)='onSaveExperience()'>
+        <mat-card style='min-width: 500px; max-width: 600px;'>
+            <mat-card-header>
+                <mat-card-title>Nouvelle Experience</mat-card-title>
+            </mat-card-header>
+
+            <!-- Les Dates -->
+            <mat-card-content>
+                <div fxLayout='column'>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Date d'entrée</mat-label>
+                        <input matInput [matDatepicker]='picker' formControlName='dateEntree'>
+                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Date de sortie</mat-label>
+                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie'>
+                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>
+                        <mat-datepicker #pickerSortie></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <!-- image -->
+                <div fxLayout='column'>
+                    <mat-form-field appearance='fill'>
+                        <input matInput type="text" name="image" formControlName='image' id="image">
+                    </mat-form-field>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Description Image</mat-label>
+                        <input matInput type="text" formControlName='alt' placeholder='alt'>
+                        <mat-error *ngIf=""></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <!-- Contrat -->
+                <div fxLayout='column'>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Type de Contrat</mat-label>
+                        <mat-select placeholder="type de contrat" formControlName='typeContrat'>
+                            <mat-option *ngFor='let contrat of typeContrat' [value]="contrat">{{ contrat }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf=""></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Enseigne</mat-label>
+                        <input matInput type="text" placeholder="option" formControlName='enseigne'>
+                        <mat-error *ngIf=""></mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div fxLayout='column'>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Lieu</mat-label>
+                        <input type="text" matInput formControlName='lieu' placeholder="Departement">
+                        <mat-error *ngIf=""></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Lien vers le site </mat-label>
+                        <input type='text' matInput placeholder="Liens" formControlName='lien' />
+                        <mat-error *ngIf=""></mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance='fill'>
+                        <mat-label>Fonction</mat-label>
+                        <textarea matInput placeholder="Quels rôle aviez vous" formControlName='fonction'></textarea>
+                        <mat-error *ngIf=""></mat-error>
+                    </mat-form-field>
+                </div>
+
+            </mat-card-content>
+            <mat-card-actions align="start">
+                <button mat-button type='button' (click)="envoyer(experienceForm)">Enregistrer</button>
+                <button mat-raised-button (click)="retour()">Annuler</button>
+            </mat-card-actions>
+            <mat-card-footer>
+            </mat-card-footer>
+        </mat-card>
+    </form>
+</section>

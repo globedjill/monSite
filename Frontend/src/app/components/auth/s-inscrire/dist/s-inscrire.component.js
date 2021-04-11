@@ -15,15 +15,39 @@ var SInscrireComponent = /** @class */ (function () {
         this.router = router;
     }
     SInscrireComponent.prototype.ngOnInit = function () {
-        // this.initForm();
-        this.seConnecteForm = this.fb.group({
-            email: ['', forms_1.Validators.required],
-            password: ['', forms_1.Validators.required]
+        this.initForm();
+    };
+    SInscrireComponent.prototype.initForm = function () {
+        this.form = this.fb.group({
+            email: ['', [forms_1.Validators.required, forms_1.Validators.email]],
+            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]],
+            passwordConfirm: ['', forms_1.Validators.required]
         });
     };
-    // initForm(){
-    // }
+    // tslint:disable-next-line: typedef
     SInscrireComponent.prototype.onSubmit = function () {
+    };
+    // GESTION DES ERREURS
+    // tslint:disable-next-line: typedef
+    SInscrireComponent.prototype.errorMail = function () {
+        if (this.form.get('email').hasError('email')) {
+            return 'le mail n\'est pas au bon format';
+        }
+    };
+    SInscrireComponent.prototype.errorPassword = function () {
+        if (this.form.get('password').hasError('minlength')) {
+            return 'le mot de passe doit contenir au moins 8 caractéres';
+        }
+    };
+    SInscrireComponent.prototype.errorPasswordConfirm = function () {
+        var recupPassword = this.form.get('password').value;
+        var recupPasswordConfirm = this.form.get('passwordConfirm').value;
+        console.log(recupPassword, recupPasswordConfirm);
+        if (this.form.get('recupPasswordConfirm')) {
+            if (recupPassword !== recupPasswordConfirm) {
+                return 'Les mot de passe ne correspondent pas';
+            }
+        }
     };
     SInscrireComponent = __decorate([
         core_1.Component({

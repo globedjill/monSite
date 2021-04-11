@@ -1,5 +1,5 @@
 <section fxLayoutAlign='center center'>
-    <form [formGroup]='seConnecteForm' (ngSubmit)="onSubmit()">
+    <form [formGroup]='form' (ngSubmit)="onSubmit()">
         <mat-card class='matCardSeCo' fxFlex='column'>
             <mat-card-header>
                 <mat-card-title>S'enregistrer</mat-card-title>
@@ -7,12 +7,22 @@
             <mat-card-content fxLayout='column'>
                 <mat-form-field>
                     <mat-label name='email'>Email</mat-label>
-                    <input matInput formControlName='email' />
+                    <input matInput formControlName='email' type='email' />
+                    <mat-error *ngIf="this.form.invalid">{{ errorMail() }}</mat-error>
                 </mat-form-field>
+
                 <mat-form-field>
                     <mat-label name='password'>Mot de passe</mat-label>
-                    <input matInput formControlName='password' />
+                    <input matInput formControlName='password' type='password' />
+                    <mat-error *ngIf="this.form.invalid">{{ errorPassword() }}</mat-error>
                 </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label name='passwordConfirm'>confirmer le mot de passe</mat-label>
+                    <input matInput name='passwordConfirm' formControlName='passwordConfirm' [errorStateMatcher]='errorPasswordConfirm()' type='password' />
+                    <mat-error *ngIf="this.form.invalid">{{ errorPasswordConfirm() }}</mat-error>
+                </mat-form-field>
+
             </mat-card-content>
             <mat-card-actions align="start">
                 <button mat-raised-button>Envoyer</button>

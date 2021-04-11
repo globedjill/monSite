@@ -1,4 +1,5 @@
 import { AppRoutingModule } from './../../app/app.routing';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { LayoutModule } from './layout.module';
@@ -12,6 +13,15 @@ import { PageContainerComponent } from 'src/app/pages/page-container/page-contai
 import { ParcourComponent } from 'src/app/pages/page-container/parcour/parcour.component';
 import { SInscrireComponent } from 'src/app/components/auth/s-inscrire/s-inscrire.component';
 import { SeConnecterComponent } from 'src/app/components/auth/se-connecter/se-connecter.component';
+import { FormationComponent } from 'src/app/pages/page-container/parcour/formations/formation/formation.component';
+import { ExperienceFormComponent } from 'src/app/pages/page-container/parcour/experiences/experience-form/experience-form.component';
+import { ExperienceComponent } from 'src/app/pages/page-container/parcour/experiences/experience/experience.component';
+import { FormationFormComponent } from 'src/app/pages/page-container/parcour/formations/formation-form/formation-form.component';
+
+
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ParcourService } from '../services/parcour.service';
 
 
 const MODULES = [
@@ -24,6 +34,10 @@ const MODULES = [
     PageContainerComponent,
     ParcourComponent,
     ContactComponent,
+    FormationComponent,
+    ExperienceComponent,
+    FormationFormComponent,
+    ExperienceFormComponent,
 ];
 
 @NgModule({
@@ -37,6 +51,9 @@ const MODULES = [
   exports: [
     MODULES,
     LayoutModule,
+  ],
+  providers:[
+    ParcourService
   ]
 
 })
