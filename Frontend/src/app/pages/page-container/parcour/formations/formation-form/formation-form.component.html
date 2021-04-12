@@ -1,8 +1,9 @@
 <section fxLayoutAlign='center center'>
-    <form [formGroup]='formationForm' (ngSubmit)='onSaveFormation()'>
+    <form [formGroup]='formationForm'>
         <mat-card style='min-width: 500px; max-width: 600px;'>
             <mat-card-header>
                 <mat-card-title>Nouvelle Formation</mat-card-title>
+                <mat-card-subtitle>{{ id }}</mat-card-subtitle>
             </mat-card-header>
             <!-- INTIUTLE -->
             <mat-card-content>
@@ -64,11 +65,18 @@
                         <textarea matInput placeholder="De quoi est fait la formation" formControlName='contenu'></textarea>
                         <mat-error *ngIf=""></mat-error>
                     </mat-form-field>
-                    <mat-form-field appearance='fill'>
-                        <mat-label>Les points de formation </mat-label>
-                        <input type='text' matInput placeholder="Les différents axes" formControlName='liste' />
-                        <mat-error *ngIf=""></mat-error>
-                    </mat-form-field>
+
+                    <div formArrayName='liste' fxLayout='column'>
+                        <button mat-raised-button (click)='addAxeListe()'>Ajouter un Objectif</button>
+                        <div *ngFor='let axe of liste.controls; let i = index' fxLayout='row'>
+                            <mat-form-field appearance='fill'>
+                                <mat-label>Les points de formation </mat-label>
+                                <input [formControlName]='i' type='text' matInput placeholder="Les différents axes" />
+                                <mat-error *ngIf=""></mat-error>
+                            </mat-form-field>
+                            <button mat-raised-button (click)="deleteAxe(i)">-</button>
+                        </div>
+                    </div>
                     <mat-form-field appearance='fill'>
                         <mat-label>Lien vers le site </mat-label>
                         <input type='text' matInput placeholder="Liens" formControlName='lien' />
@@ -77,7 +85,7 @@
                 </div>
             </mat-card-content>
             <mat-card-actions align="start">
-                <button mat-button type='button' (click)="onSaveFormation()">Enregistrer</button>
+                <button mat-button (click)="onSaveFormation()">Enregistrer</button>
                 <button mat-raised-button (click)="retour()">Annuler</button>
             </mat-card-actions>
             <mat-card-footer>

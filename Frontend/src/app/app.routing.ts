@@ -19,6 +19,7 @@ const routes: Routes = [
 
   { path: 'parcour', component: ParcourComponent},
   { path: 'formation', component: FormationComponent},
+  { path: 'formation/:_id', component: FormationFormComponent},
   { path: 'formationForm', component: FormationFormComponent},
   { path: 'experience', component: ExperienceComponent},
   { path: 'experienceForm' , component:ExperienceFormComponent},

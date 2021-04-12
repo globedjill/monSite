@@ -2,24 +2,14 @@
 
 var router = require('express').Router();
 
-var Formation = require('../database/models/formation.model');
+var _require = require('../controllers/formation.controllers'),
+    formationList = _require.formationList,
+    formationRepucOne = _require.formationRepucOne,
+    saveFormation = _require.saveFormation,
+    formationDelete = _require.formationDelete;
 
-router.post('/', function (req, res) {
-  var body = req.body;
-  var newFormation = new Formation(body);
-  newFormation.save().then(function (formation) {
-    console.log(formation);
-    res.json(body);
-  })["catch"](function (err) {
-    console.log({
-      err: err
-    });
-    res.status(400).json(err);
-  });
-});
-router.get('/', function (req, res) {
-  Formation.find({}).exec().then(function (response) {
-    res.json(response);
-  });
-});
+router.post('/', saveFormation);
+router.get('/', formationList);
+router.get('/one', formationRepucOne);
+router["delete"]('/:formationId', formationDelete);
 module.exports = router;
