@@ -1,32 +1,37 @@
-const { getFormations, createFormation } = require('../queries/formation.queries');
+const { getFormations, createFormation, deleteFormation, formationUpdate, getOneId } = require('../queries/formation.queries');
 
-exports.saveFormation = async(req, res) => {
+exports.saveFormation = async(req, res, next) => {
     try {
         const body = req.body;
-        console.log(body);
         await createFormation(body);
-        res.json(body);
+        // res.json(body);
     } catch (e) {
+        next(e);
         console.error(e);
     }
 }
 
-exports.formationList = async(req, res) => {
+exports.updateFormation = async(req, res, next) => {
+    const formationId = req.params.formationId;
+    try {
+        const body = req.body;
+        const formation = await getOneId(formationId);
+        await formationUpdate(formation, body);
+        const formations = await getFormations();
+        res.json(formations);
+    } catch (e) {
+        next(e);
+        console.error(e);
+    }
+}
+
+exports.formationList = async(req, res, next) => {
     try {
         const formations = await getFormations();
         res.json(formations);
     } catch (e) {
+        next(e);
         console.error(e);
-    }
-};
-
-exports.formationRepucOne = async(req, res) => {
-    try {
-        const formation = await Formation.find({ nomFormation: "virgil" }).exec();
-        res.json(formation);
-        console.log(formation);
-    } catch (e) {
-        console.error(e)
     }
 };
 
@@ -34,8 +39,9 @@ exports.formationDelete = async(req, res, next) => {
     try {
         const formationId = req.params.formationId;
         await deleteFormation(formationId);
-
+        const formations = await getFormations();
+        res.json(formations);
     } catch (e) {
-        next()
+        next(e);
     }
-}
+};

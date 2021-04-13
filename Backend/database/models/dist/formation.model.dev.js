@@ -43,7 +43,7 @@ var formationSchema = schema(_defineProperty({
 }, "lieu", {
   type: String
 }), {
-  timestamp: true
+  timestamps: true
 }); // formationSchema.pre('save', function() {
 //     return Formation.countDocuments().exec().then(nbr => this.index = nbr + 1);
 // })

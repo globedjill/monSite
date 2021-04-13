@@ -12,9 +12,8 @@ import { ParcourService } from 'src/shared/services/parcour.service';
 export class FormationFormComponent implements OnInit {
 
   public id: string;
-
-  formationForm: FormGroup;
-  formation: Formation;
+  public formation: Formation;
+  public formationForm: FormGroup;
 
   constructor(
     private fb:FormBuilder,
@@ -28,36 +27,43 @@ export class FormationFormComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      this.id = paramMap.get('_id');
-    })
-    this.initForm();
+        this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+          this.id = paramMap.get('_id');
+          const index =paramMap.get('index');
+          if(this.id){
+            this.formation = this.parcourService.getFormation(Number(index));
+          }
+          this.initForm(this.formation);
+        })
   }
 
   initForm(
-  //   formation: Formation = {
-  //   nomFormation:'',
-  //   image:'',
-  //   alt:'',
-  //   lieu:'',
-  //   adresse:'',
-  //   dateEntree: new Date,
-  //   dateSortie: new Date,
-  //   contenu:''
-  // }
+    formation: Formation = {
+    nomFormation:'',
+    option:'',
+    image:'',
+    alt:'',
+    lieu:'',
+    adresse:'',
+    dateEntree: new Date,
+    dateSortie: new Date,
+    contenu:'',
+    liste:[],
+    lien:''
+  }
   ): void {
     this.formationForm = this.fb.group({
-      nomFormation: [null, Validators.required],
-      option: [null, Validators.minLength(3)],
-      image: [null],
-      alt: [null, Validators.minLength(3)],
-      lieu: [null, Validators.required],
-      adresse: [null, Validators.minLength(3)],
-      dateEntree: [null, Validators.required],
-      dateSortie: [null, Validators.required],
-      contenu: [null, Validators.required],
-      liste: this.fb.array([]),
-      lien: [null]
+      nomFormation: [formation.nomFormation, Validators.required],
+      option: [formation.option, Validators.minLength(3)],
+      image: [formation.image],
+      alt: [formation.alt, Validators.minLength(3)],
+      lieu: [formation.lieu, Validators.required],
+      adresse: [formation.adresse, Validators.minLength(3)],
+      dateEntree: [formation.dateEntree, Validators.required],
+      dateSortie: [formation.dateSortie, Validators.required],
+      contenu: [formation.contenu, Validators.required],
+      liste: this.fb.array(formation.liste),
+      lien: [formation.lien]
     });
   }
 
@@ -68,9 +74,16 @@ export class FormationFormComponent implements OnInit {
     this.liste.removeAt(i)
   }
 
+
+  // ACTION SUR LE SERVICE
   onSaveFormation(){
     this.parcourService.createNewFormation(this.formationForm.value);
-    // this.router.navigate(['/'])
+    this.router.navigate(['parcour']);
+  }
+
+  onModify(){
+    this.parcourService.updateFormation(this.formationForm.value, this.id);
+    this.router.navigate(['parcour']);
   }
 
   retour(){

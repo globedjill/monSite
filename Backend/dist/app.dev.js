@@ -8,6 +8,8 @@ var path = require('path');
 
 var app = express();
 
+require('./config/session.config');
+
 var routing = require('./routes');
 
 var cookieParser = require('cookie-parser');

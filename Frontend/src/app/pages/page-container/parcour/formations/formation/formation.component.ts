@@ -1,5 +1,5 @@
-import { FormationFormComponent } from 'src/app/pages/page-container/parcour/formations/formation-form/formation-form.component';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Formation } from 'src/shared/modeles/formation.interface';
 import { ParcourService } from 'src/shared/services/parcour.service';
@@ -16,9 +16,32 @@ export class FormationComponent implements OnInit, OnDestroy {
   formation: Formation;
 
   constructor(
-    private parcourService: ParcourService
-  ) {
-    // this.parcourTab = [
+    private parcourService: ParcourService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+
+    this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe(
+      (formationTab: Formation[]) => {
+        this.parcourTab = formationTab;
+      }
+    );
+    this.parcourService.recupFormations();
+    // this.parcourService.emettreLesFormationsRecuperer();
+  }
+
+  deleteFormation(id: String){
+    this.parcourService.supprimerUneFormation(id);
+  }
+
+  ngOnDestroy(): void {
+    this.tableauDeFormationSubscription.unsubscribe();
+   }
+}
+
+
+// this.parcourTab = [
     //   {
     //     nomFormation: 'Developpeur web FullStack',
     //     image: '../../../../assets/images/OC_Banner.png' ,
@@ -86,26 +109,3 @@ export class FormationComponent implements OnInit, OnDestroy {
     //   },
     // ];
 
-   }
-
-  ngOnInit(): void {
-    this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe(
-      (formationTab: Formation[]) => {
-        this.parcourTab = formationTab;
-      }
-    );
-    this.parcourService.recupFormations();
-    this.parcourService.emettreLesFormationsRecuperer();
-  }
-
-  ngOnDestroy(): void {
-   this.tableauDeFormationSubscription.unsubscribe();
-  }
-
-  deleteFormation(){
-    this.parcourService.supprimerUneFormation(this.formation);
-  }
-  modifyFormation(){
-
-  }
-}

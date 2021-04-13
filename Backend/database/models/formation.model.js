@@ -20,7 +20,7 @@ const formationSchema = schema({
     liste: { type: [] },
     lieu: { type: String },
 }, {
-    timestamp: true
+    timestamps: true
 });
 
 // formationSchema.pre('save', function() {

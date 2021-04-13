@@ -7,14 +7,17 @@
     <div fxLayout='row wrap' fxLayoutAlign='center start'>
         <mat-card *ngFor='let formation of parcourTab; let i = index'>
             <div>
-                <button mat-raised-button (click)="deleteFormation()">Supprimer</button>
-                <button mat-raised-button [routerLink]="['/formation',formation._id]" (click)="modifyFormation()">Modifier</button>
+                <button mat-raised-button (click)="deleteFormation(formation._id)">Supprimer</button>
+                <button mat-raised-button [routerLink]="['/formation',formation._id]">Modifier</button>
+                <p>{{ formation._id }}</p>
             </div>
             <mat-card-header>
-                <mat-card-title>{{ formation.nomFormation }}</mat-card-title>
-                <mat-card-subtitle>{{ formation.lieu }}</mat-card-subtitle>
+                <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>
+                <mat-card-subtitle>
+                    {{ formation.lieu }} <br> {{ formation.adresse }}
+                </mat-card-subtitle>
             </mat-card-header>
-            <!-- <img class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'> -->
+            <img class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'>
             <mat-card-content>
                 <div fxLayout='row' fxLayoutAlign='space-around center'>
                     <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>

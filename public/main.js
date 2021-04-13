@@ -344,82 +344,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_formation_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./formation.component.html */ "j40A");
 /* harmony import */ var _formation_component_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./formation.component.sass */ "deg0");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var src_shared_services_parcour_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/shared/services/parcour.service */ "t5SD");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var src_shared_services_parcour_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/shared/services/parcour.service */ "t5SD");
+
 
 
 
 
 
 let FormationComponent = class FormationComponent {
-    constructor(parcourService) {
-        // this.parcourTab = [
-        //   {
-        //     nomFormation: 'Developpeur web FullStack',
-        //     image: '../../../../assets/images/OC_Banner.png' ,
-        //     alt: 'imageOpen',
-        //     lieu: 'Telepresentiel',
-        //     dateEntree: new Date(' 01/04/2020 '),
-        //     dateSortie: new Date(' 01/10/2020 '),
-        //     contenu: ' Le developpeur full-stack peut gére a la fois des tâches back-end et front-ent, bien qu\'il soit pas necesserement un expert dans l\'un ou l\'autre. ',
-        //     liste: [
-        //       'creer un backend de site',
-        //       'Utiliser des bibliothéques ou des framework frontaux',
-        //       'gerer le deploiements des application et placer les projets sur les serveur'
-        //     ],
-        //     lien: 'https://openclassrooms.com/fr/paths/185-developpeur-web'
-        //   },
-        //   {
-        //     nomFormation: 'BPA Conducteur d\'engin',
-        //     image: '../../../../assets/images/OC_bazas.png',
-        //     alt: 'imageBazas',
-        //     lieu: 'EPLEFPA de Bazas',
-        //     dateEntree: new Date(' 01/04/2007 '),
-        //     dateSortie: new Date(' 01/10/207 '),
-        //     contenu: ' Le brevet Professionnel Option Travaux forestier permer d\'aquérir des connaissances et des compétences professionnemmes en: ',
-        //     liste: [
-        //       'Réalisation de travaux forestiers',
-        //       'Mécanique et entretiens des équipements',
-        //       'Conduite d\'engins forestiers',
-        //       'Connaissances scientifique et technique relative a la forêt',
-        //       'Organisation de chantiers forestiers'
-        //     ]
-        //   },
-        //   {
-        //     nomFormation: 'BTS Technico Commerciale',
-        //     option: 'Produit d\'origine Forestier',
-        //     image: '../../../../assets/images/OC_meymac.png',
-        //     alt: 'imageBazas',
-        //     lieu: 'Lycée forestier Meymac',
-        //     adresse: 'Meymac(19)',
-        //     dateEntree: new Date(' 01/04/2001 '),
-        //     dateSortie: new Date(' 01/10/2004 '),
-        //     contenu: ' Formation a devienir des agents commerciaux spécialiser dans le domaines de la filiére forêt-bois',
-        //     liste: [
-        //       'Technique de marketing',
-        //       'Gestion de la relation client',
-        //       'De la négociation a la vente de solution technico commerciale',
-        //       'Laformation porte egalement sur la gestion cimmerciale, le suivides fournisseurs et des clients.'
-        //     ]
-        //   },
-        //   {
-        //     nomFormation: 'Baccalaureat Science et Technologie de l\'Agronomie et de l\'Environnement',
-        //     option: 'Aménagement du territoire',
-        //     image: '../../../../assets/images/OC_Charlesquentin.png',
-        //     alt: 'imageBanniere lycee chauny',
-        //     lieu: 'Lycée Robert chaumann',
-        //     adresse: 'Chauny(02)',
-        //     dateEntree: new Date(' 01/04/1999 '),
-        //     dateSortie: new Date(' 01/10/2001 '),
-        //     contenu: ' Formation permettant de maitriser les techinique de gestion et l\'aménagement des milieux, qu\'il soit artificielle ou naturelle.',
-        //     liste: [
-        //       'Analyser les aménagements existant',
-        //       'participer des des suivies d\'épéces pour mieux appréhender la gestion des population naturelles',
-        //       'Réaliser des aménagements, de la conseption a la mise en oeuvre.',
-        //       'Découvrir les grands enjeux liées à l\'amenagemet des espaces et a la gestion des éspéces.'
-        //     ]
-        //   },
-        // ];
+    constructor(parcourService, router) {
         this.parcourService = parcourService;
+        this.router = router;
     }
     ngOnInit() {
         this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe((formationTab) => {
@@ -428,17 +364,16 @@ let FormationComponent = class FormationComponent {
         this.parcourService.recupFormations();
         this.parcourService.emettreLesFormationsRecuperer();
     }
+    deleteFormation(id) {
+        this.parcourService.supprimerUneFormation(id);
+    }
     ngOnDestroy() {
         this.tableauDeFormationSubscription.unsubscribe();
     }
-    deleteFormation() {
-        this.parcourService.supprimerUneFormation(this.formation);
-    }
-    modifyFormation() {
-    }
 };
 FormationComponent.ctorParameters = () => [
-    { type: src_shared_services_parcour_service__WEBPACK_IMPORTED_MODULE_4__["ParcourService"] }
+    { type: src_shared_services_parcour_service__WEBPACK_IMPORTED_MODULE_5__["ParcourService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 FormationComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -448,6 +383,73 @@ FormationComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     })
 ], FormationComponent);
 
+// this.parcourTab = [
+//   {
+//     nomFormation: 'Developpeur web FullStack',
+//     image: '../../../../assets/images/OC_Banner.png' ,
+//     alt: 'imageOpen',
+//     lieu: 'Telepresentiel',
+//     dateEntree: new Date(' 01/04/2020 '),
+//     dateSortie: new Date(' 01/10/2020 '),
+//     contenu: ' Le developpeur full-stack peut gére a la fois des tâches back-end et front-ent, bien qu\'il soit pas necesserement un expert dans l\'un ou l\'autre. ',
+//     liste: [
+//       'creer un backend de site',
+//       'Utiliser des bibliothéques ou des framework frontaux',
+//       'gerer le deploiements des application et placer les projets sur les serveur'
+//     ],
+//     lien: 'https://openclassrooms.com/fr/paths/185-developpeur-web'
+//   },
+//   {
+//     nomFormation: 'BPA Conducteur d\'engin',
+//     image: '../../../../assets/images/OC_bazas.png',
+//     alt: 'imageBazas',
+//     lieu: 'EPLEFPA de Bazas',
+//     dateEntree: new Date(' 01/04/2007 '),
+//     dateSortie: new Date(' 01/10/207 '),
+//     contenu: ' Le brevet Professionnel Option Travaux forestier permer d\'aquérir des connaissances et des compétences professionnemmes en: ',
+//     liste: [
+//       'Réalisation de travaux forestiers',
+//       'Mécanique et entretiens des équipements',
+//       'Conduite d\'engins forestiers',
+//       'Connaissances scientifique et technique relative a la forêt',
+//       'Organisation de chantiers forestiers'
+//     ]
+//   },
+//   {
+//     nomFormation: 'BTS Technico Commerciale',
+//     option: 'Produit d\'origine Forestier',
+//     image: '../../../../assets/images/OC_meymac.png',
+//     alt: 'imageBazas',
+//     lieu: 'Lycée forestier Meymac',
+//     adresse: 'Meymac(19)',
+//     dateEntree: new Date(' 01/04/2001 '),
+//     dateSortie: new Date(' 01/10/2004 '),
+//     contenu: ' Formation a devienir des agents commerciaux spécialiser dans le domaines de la filiére forêt-bois',
+//     liste: [
+//       'Technique de marketing',
+//       'Gestion de la relation client',
+//       'De la négociation a la vente de solution technico commerciale',
+//       'Laformation porte egalement sur la gestion cimmerciale, le suivides fournisseurs et des clients.'
+//     ]
+//   },
+//   {
+//     nomFormation: 'Baccalaureat Science et Technologie de l\'Agronomie et de l\'Environnement',
+//     option: 'Aménagement du territoire',
+//     image: '../../../../assets/images/OC_Charlesquentin.png',
+//     alt: 'imageBanniere lycee chauny',
+//     lieu: 'Lycée Robert chaumann',
+//     adresse: 'Chauny(02)',
+//     dateEntree: new Date(' 01/04/1999 '),
+//     dateSortie: new Date(' 01/10/2001 '),
+//     contenu: ' Formation permettant de maitriser les techinique de gestion et l\'aménagement des milieux, qu\'il soit artificielle ou naturelle.',
+//     liste: [
+//       'Analyser les aménagements existant',
+//       'participer des des suivies d\'épéces pour mieux appréhender la gestion des population naturelles',
+//       'Réaliser des aménagements, de la conseption a la mise en oeuvre.',
+//       'Découvrir les grands enjeux liées à l\'amenagemet des espaces et a la gestion des éspéces.'
+//     ]
+//   },
+// ];
 
 
 /***/ }),
@@ -928,7 +930,7 @@ ParcourComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='formationForm'>\n        <mat-card style='min-width: 500px; max-width: 600px;'>\n            <mat-card-header>\n                <mat-card-title>Nouvelle Formation</mat-card-title>\n                <mat-card-subtitle>{{ id }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- INTIUTLE -->\n            <mat-card-content>\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Formation</mat-label>\n                        <input matInput type=\"text\" formControlName='nomFormation' placeholder=\"Nom de la formation\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Option de la Formation</mat-label>\n                        <input matInput type=\"text\" placeholder=\"option\" formControlName='option'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- IMAGE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <input matInput type=\"text\" name=\"image\" formControlName='image' placeholder=\"image\" id=\"image\">\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Description Image</mat-label>\n                        <input matInput type=\"text\" formControlName='alt' placeholder='alt'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- LOCALISATION -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lieu</mat-label>\n                        <input type=\"text\" matInput formControlName='lieu' placeholder=\"Departement\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Adresse</mat-label>\n                        <input type=\"text\" matInput formControlName='adresse' placeholder=\"lieu\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- DATE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date d'entrée</mat-label>\n                        <input matInput [matDatepicker]='picker' formControlName='dateEntree'>\n                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>\n                        <mat-datepicker #picker></mat-datepicker>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date de sortie</mat-label>\n                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie'>\n                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>\n                        <mat-datepicker #pickerSortie></mat-datepicker>\n                    </mat-form-field>\n                </div>\n                <!-- COMPLEMENT -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Contenu de la formation</mat-label>\n                        <textarea matInput placeholder=\"De quoi est fait la formation\" formControlName='contenu'></textarea>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n\n                    <div formArrayName='liste' fxLayout='column'>\n                        <button mat-raised-button (click)='addAxeListe()'>Ajouter un Objectif</button>\n                        <div *ngFor='let axe of liste.controls; let i = index' fxLayout='row'>\n                            <mat-form-field appearance='fill'>\n                                <mat-label>Les points de formation </mat-label>\n                                <input [formControlName]='i' type='text' matInput placeholder=\"Les différents axes\" />\n                                <mat-error *ngIf=\"\"></mat-error>\n                            </mat-form-field>\n                            <button mat-raised-button (click)=\"deleteAxe(i)\">-</button>\n                        </div>\n                    </div>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lien vers le site </mat-label>\n                        <input type='text' matInput placeholder=\"Liens\" formControlName='lien' />\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button mat-button (click)=\"onSaveFormation()\">Enregistrer</button>\n                <button mat-raised-button (click)=\"retour()\">Annuler</button>\n            </mat-card-actions>\n            <mat-card-footer>\n            </mat-card-footer>\n        </mat-card>\n    </form>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='formationForm'>\n        <mat-card style='min-width: 500px; max-width: 600px;'>\n            <mat-card-header>\n                <mat-card-title>Nouvelle Formation</mat-card-title>\n                <mat-card-subtitle>{{ id }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- INTIUTLE -->\n            <mat-card-content>\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Formation</mat-label>\n                        <input matInput type=\"text\" formControlName='nomFormation' placeholder=\"Nom de la formation\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Option de la Formation</mat-label>\n                        <input matInput type=\"text\" placeholder=\"option\" formControlName='option'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- IMAGE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <input matInput type=\"text\" name=\"image\" formControlName='image' placeholder=\"image\" id=\"image\">\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Description Image</mat-label>\n                        <input matInput type=\"text\" formControlName='alt' placeholder='alt'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- LOCALISATION -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lieu</mat-label>\n                        <input type=\"text\" matInput formControlName='lieu' placeholder=\"Departement\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Adresse</mat-label>\n                        <input type=\"text\" matInput formControlName='adresse' placeholder=\"lieu\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- DATE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date d'entrée</mat-label>\n                        <input matInput [matDatepicker]='picker' formControlName='dateEntree'>\n                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>\n                        <mat-datepicker #picker></mat-datepicker>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date de sortie</mat-label>\n                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie'>\n                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>\n                        <mat-datepicker #pickerSortie></mat-datepicker>\n                    </mat-form-field>\n                </div>\n                <!-- COMPLEMENT -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Contenu de la formation</mat-label>\n                        <textarea matInput placeholder=\"De quoi est fait la formation\" formControlName='contenu'></textarea>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n\n                    <div formArrayName='liste' fxLayout='column'>\n                        <button mat-raised-button (click)='addAxeListe()'>Ajouter un Objectif</button>\n                        <div *ngFor='let axe of liste.controls; let i = index' fxLayout='row'>\n                            <mat-form-field appearance='fill'>\n                                <mat-label>Les points de formation </mat-label>\n                                <input [formControlName]='i' type='text' matInput placeholder=\"Les différents axes\" />\n                                <mat-error *ngIf=\"\"></mat-error>\n                            </mat-form-field>\n                            <button mat-raised-button (click)=\"deleteAxe(i)\">-</button>\n                        </div>\n                    </div>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lien vers le site </mat-label>\n                        <input type='text' matInput placeholder=\"Liens\" formControlName='lien' />\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button *ngIf='!this.id' mat-raised-button (click)=\"onModify()\">Action</button>\n                <button *ngIf='!this.id' mat-raised-button (click)=\"onSaveFormation()\">Enregistrer</button>\n                <button mat-raised-button (click)=\"retour()\">Annuler</button>\n            </mat-card-actions>\n            <mat-card-footer>\n            </mat-card-footer>\n        </mat-card>\n    </form>\n</section>");
 
 /***/ }),
 
@@ -1228,7 +1230,7 @@ NavbarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section>\n\n    <div>\n        <h3 fxLayoutAlign='center center'> Formation</h3>\n        <button mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>\n    </div>\n    <div fxLayout='row wrap' fxLayoutAlign='center start'>\n        <mat-card *ngFor='let formation of parcourTab; let i = index'>\n            <div>\n                <button mat-raised-button (click)=\"deleteFormation()\">Supprimer</button>\n                <button mat-raised-button [routerLink]=\"['/formation',formation._id]\" (click)=\"modifyFormation()\">Modifier</button>\n            </div>\n            <mat-card-header>\n                <mat-card-title>{{ formation.nomFormation }}</mat-card-title>\n                <mat-card-subtitle>{{ formation.lieu }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- <img class='imgBg' matCardImage src=\"{{ formation.image }}\" alt='{{formation.alt}}'> -->\n            <mat-card-content>\n                <div fxLayout='row' fxLayoutAlign='space-around center'>\n                    <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>\n                    <p>Date de Sortie : {{ formation.dateSortie | date:'MM/y'}}</p>\n                </div>\n            </mat-card-content>\n            <mat-card-content>\n                <div>\n                    <p> Contennu de la formation : </p>\n                    <p> {{ formation.contenu}}</p>\n                    <mat-list dense>\n                        <mat-list-item *ngFor=\"let item of formation.liste\">\n                            {{ item }}\n                        </mat-list-item>\n                    </mat-list>\n                </div>\n            </mat-card-content>\n            <mat-card-actions>\n                <a href=\"{{ formation.lien}}\" target='blank'><button mat-raised-button> En savoir plus</button></a>\n            </mat-card-actions>\n        </mat-card>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<section>\n\n    <div>\n        <h3 fxLayoutAlign='center center'> Formation</h3>\n        <button mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>\n    </div>\n    <div fxLayout='row wrap' fxLayoutAlign='center start'>\n        <mat-card *ngFor='let formation of parcourTab; let i = index'>\n            <div>\n                <button mat-raised-button (click)=\"deleteFormation(formation._id)\">Supprimer</button>\n                <button mat-raised-button [routerLink]=\"['/formation',formation._id]\">Modifier</button>\n                <p>{{ formation._id }}</p>\n            </div>\n            <mat-card-header>\n                <mat-card-title>{{ formation.nomFormation }}</mat-card-title>\n                <mat-card-subtitle>{{ formation.lieu }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- <img class='imgBg' matCardImage src=\"{{ formation.image }}\" alt='{{formation.alt}}'> -->\n            <mat-card-content>\n                <div fxLayout='row' fxLayoutAlign='space-around center'>\n                    <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>\n                    <p>Date de Sortie : {{ formation.dateSortie | date:'MM/y'}}</p>\n                </div>\n            </mat-card-content>\n            <mat-card-content>\n                <div>\n                    <p> Contennu de la formation : </p>\n                    <p> {{ formation.contenu}}</p>\n                    <mat-list dense>\n                        <mat-list-item *ngFor=\"let item of formation.liste\">\n                            {{ item }}\n                        </mat-list-item>\n                    </mat-list>\n                </div>\n            </mat-card-content>\n            <mat-card-actions>\n                <a href=\"{{ formation.lien}}\" target='blank'><button mat-raised-button> En savoir plus</button></a>\n            </mat-card-actions>\n        </mat-card>\n    </div>\n</section>\n");
 
 /***/ }),
 
@@ -1300,16 +1302,14 @@ let ParcourService = class ParcourService {
             this.emettreLesFormationsRecuperer();
         });
     }
-    recupOneFormation() {
-        this.http.get('api/formations/one')
-            .subscribe((formation) => {
-            this.formation = formation;
+    supprimerUneFormation(id) {
+        this.http.delete('api/formations/' + id).subscribe(() => {
+            ((formation) => {
+                this.formationTab = formation;
+            });
         });
-    }
-    supprimerUneFormation(formation) {
-        this.http.delete('api/:formationId').subscribe((formation) => {
-            console.log(formation);
-        });
+        this.recupFormations();
+        this.emettreLesFormationsRecuperer();
     }
 };
 ParcourService.ctorParameters = () => [
@@ -1436,21 +1436,26 @@ let FormationFormComponent = class FormationFormComponent {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((paramMap) => {
             this.id = paramMap.get('_id');
+            if (this.id) {
+                console.log('vous etes ici');
+                this.initForm();
+            }
+            else {
+                console.log('vous etes la');
+                this.initForm();
+            }
         });
-        this.initForm();
     }
-    initForm(
-    //   formation: Formation = {
-    //   nomFormation:'',
-    //   image:'',
-    //   alt:'',
-    //   lieu:'',
-    //   adresse:'',
-    //   dateEntree: new Date,
-    //   dateSortie: new Date,
-    //   contenu:''
-    // }
-    ) {
+    initForm(formation = {
+        nomFormation: '',
+        image: '',
+        alt: '',
+        lieu: '',
+        adresse: '',
+        dateEntree: new Date,
+        dateSortie: new Date,
+        contenu: ''
+    }) {
         this.formationForm = this.fb.group({
             nomFormation: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             option: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
@@ -1473,7 +1478,9 @@ let FormationFormComponent = class FormationFormComponent {
     }
     onSaveFormation() {
         this.parcourService.createNewFormation(this.formationForm.value);
-        // this.router.navigate(['/'])
+        this.router.navigate(['parcour']);
+    }
+    onModify() {
     }
     retour() {
         this.router.navigate(['parcour']);

@@ -4,12 +4,12 @@ var router = require('express').Router();
 
 var _require = require('../controllers/formation.controllers'),
     formationList = _require.formationList,
-    formationRepucOne = _require.formationRepucOne,
     saveFormation = _require.saveFormation,
-    formationDelete = _require.formationDelete;
+    formationDelete = _require.formationDelete,
+    updateFormation = _require.updateFormation;
 
+router.post('/update/:formationId', updateFormation);
 router.post('/', saveFormation);
 router.get('/', formationList);
-router.get('/one', formationRepucOne);
 router["delete"]('/:formationId', formationDelete);
 module.exports = router;

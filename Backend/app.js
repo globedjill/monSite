@@ -3,6 +3,9 @@ const morgan = require('morgan');
 var path = require('path');
 
 const app = express();
+
+require('./config/session.config');
+
 const routing = require('./routes');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');

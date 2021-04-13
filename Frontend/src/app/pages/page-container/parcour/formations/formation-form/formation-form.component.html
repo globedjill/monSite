@@ -85,7 +85,9 @@
                 </div>
             </mat-card-content>
             <mat-card-actions align="start">
-                <button mat-button (click)="onSaveFormation()">Enregistrer</button>
+                <button *ngIf='this.id' mat-raised-button (click)="onModify()">modifier
+                </button>
+                <button *ngIf='!this.id' mat-raised-button (click)="onSaveFormation()">Enregistrer</button>
                 <button mat-raised-button (click)="retour()">Annuler</button>
             </mat-card-actions>
             <mat-card-footer>

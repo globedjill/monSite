@@ -13,11 +13,14 @@ export class ParcourService  {
   formation: Formation;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   emettreLesFormationsRecuperer(){
     this.formationTab$.next(this.formationTab);
+  }
+  getFormation(index: number){
+    return this.formationTab$.value[index];
   }
 
   createNewFormation(newFormation: Formation){
@@ -30,6 +33,10 @@ export class ParcourService  {
     this.http.post<Formation>('/api/formations',formation).subscribe((formation)=>{});
   }
 
+  updateFormation(formation:Formation, id: String){
+    this.http.post<Formation>('/api/formations/update/'+ id, formation).subscribe((id)=> {});
+  }
+
   recupFormations(){
     this.http.get<Formation[]>('api/formations')
       .subscribe((formations: Formation[])=> {
@@ -38,17 +45,13 @@ export class ParcourService  {
     });
   }
 
-  recupOneFormation(){
-    this.http.get<Formation>('api/formations/one')
-      .subscribe((formation: Formation) => {
-        this.formation = formation
-      });
+  supprimerUneFormation(id: String){
+    this.http.delete('api/formations/' + id ).subscribe(()=> {
+      ((formation: Formation[] ) => {
+        this.formationTab = formation;
+      })
+    })
+    this.recupFormations();
+    this.emettreLesFormationsRecuperer();
   }
-
-  supprimerUneFormation(formation: Formation){
-    this.http.delete<Formation>('api/:formationId').subscribe((formation: Formation) => {
-      console.log(formation);
-    });
-  }
-
 }
