@@ -19,6 +19,12 @@ var page_container_component_1 = require("src/app/pages/page-container/page-cont
 var parcour_component_1 = require("src/app/pages/page-container/parcour/parcour.component");
 var s_inscrire_component_1 = require("src/app/components/auth/s-inscrire/s-inscrire.component");
 var se_connecter_component_1 = require("src/app/components/auth/se-connecter/se-connecter.component");
+var formation_component_1 = require("src/app/pages/page-container/parcour/formations/formation/formation.component");
+var experience_form_component_1 = require("src/app/pages/page-container/parcour/experiences/experience-form/experience-form.component");
+var experience_component_1 = require("src/app/pages/page-container/parcour/experiences/experience/experience.component");
+var formation_form_component_1 = require("src/app/pages/page-container/parcour/formations/formation-form/formation-form.component");
+var parcour_service_1 = require("../services/parcour.service");
+var users_service_1 = require("../services/users.service");
 var MODULES = [
     header_component_1.HeaderComponent,
     footer_component_1.FooterComponent,
@@ -29,6 +35,10 @@ var MODULES = [
     page_container_component_1.PageContainerComponent,
     parcour_component_1.ParcourComponent,
     contact_component_1.ContactComponent,
+    formation_component_1.FormationComponent,
+    experience_component_1.ExperienceComponent,
+    formation_form_component_1.FormationFormComponent,
+    experience_form_component_1.ExperienceFormComponent,
 ];
 var CoreModule = /** @class */ (function () {
     function CoreModule() {
@@ -45,6 +55,10 @@ var CoreModule = /** @class */ (function () {
             exports: [
                 MODULES,
                 layout_module_1.LayoutModule,
+            ],
+            providers: [
+                parcour_service_1.ParcourService,
+                users_service_1.UsersService
             ]
         })
     ], CoreModule);

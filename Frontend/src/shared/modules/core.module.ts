@@ -1,5 +1,4 @@
 import { AppRoutingModule } from './../../app/app.routing';
-import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { LayoutModule } from './layout.module';
@@ -18,10 +17,8 @@ import { ExperienceFormComponent } from 'src/app/pages/page-container/parcour/ex
 import { ExperienceComponent } from 'src/app/pages/page-container/parcour/experiences/experience/experience.component';
 import { FormationFormComponent } from 'src/app/pages/page-container/parcour/formations/formation-form/formation-form.component';
 
-
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { ParcourService } from '../services/parcour.service';
+import { UsersService } from '../services/users.service';
 
 
 const MODULES = [
@@ -53,7 +50,8 @@ const MODULES = [
     LayoutModule,
   ],
   providers:[
-    ParcourService
+    ParcourService,
+    UsersService
   ]
 
 })

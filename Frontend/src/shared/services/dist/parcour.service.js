@@ -26,6 +26,7 @@ var ParcourService = /** @class */ (function () {
         this.saveFormations(newFormation);
         this.emettreLesFormationsRecuperer();
     };
+    // Queries
     ParcourService.prototype.saveFormations = function (formation) {
         this.http.post('/api/formations', formation).subscribe(function (formation) { });
     };

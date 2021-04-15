@@ -29,6 +29,8 @@ export class ParcourService  {
     this.emettreLesFormationsRecuperer()
   }
 
+
+  // Queries
   saveFormations(formation: Formation){
     this.http.post<Formation>('/api/formations',formation).subscribe((formation)=>{});
   }

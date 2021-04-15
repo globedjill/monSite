@@ -1,5 +1,6 @@
+import { UsersService } from './../../../../shared/services/users.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -9,9 +10,32 @@ import { FormGroup } from '@angular/forms';
 })
 export class SeConnecterComponent implements OnInit {
 
-  constructor() { }
+  singinForm: FormGroup;
+  error: any;
+
+  constructor(
+    private fb: FormBuilder,
+    private userService: UsersService
+  ) { }
 
   ngOnInit(): void {
+    this.singinForm = this.fb.group({
+      email:[''],
+      password:['']
+    })
+  }
+
+  submit(){
+    this.userService.signin(this.singinForm.value).subscribe((err)=>{
+      this.error = JSON.stringify(err);
+      }
+    );
+  }
+
+
+  //Gestion des erreurs
+  seconnecterErreur(){
+    return this.error;
   }
 
 }

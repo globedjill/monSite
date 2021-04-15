@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { UsersService } from './../../../shared/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -12,9 +14,12 @@ export class HeaderComponent implements OnInit {
   activeLink: string;
   menuConnect: any[];
 
-  constructor( private router: Router)
+  constructor(
+    private router: Router,
+    private userService: UsersService,
+    private http: HttpClient
+    )
   {
-
     this.listeMenu = [
       {
         nom: 'Acceuil',
@@ -42,14 +47,15 @@ export class HeaderComponent implements OnInit {
         lien: 'sInscrire'
       }
    ];
-
-
     this.activeLink = this.listeMenu[0];
 
   }
 
   ngOnInit(): void {
-
+    // this.http.get('/api').subscribe(()=>{});
   }
 
+  loggout(){
+    this.userService.loggout();
+  }
 }

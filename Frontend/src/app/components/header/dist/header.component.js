@@ -9,8 +9,10 @@ exports.__esModule = true;
 exports.HeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router) {
+    function HeaderComponent(router, userService, http) {
         this.router = router;
+        this.userService = userService;
+        this.http = http;
         this.listeMenu = [
             {
                 nom: 'Acceuil',
@@ -41,6 +43,10 @@ var HeaderComponent = /** @class */ (function () {
         this.activeLink = this.listeMenu[0];
     }
     HeaderComponent.prototype.ngOnInit = function () {
+        // this.http.get('/api').subscribe(()=>{});
+    };
+    HeaderComponent.prototype.loggout = function () {
+        this.userService.loggout();
     };
     HeaderComponent = __decorate([
         core_1.Component({

@@ -10,22 +10,24 @@ exports.SInscrireComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var SInscrireComponent = /** @class */ (function () {
-    function SInscrireComponent(fb, router) {
+    function SInscrireComponent(fb, router, usersService) {
         this.fb = fb;
         this.router = router;
+        this.usersService = usersService;
     }
     SInscrireComponent.prototype.ngOnInit = function () {
         this.initForm();
     };
     SInscrireComponent.prototype.initForm = function () {
         this.form = this.fb.group({
+            pseudo: ['', forms_1.Validators.required],
             email: ['', [forms_1.Validators.required, forms_1.Validators.email]],
-            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]],
-            passwordConfirm: ['', forms_1.Validators.required]
+            password: ['', [forms_1.Validators.required, forms_1.Validators.minLength(8)]]
         });
     };
     // tslint:disable-next-line: typedef
     SInscrireComponent.prototype.onSubmit = function () {
+        this.usersService.createUser(this.form.value);
     };
     // GESTION DES ERREURS
     // tslint:disable-next-line: typedef
@@ -40,14 +42,6 @@ var SInscrireComponent = /** @class */ (function () {
         }
     };
     SInscrireComponent.prototype.errorPasswordConfirm = function () {
-        var recupPassword = this.form.get('password').value;
-        var recupPasswordConfirm = this.form.get('passwordConfirm').value;
-        console.log(recupPassword, recupPasswordConfirm);
-        if (this.form.get('recupPasswordConfirm')) {
-            if (recupPassword !== recupPasswordConfirm) {
-                return 'Les mot de passe ne correspondent pas';
-            }
-        }
     };
     SInscrireComponent = __decorate([
         core_1.Component({

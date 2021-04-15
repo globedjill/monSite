@@ -1,6 +1,6 @@
 const { app } = require('../app');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 
 app.use(session({
@@ -11,11 +11,11 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         // On ne peut pas recuperer lesdonnée via le js-client
-        httpOnly: false,
+        httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 14 // 14 jours
     },
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection,
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://virgil_admin:Evan25082010@cluster0.z3wus.mongodb.net/monSite?retryWrites=true&w=majority',
         ttl: 60 * 60 * 24 * 14 // Durée de la connection
     })
 }))

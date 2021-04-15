@@ -3,13 +3,17 @@ const morgan = require('morgan');
 var path = require('path');
 
 const app = express();
-
-require('./config/session.config');
+exports.app = app;
 
 const routing = require('./routes');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-require('./database/index.database')
+const passport = require('passport');
+require('./database/index.database');
+require('./config/session.config');
+require('./config/passport.config');
+
+app.use(passport.session());
 
 app.use(morgan('short'));
 app.use(bodyParser.json());

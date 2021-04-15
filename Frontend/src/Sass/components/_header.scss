@@ -1,4 +1,5 @@
 header {
+    box-sizing: border-box;
     background-image: url('../../assets/images/bg_header.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,8 +27,8 @@ header {
         }
     }
     & nav {
-        margin-left: 150px;
-        // background-color: tomato;
+        // margin-left: 150px;
+        // background-color: rgb(126, 250, 44);
         & .mat-tab-link {
             font-size: $fontSize_a;
             color: white;

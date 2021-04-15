@@ -1,3 +1,4 @@
+import { UsersService } from './../../../../shared/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
@@ -14,6 +15,7 @@ export class SInscrireComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private usersService: UsersService
   ) {
   }
 
@@ -23,16 +25,17 @@ export class SInscrireComponent implements OnInit {
 
   initForm(): void {
     this.form = this.fb.group({
+      pseudo:['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      passwordConfirm: ['', Validators.required]
+      // passwordConfirm: ['', Validators.required]
     });
 
   }
 
   // tslint:disable-next-line: typedef
   onSubmit(){
-
+    this.usersService.createUser(this.form.value);
   }
 
 
@@ -51,13 +54,6 @@ errorPassword(){
 }
 
 errorPasswordConfirm(){
-  const recupPassword = this.form.get('password').value;
-  const recupPasswordConfirm = this.form.get('passwordConfirm').value;
-  console.log(recupPassword,recupPasswordConfirm);
-  if (this.form.get('recupPasswordConfirm')){
-    if (recupPassword !== recupPasswordConfirm){
-      return 'Les mot de passe ne correspondent pas';
-    }
-  }
+
   }
   }

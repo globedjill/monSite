@@ -3,8 +3,11 @@
 var mongoose = require('mongoose');
 
 var schema = mongoose.Schema;
+
+var bCrypt = require('bcrypt');
+
 var userSchema = schema({
-  userName: {
+  pseudo: {
     type: String,
     required: true
   },
@@ -19,5 +22,14 @@ var userSchema = schema({
     }
   }
 });
+
+userSchema.statics.hashPassword = function (password) {
+  return bCrypt.hash(password, 10);
+};
+
+userSchema.methods.comparePassword = function (password) {
+  return bCrypt.compare(password, this.local.password);
+};
+
 var User = mongoose.model('user', userSchema);
 module.exports = User;
