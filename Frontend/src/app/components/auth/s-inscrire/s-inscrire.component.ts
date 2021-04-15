@@ -11,6 +11,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 export class SInscrireComponent implements OnInit {
 
  public form: FormGroup;
+ public error: string;
 
   constructor(
     private fb: FormBuilder,
@@ -35,9 +36,13 @@ export class SInscrireComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   onSubmit(){
-    this.usersService.createUser(this.form.value);
+    this.usersService.createUser(this.form.value).subscribe(()=>{
+      this.router.navigate(['/seConnecter']);
+    },
+    err => {
+      this.error = err;
+    });;
   }
-
 
   // GESTION DES ERREURS
 // tslint:disable-next-line: typedef

@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.http.get('/api').subscribe(()=>{});
+
   }
 
   loggout(){

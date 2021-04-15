@@ -43,7 +43,6 @@ var HeaderComponent = /** @class */ (function () {
         this.activeLink = this.listeMenu[0];
     }
     HeaderComponent.prototype.ngOnInit = function () {
-        // this.http.get('/api').subscribe(()=>{});
     };
     HeaderComponent.prototype.loggout = function () {
         this.userService.loggout();

@@ -19,22 +19,21 @@ exports.signup = function _callee(req, res, next) {
 
         case 4:
           user = _context.sent;
-          console.log(user);
           res.json(user);
-          _context.next = 12;
+          _context.next = 11;
           break;
 
-        case 9:
-          _context.prev = 9;
+        case 8:
+          _context.prev = 8;
           _context.t0 = _context["catch"](1);
-          console.error(_context.t0);
+          console.error('erreur d\'enregistrement:' + _context.t0);
 
-        case 12:
+        case 11:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[1, 9]]);
+  }, null, null, [[1, 8]]);
 }; // Logged du user
 
 
@@ -52,6 +51,7 @@ exports.signIn = function (req, res, next) {
           next(err);
         } else {
           console.log('3');
+          res.redirect('/');
         }
       });
     }
@@ -61,4 +61,5 @@ exports.signIn = function (req, res, next) {
 
 exports.signOut = function (req, res, next) {
   req.logOut();
+  res.redirect('/');
 };

@@ -6,12 +6,13 @@ var formations = require('./api.formation.routes');
 
 var experiences = require('./api.experience.routes');
 
-var users = require('./api.users.routes');
+var users = require('./api.users.routes'); //declarationdes routes sur /api
+
 
 router.use('/users', users);
 router.use('/formations', formations);
-router.use('/experiences', experiences); // router.get('/', (req, res) => {
-//     console.log(req.user);
-// });
-
+router.use('/experiences', experiences);
+router.get('/', function (req, res) {
+  res.json(req.user);
+});
 module.exports = router;

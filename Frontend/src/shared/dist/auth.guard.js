@@ -6,17 +6,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 exports.__esModule = true;
-exports.AuthService = void 0;
+exports.AuthGuard = void 0;
 var core_1 = require("@angular/core");
-var AuthService = /** @class */ (function () {
-    function AuthService(http) {
-        this.http = http;
+var AuthGuard = /** @class */ (function () {
+    function AuthGuard(authService) {
+        this.authService = authService;
     }
-    AuthService = __decorate([
+    AuthGuard.prototype.canActivate = function () {
+        return true;
+    };
+    AuthGuard.prototype.essai = function () {
+        this.authService.essai();
+    };
+    AuthGuard = __decorate([
         core_1.Injectable({
             providedIn: 'root'
         })
-    ], AuthService);
-    return AuthService;
+    ], AuthGuard);
+    return AuthGuard;
 }());
-exports.AuthService = AuthService;
+exports.AuthGuard = AuthGuard;

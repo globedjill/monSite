@@ -27,7 +27,13 @@ var SInscrireComponent = /** @class */ (function () {
     };
     // tslint:disable-next-line: typedef
     SInscrireComponent.prototype.onSubmit = function () {
-        this.usersService.createUser(this.form.value);
+        var _this = this;
+        this.usersService.createUser(this.form.value).subscribe(function () {
+            _this.router.navigate(['/seConnecter']);
+        }, function (err) {
+            _this.error = err;
+        });
+        ;
     };
     // GESTION DES ERREURS
     // tslint:disable-next-line: typedef

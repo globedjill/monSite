@@ -8,38 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.UsersService = void 0;
 var core_1 = require("@angular/core");
-var rxjs_1 = require("rxjs");
 var UsersService = /** @class */ (function () {
     function UsersService(http, router) {
         this.http = http;
         this.router = router;
-        this.isConnect = new rxjs_1.BehaviorSubject({
-            isAuth: null,
-            keyConnect: null
-        });
     }
-    UsersService.prototype.createUser = function (newUser) {
-        this.saveUser(newUser);
-    };
     // Queries
     // Inscription
-    UsersService.prototype.saveUser = function (newUser) {
-        var _this = this;
-        this.http.post('/api/users/signup', newUser).subscribe(function () {
-            _this.router.navigate(['/seConnecter']);
-        });
+    UsersService.prototype.createUser = function (newUser) {
+        return this.http.post('/api/users/signup', newUser);
     };
     // Connexion
     UsersService.prototype.signin = function (user) {
         return this.http.post('/api/users/signin', user);
-        // .pipe(
-        //   tap((keyConnect: string)=> {
-        //     this.isConnect.next({
-        //       isAuth: true,
-        //       keyConnect: keyConnect
-        //     });
-        //   })
-        // );
     };
     // Deconnexion
     UsersService.prototype.loggout = function () {

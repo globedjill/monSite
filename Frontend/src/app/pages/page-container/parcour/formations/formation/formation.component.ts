@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Formation } from 'src/shared/modeles/formation.interface';
+import { AuthService } from 'src/shared/services/auth.service';
 import { ParcourService } from 'src/shared/services/parcour.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class FormationComponent implements OnInit, OnDestroy {
 
   constructor(
     private parcourService: ParcourService,
+    private authService:AuthService,
     private router: Router
   ) {}
 
@@ -28,7 +30,6 @@ export class FormationComponent implements OnInit, OnDestroy {
       }
     );
     this.parcourService.recupFormations();
-    // this.parcourService.emettreLesFormationsRecuperer();
   }
 
   deleteFormation(id: String){
@@ -37,6 +38,10 @@ export class FormationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tableauDeFormationSubscription.unsubscribe();
+   }
+
+   guard(){
+    this.authService.essai();
    }
 }
 

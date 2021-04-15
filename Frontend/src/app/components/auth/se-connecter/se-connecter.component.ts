@@ -1,6 +1,6 @@
 import { UsersService } from './../../../../shared/services/users.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -20,8 +20,8 @@ export class SeConnecterComponent implements OnInit {
 
   ngOnInit(): void {
     this.singinForm = this.fb.group({
-      email:[''],
-      password:['']
+      email:['',Validators.required],
+      password:['',Validators.required]
     })
   }
 

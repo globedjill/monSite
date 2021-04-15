@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { AuthGuard } from 'src/shared/auth.guard';
+
 import { SInscrireComponent } from './components/auth/s-inscrire/s-inscrire.component';
 import { SeConnecterComponent } from './components/auth/se-connecter/se-connecter.component';
 import { AcceuilComponent } from './pages/page-container/acceuil/acceuil.component';
@@ -18,11 +21,19 @@ const routes: Routes = [
   { path: 'sInscrire', component: SInscrireComponent},
 
   { path: 'parcour', component: ParcourComponent},
+
   { path: 'formation', component: FormationComponent},
-  { path: 'formation/:_id', component: FormationFormComponent},
-  { path: 'formationForm', component: FormationFormComponent},
+  { path: 'formation/:_id',
+      canActivate:[AuthGuard],
+      component: FormationFormComponent},
+  { path: 'formationForm',
+      canActivate:[AuthGuard],
+      component: FormationFormComponent},
+
   { path: 'experience', component: ExperienceComponent},
-  { path: 'experienceForm' , component:ExperienceFormComponent},
+  { path: 'experienceForm',
+      canActivate:[AuthGuard],
+      component:ExperienceFormComponent},
 
   { path: 'contact', component: ContactComponent},
   { path: '', redirectTo: '/', pathMatch: 'full' },

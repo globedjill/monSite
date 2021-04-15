@@ -9,8 +9,9 @@ exports.__esModule = true;
 exports.FormationComponent = void 0;
 var core_1 = require("@angular/core");
 var FormationComponent = /** @class */ (function () {
-    function FormationComponent(parcourService, router) {
+    function FormationComponent(parcourService, authService, router) {
         this.parcourService = parcourService;
+        this.authService = authService;
         this.router = router;
     }
     FormationComponent.prototype.ngOnInit = function () {
@@ -19,13 +20,15 @@ var FormationComponent = /** @class */ (function () {
             _this.parcourTab = formationTab;
         });
         this.parcourService.recupFormations();
-        // this.parcourService.emettreLesFormationsRecuperer();
     };
     FormationComponent.prototype.deleteFormation = function (id) {
         this.parcourService.supprimerUneFormation(id);
     };
     FormationComponent.prototype.ngOnDestroy = function () {
         this.tableauDeFormationSubscription.unsubscribe();
+    };
+    FormationComponent.prototype.guard = function () {
+        this.authService.essai();
     };
     FormationComponent = __decorate([
         core_1.Component({

@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.SeConnecterComponent = void 0;
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var SeConnecterComponent = /** @class */ (function () {
     function SeConnecterComponent(fb, userService) {
         this.fb = fb;
@@ -15,8 +16,8 @@ var SeConnecterComponent = /** @class */ (function () {
     }
     SeConnecterComponent.prototype.ngOnInit = function () {
         this.singinForm = this.fb.group({
-            email: [''],
-            password: ['']
+            email: ['', forms_1.Validators.required],
+            password: ['', forms_1.Validators.required]
         });
     };
     SeConnecterComponent.prototype.submit = function () {

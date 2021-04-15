@@ -7,16 +7,18 @@
             <mat-card-content fxLayout='column'>
                 <mat-form-field>
                     <mat-label name='email'>Email</mat-label>
-                    <input matInput formControlName='email' />
+                    <input matInput type='email' formControlName='email' />
+                    <mat-error *ngIf=""></mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label name='password'>Mot de passe</mat-label>
-                    <input matInput formControlName='password' />
+                    <input matInput type='password' formControlName='password' />
+                    <mat-error *ngIf=""></mat-error>
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions align="start">
                 <mat-error *ngIf='this.error'>{{ seconnecterErreur() }}</mat-error>
-                <button mat-raised-button (click)='submit()'>Envoyer</button>
+                <button mat-raised-button [disabled]='this.singinForm.invalid' (click)='submit()'>Envoyer</button>
             </mat-card-actions>
         </mat-card>
     </form>
