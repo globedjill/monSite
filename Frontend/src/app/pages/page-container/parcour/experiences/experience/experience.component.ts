@@ -1,5 +1,8 @@
+import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Experience } from 'src/shared/modeles/experience.interface';
+import { UserSession } from 'src/shared/modeles/userSession.interface';
+import { UsersService } from 'src/shared/services/users.service';
 
 @Component({
   selector: 'app-experience',
@@ -7,10 +10,15 @@ import { Experience } from 'src/shared/modeles/experience.interface';
   styleUrls: ['./experience.component.sass']
 })
 export class ExperienceComponent implements OnInit {
+
+  subscription: Subscription;
+  userSession: UserSession;
+
   experienceTab: Experience[];
 
-
-  constructor() {
+  constructor(
+    private userService: UsersService
+  ) {
     this.experienceTab = [
       {
         dateEntree: new Date('2018/01/05'),
@@ -34,6 +42,10 @@ export class ExperienceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.subscription = this.userService.idSession$.subscribe((usersession: UserSession)=> {
+      this.userSession = usersession;
+    })
+
   }
 
 }

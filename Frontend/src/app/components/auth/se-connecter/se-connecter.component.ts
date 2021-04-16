@@ -1,6 +1,7 @@
 import { UsersService } from './../../../../shared/services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,11 +12,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SeConnecterComponent implements OnInit {
 
   singinForm: FormGroup;
-  error: any;
+  error: string;
 
   constructor(
     private fb: FormBuilder,
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,16 +28,23 @@ export class SeConnecterComponent implements OnInit {
   }
 
   submit(){
-    this.userService.signin(this.singinForm.value).subscribe((err)=>{
-      this.error = JSON.stringify(err);
+    this.userService.signin(this.singinForm.value).subscribe((response)=>{
+      console.log('la connexion cest bien deroule');
+      this.router.navigate(['acceuil']);
+      },
+      err => {
+        console.log('Apres soumission de la connection vous etes dans lerreur');
+        this.error = err;
       }
     );
   }
 
+  goSInscrire(){
+    this.router.navigate(['sInscrire']);
+  }
 
   //Gestion des erreurs
   seconnecterErreur(){
     return this.error;
   }
-
 }

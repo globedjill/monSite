@@ -36,12 +36,17 @@ export class SInscrireComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   onSubmit(){
-    this.usersService.createUser(this.form.value).subscribe(()=>{
+    this.usersService.createUser(this.form.value).subscribe((response)=>{
+      console.log(response);
       this.router.navigate(['/seConnecter']);
     },
     err => {
       this.error = err;
     });;
+  }
+
+  goSeConnecter(){
+    this.router.navigate(['/seConnecter']);
   }
 
   // GESTION DES ERREURS

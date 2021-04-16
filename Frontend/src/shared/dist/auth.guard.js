@@ -9,14 +9,11 @@ exports.__esModule = true;
 exports.AuthGuard = void 0;
 var core_1 = require("@angular/core");
 var AuthGuard = /** @class */ (function () {
-    function AuthGuard(authService) {
-        this.authService = authService;
+    function AuthGuard(userService) {
+        this.userService = userService;
     }
-    AuthGuard.prototype.canActivate = function () {
-        return true;
-    };
-    AuthGuard.prototype.essai = function () {
-        this.authService.essai();
+    AuthGuard.prototype.canActivate = function (route, state) {
+        return this.userService.idSession$.value.isAuth;
     };
     AuthGuard = __decorate([
         core_1.Injectable({

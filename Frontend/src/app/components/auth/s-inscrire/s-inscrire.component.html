@@ -29,8 +29,11 @@
                 </mat-form-field>
 
             </mat-card-content>
-            <mat-card-actions align="start">
+            <mat-card-actions fx-flex='column'>
                 <button mat-raised-button [disabled]='this.form.invalid' (click)='onSubmit()'>Envoyer</button>
+                <button mat-raised-button (click)="goSeConnecter()">
+                    J'ai deja un compte
+                </button>
             </mat-card-actions>
         </mat-card>
     </form>

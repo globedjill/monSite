@@ -19,7 +19,7 @@ exports.signup = function _callee(req, res, next) {
 
         case 4:
           user = _context.sent;
-          res.json(user);
+          res.json('creation Ok');
           _context.next = 11;
           break;
 
@@ -40,6 +40,7 @@ exports.signup = function _callee(req, res, next) {
 exports.signIn = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) {
+      console.log('erreur systeme');
       next(err);
     } else if (!user) {
       res.json({
@@ -48,10 +49,10 @@ exports.signIn = function (req, res, next) {
     } else {
       req.login(user, function (err) {
         if (err) {
+          console.log('quelque chose na pas fonctionner');
           next(err);
         } else {
-          console.log('3');
-          res.redirect('/');
+          res.json(user);
         }
       });
     }
@@ -60,6 +61,7 @@ exports.signIn = function (req, res, next) {
 
 
 exports.signOut = function (req, res, next) {
+  console.log(res.json(req.user));
   req.logOut();
-  res.redirect('/');
+  res.end();
 };

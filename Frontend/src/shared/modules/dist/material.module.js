@@ -24,6 +24,7 @@ var input_1 = require("@angular/material/input");
 var expansion_1 = require("@angular/material/expansion");
 var select_1 = require("@angular/material/select");
 var checkbox_1 = require("@angular/material/checkbox");
+var divider_1 = require("@angular/material/divider");
 var datepicker_1 = require("@angular/material/datepicker");
 var core_2 = require("@angular/material/core");
 var progress_bar_1 = require("@angular/material/progress-bar");
@@ -48,7 +49,8 @@ var MATERIAL = [
     datepicker_1.MatDatepickerModule,
     core_2.MatNativeDateModule,
     progress_bar_1.MatProgressBarModule,
-    tooltip_1.MatTooltipModule
+    tooltip_1.MatTooltipModule,
+    divider_1.MatDividerModule
 ];
 var MaterialModule = /** @class */ (function () {
     function MaterialModule() {

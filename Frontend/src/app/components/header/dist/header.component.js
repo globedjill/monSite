@@ -9,10 +9,9 @@ exports.__esModule = true;
 exports.HeaderComponent = void 0;
 var core_1 = require("@angular/core");
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router, userService, http) {
+    function HeaderComponent(router, userService) {
         this.router = router;
         this.userService = userService;
-        this.http = http;
         this.listeMenu = [
             {
                 nom: 'Acceuil',
@@ -43,9 +42,24 @@ var HeaderComponent = /** @class */ (function () {
         this.activeLink = this.listeMenu[0];
     }
     HeaderComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.userService.idSession$.subscribe(function (userSession) {
+            _this.userSession = userSession;
+        });
     };
     HeaderComponent.prototype.loggout = function () {
-        this.userService.loggout();
+        this.userService.loggout().subscribe(function () {
+            console.log('deconnexion reussi !');
+        }, function (err) {
+            console.log('deconnexion reussi dans lerreur');
+            console.log(err);
+        });
+        ;
+    };
+    HeaderComponent.prototype.ngOnDestroy = function () {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     };
     HeaderComponent = __decorate([
         core_1.Component({

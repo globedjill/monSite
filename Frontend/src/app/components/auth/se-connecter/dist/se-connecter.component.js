@@ -10,9 +10,10 @@ exports.SeConnecterComponent = void 0;
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var SeConnecterComponent = /** @class */ (function () {
-    function SeConnecterComponent(fb, userService) {
+    function SeConnecterComponent(fb, userService, router) {
         this.fb = fb;
         this.userService = userService;
+        this.router = router;
     }
     SeConnecterComponent.prototype.ngOnInit = function () {
         this.singinForm = this.fb.group({
@@ -22,9 +23,16 @@ var SeConnecterComponent = /** @class */ (function () {
     };
     SeConnecterComponent.prototype.submit = function () {
         var _this = this;
-        this.userService.signin(this.singinForm.value).subscribe(function (err) {
-            _this.error = JSON.stringify(err);
+        this.userService.signin(this.singinForm.value).subscribe(function (response) {
+            console.log('la connexion cest bien deroule');
+            _this.router.navigate(['acceuil']);
+        }, function (err) {
+            console.log('Apres soumission de la connection vous etes dans lerreur');
+            _this.error = err;
         });
+    };
+    SeConnecterComponent.prototype.goSInscrire = function () {
+        this.router.navigate(['sInscrire']);
     };
     //Gestion des erreurs
     SeConnecterComponent.prototype.seconnecterErreur = function () {

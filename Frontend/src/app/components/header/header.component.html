@@ -9,9 +9,9 @@
     </nav>
 </header>
 <div>
-    <button mat-raised-button [matMenuTriggerFor]="menuRef">Se Connecter</button>
+    <button mat-raised-button *ngIf='!this.userSession.isAuth' [matMenuTriggerFor]="menuRef">Se Connecter</button>
     <mat-menu #menuRef="matMenu">
         <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>
     </mat-menu>
-    <button mat-raised-button routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>
+    <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>
 </div>

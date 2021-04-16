@@ -28,12 +28,16 @@ var SInscrireComponent = /** @class */ (function () {
     // tslint:disable-next-line: typedef
     SInscrireComponent.prototype.onSubmit = function () {
         var _this = this;
-        this.usersService.createUser(this.form.value).subscribe(function () {
+        this.usersService.createUser(this.form.value).subscribe(function (response) {
+            console.log(response);
             _this.router.navigate(['/seConnecter']);
         }, function (err) {
             _this.error = err;
         });
         ;
+    };
+    SInscrireComponent.prototype.goSeConnecter = function () {
+        this.router.navigate(['/seConnecter']);
     };
     // GESTION DES ERREURS
     // tslint:disable-next-line: typedef

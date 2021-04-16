@@ -2,8 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Formation } from 'src/shared/modeles/formation.interface';
+import { UserSession } from 'src/shared/modeles/userSession.interface';
 import { AuthService } from 'src/shared/services/auth.service';
 import { ParcourService } from 'src/shared/services/parcour.service';
+import { UsersService } from 'src/shared/services/users.service';
 
 @Component({
   selector: 'app-formation',
@@ -16,13 +18,20 @@ export class FormationComponent implements OnInit, OnDestroy {
   parcourTab: Formation[];
   formation: Formation;
 
+  subscription: Subscription;
+  userSession: UserSession;
+
   constructor(
     private parcourService: ParcourService,
-    private authService:AuthService,
+    private userService: UsersService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.subscription = this.userService.idSession$.subscribe(
+      (userSession: UserSession) => {
+        this.userSession = userSession;
+    })
 
     this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe(
       (formationTab: Formation[]) => {
@@ -38,10 +47,7 @@ export class FormationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tableauDeFormationSubscription.unsubscribe();
-   }
-
-   guard(){
-    this.authService.essai();
+    if(this.subscription){this.subscription.unsubscribe()};
    }
 }
 

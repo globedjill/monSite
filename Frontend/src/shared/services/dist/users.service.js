@@ -8,10 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.UsersService = void 0;
 var core_1 = require("@angular/core");
+var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
 var UsersService = /** @class */ (function () {
     function UsersService(http, router) {
         this.http = http;
         this.router = router;
+        this.idSession$ = new rxjs_1.BehaviorSubject({
+            isAuth: null,
+            _id: null
+        });
     }
     // Queries
     // Inscription
@@ -20,11 +26,29 @@ var UsersService = /** @class */ (function () {
     };
     // Connexion
     UsersService.prototype.signin = function (user) {
-        return this.http.post('/api/users/signin', user);
+        var _this = this;
+        return this.http.post('/api/users/signin', user).pipe(operators_1.tap(function (response) {
+            _this.idSession$.next({
+                isAuth: true,
+                _id: response._id
+            });
+            console.log(response);
+        }, function (err) {
+            console.log(err);
+        }));
     };
     // Deconnexion
     UsersService.prototype.loggout = function () {
-        this.http.get('api/users/signout').subscribe(function () { });
+        var _this = this;
+        return this.http.get('api/users/signout').pipe(operators_1.tap(function (response) {
+            _this.idSession$.next({
+                isAuth: false,
+                _id: response._id
+            });
+            console.log(response);
+        }, function (err) {
+            console.log(err);
+        }));
     };
     UsersService = __decorate([
         core_1.Injectable({
