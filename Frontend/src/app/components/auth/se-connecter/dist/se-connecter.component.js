@@ -23,16 +23,19 @@ var SeConnecterComponent = /** @class */ (function () {
     };
     SeConnecterComponent.prototype.submit = function () {
         var _this = this;
-        this.userService.signin(this.singinForm.value).subscribe(function (response) {
+        this.userService.signin(this.singinForm.value).subscribe(function () {
             console.log('la connexion cest bien deroule');
             _this.router.navigate(['acceuil']);
         }, function (err) {
             console.log('Apres soumission de la connection vous etes dans lerreur');
-            _this.error = err;
+            _this.error = _this.userService.error;
         });
     };
     SeConnecterComponent.prototype.goSInscrire = function () {
         this.router.navigate(['sInscrire']);
+    };
+    SeConnecterComponent.prototype.goggleConnection = function () {
+        this.userService.signinGoogle();
     };
     //Gestion des erreurs
     SeConnecterComponent.prototype.seconnecterErreur = function () {

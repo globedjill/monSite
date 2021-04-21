@@ -14,12 +14,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_experience_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./experience.component.html */ "Uu6n");
 /* harmony import */ var _experience_component_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./experience.component.sass */ "55jg");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_shared_services_users_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/shared/services/users.service */ "QUjd");
+
 
 
 
 
 let ExperienceComponent = class ExperienceComponent {
-    constructor() {
+    constructor(userService) {
+        this.userService = userService;
         this.experienceTab = [
             {
                 dateEntree: new Date('2018/01/05'),
@@ -42,9 +45,14 @@ let ExperienceComponent = class ExperienceComponent {
         ];
     }
     ngOnInit() {
+        this.subscription = this.userService.idSession$.subscribe((usersession) => {
+            this.userSession = usersession;
+        });
     }
 };
-ExperienceComponent.ctorParameters = () => [];
+ExperienceComponent.ctorParameters = () => [
+    { type: src_shared_services_users_service__WEBPACK_IMPORTED_MODULE_4__["UsersService"] }
+];
 ExperienceComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-experience',
@@ -69,6 +77,102 @@ module.exports = __webpack_require__(/*! /Users/mingotvirgil/Documents/PageWeb/m
 
 /***/ }),
 
+/***/ "0mEW":
+/*!**********************************************************************************************************!*\
+  !*** ./src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component.ts ***!
+  \**********************************************************************************************************/
+/*! exports provided: UploadImageFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadImageFormComponent", function() { return UploadImageFormComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_upload_image_form_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./upload-image-form.component.html */ "Z9o9");
+/* harmony import */ var _upload_image_form_component_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./upload-image-form.component.sass */ "GaKj");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_shared_services_upload_file_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/shared/services/upload-file.service */ "Af7n");
+// import { MatInputModule } from '@angular/material/input';
+// import { HttpClient } from '@angular/common/http';
+// import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+// import { FormControl, Validators } from '@angular/forms';
+// import { ThemePalette } from '@angular/material/core';
+// import { Observable, Subscription } from 'rxjs';
+// import { NgxMatFileInputModule, NgxMatFileInputIcon, AcceptValidator, MaxSizeValidator } from '@angular-material-components/file-input';
+// import { UploadFileService } from 'src/shared/services/upload-file.service';
+
+
+
+// @Component({
+//   selector: 'app-upload-image-form',
+//   templateUrl: './upload-image-form.component.html',
+//   styleUrls: ['./upload-image-form.component.sass']
+// })
+// export class UploadImageFormComponent implements OnInit {
+//   public filesHolder$: Observable<File[]> = this.uploadService.fileHolders$.asObservable();
+//   public filetabSub: Subscription;
+//   fileTab: [];
+//   @ViewChild('fileInput', {static: true}) inputRef: ElementRef;
+//   color: ThemePalette = 'primary';
+//   disabled: boolean = false;
+//   multiple: boolean = false;
+//   accept: string;
+//   formControl: FormControl;
+//   constructor(
+//     private uploadService: UploadFileService,
+//     private http: HttpClient,
+//   ) {}
+//   ngOnInit(): void {
+//     this.formControl = new FormControl([Validators.required]);
+//   }
+// }
+
+
+let UploadImageFormComponent = class UploadImageFormComponent {
+    constructor(upLoadFileService) {
+        this.upLoadFileService = upLoadFileService;
+        this.filesHolder$ = this.upLoadFileService.filesHolder$.asObservable();
+    }
+    ngOnInit() {
+    }
+    openFile() {
+        this.inputRef.nativeElement.click();
+    }
+    addFile($event) {
+        const file = $event.target.files;
+        this.upLoadFileService.addFile(file);
+        this.noFile = this.upLoadFileService.filesHolder$.value.length;
+    }
+    deleteFile(index) {
+        this.upLoadFileService.removeFile(index);
+        this.noFile = this.upLoadFileService.filesHolder$.value.length;
+    }
+    dropFile($event) {
+        console.log($event);
+        if ($event.dataTransfer) {
+            const file = $event.dataTransfer.files;
+            this.upLoadFileService.addFile(file);
+        }
+    }
+};
+UploadImageFormComponent.ctorParameters = () => [
+    { type: src_shared_services_upload_file_service__WEBPACK_IMPORTED_MODULE_4__["UploadFileService"] }
+];
+UploadImageFormComponent.propDecorators = {
+    inputRef: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: ['fileinput', { static: false },] }]
+};
+UploadImageFormComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-upload-image-form',
+        template: _raw_loader_upload_image_form_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_upload_image_form_component_sass__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    })
+], UploadImageFormComponent);
+
+
+
+/***/ }),
+
 /***/ "1z2Q":
 /*!****************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/auth/se-connecter/se-connecter.component.html ***!
@@ -78,7 +182,7 @@ module.exports = __webpack_require__(/*! /Users/mingotvirgil/Documents/PageWeb/m
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form>\n        <mat-card class='matCardSeCo' fxFlex='column'>\n            <mat-card-header>\n                <mat-card-title>S'enregistrer</mat-card-title>\n            </mat-card-header>\n            <mat-card-content fxLayout='column'>\n                <mat-form-field>\n                    <mat-label name='email'>Email</mat-label>\n                    <input matInput formControlName='email' />\n                </mat-form-field>\n                <mat-form-field>\n                    <mat-label name='password'>Mot de passe</mat-label>\n                    <input matInput formControlName='password' />\n                </mat-form-field>\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button mat-raised-button>Envoyer</button>\n            </mat-card-actions>\n        </mat-card>\n    </form>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='singinForm'>\n        <mat-card class='matCardSeCo' fxFlex='column'>\n            <mat-card-header>\n                <mat-card-title>Se Connecter</mat-card-title>\n            </mat-card-header>\n            <mat-card-content fxLayout='column'>\n                <mat-form-field>\n                    <mat-label name='email'>Email</mat-label>\n                    <input matInput type='email' formControlName='email' />\n                    <mat-error *ngIf=\"\"></mat-error>\n                </mat-form-field>\n                <mat-form-field>\n                    <mat-label name='password'>Mot de passe</mat-label>\n                    <input matInput type='password' formControlName='password' />\n                    <mat-error *ngIf=\"\"></mat-error>\n                </mat-form-field>\n                <button mat-raised-button (click)=\"goggleConnection()\"><span class=\"material-icons-outlined\">\n                  g_translate\n                  </span></button>\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <mat-error *ngIf='error'>{{ seconnecterErreur() }}</mat-error>\n                <button mat-raised-button [disabled]='this.singinForm.invalid' (click)='submit()'>Envoyer</button>\n                <button mat-raised-button (click)='goSInscrire()'>Je n'ai pas de compte\n                </button>\n            </mat-card-actions>\n\n        </mat-card>\n    </form>\n</section>");
 
 /***/ }),
 
@@ -91,7 +195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-acceuil></app-acceuil>\n<!-- <app-parcour></app-parcour>\n<app-contact></app-contact> -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-acceuil></app-acceuil>");
 
 /***/ }),
 
@@ -108,16 +212,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_header_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./header.component.html */ "yxfS");
 /* harmony import */ var _header_component_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header.component.sass */ "8web");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _shared_services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../shared/services/users.service */ "QUjd");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
 
 
 
 
 
 let HeaderComponent = class HeaderComponent {
-    constructor(router) {
+    constructor(router, userService) {
         this.router = router;
+        this.userService = userService;
         this.listeMenu = [
             {
                 nom: 'Acceuil',
@@ -148,13 +255,31 @@ let HeaderComponent = class HeaderComponent {
         this.activeLink = this.listeMenu[0];
     }
     ngOnInit() {
+        this.subscription = this.userService.idSession$.subscribe((userSession) => {
+            this.userSession = userSession;
+        });
+    }
+    loggout() {
+        this.userService.loggout().subscribe(() => {
+            console.log('deconnexion reussi !');
+        }, err => {
+            console.log('deconnexion reussi dans lerreur');
+            console.log(err);
+        });
+        ;
+    }
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 };
 HeaderComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _shared_services_users_service__WEBPACK_IMPORTED_MODULE_3__["UsersService"] }
 ];
 HeaderComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
         selector: 'app-header',
         template: _raw_loader_header_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_header_component_sass__WEBPACK_IMPORTED_MODULE_2__["default"]]
@@ -266,6 +391,82 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "Af7n":
+/*!****************************************************!*\
+  !*** ./src/shared/services/upload-file.service.ts ***!
+  \****************************************************/
+/*! exports provided: UploadFileService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadFileService", function() { return UploadFileService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+
+
+
+
+
+let UploadFileService = class UploadFileService {
+    constructor(http) {
+        this.http = http;
+        this.filesHolder$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]([]);
+    }
+    addFile(files) {
+        this.filesHolder$.next([
+            ...this.filesHolder$.value,
+            ...Array.from(files).map((f) => {
+                const formData = new FormData();
+                formData.append('f', f);
+                const request = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpRequest"]('POST', '/api/upload', formData, {
+                    reportProgress: true
+                });
+                return {
+                    file: f,
+                    progress$: this.http.request(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((event) => {
+                        switch (event.type) {
+                            case _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpEventType"].Sent: {
+                                return 0;
+                            }
+                            case _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpEventType"].UploadProgress: {
+                                return Math.round(event.loaded / event.total * 100);
+                            }
+                            case _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpEventType"].Response: {
+                                return 100;
+                            }
+                            default: {
+                                return 0;
+                            }
+                        }
+                    }))
+                };
+            })
+        ]);
+    }
+    removeFile(index) {
+        const files = this.filesHolder$.value.slice();
+        this.http.delete(`/api/upload/${files[index].file.name}`).subscribe();
+        files.splice(index, 1);
+        this.filesHolder$.next(files);
+    }
+};
+UploadFileService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
+];
+UploadFileService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])({
+        providedIn: 'root'
+    })
+], UploadFileService);
+
+
+
+/***/ }),
+
 /***/ "AytR":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -346,6 +547,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
 /* harmony import */ var src_shared_services_parcour_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/shared/services/parcour.service */ "t5SD");
+/* harmony import */ var src_shared_services_users_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/shared/services/users.service */ "QUjd");
+
 
 
 
@@ -353,26 +556,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let FormationComponent = class FormationComponent {
-    constructor(parcourService, router) {
+    constructor(parcourService, userService, router) {
         this.parcourService = parcourService;
+        this.userService = userService;
         this.router = router;
     }
     ngOnInit() {
+        this.subscription = this.userService.idSession$.subscribe((userSession) => {
+            this.userSession = userSession;
+        });
         this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe((formationTab) => {
             this.parcourTab = formationTab;
         });
         this.parcourService.recupFormations();
-        this.parcourService.emettreLesFormationsRecuperer();
     }
     deleteFormation(id) {
         this.parcourService.supprimerUneFormation(id);
     }
     ngOnDestroy() {
         this.tableauDeFormationSubscription.unsubscribe();
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+        ;
     }
 };
 FormationComponent.ctorParameters = () => [
     { type: src_shared_services_parcour_service__WEBPACK_IMPORTED_MODULE_5__["ParcourService"] },
+    { type: src_shared_services_users_service__WEBPACK_IMPORTED_MODULE_6__["UsersService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 FormationComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -467,19 +678,56 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_se_connecter_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./se-connecter.component.html */ "1z2Q");
 /* harmony import */ var _se_connecter_component_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./se-connecter.component.sass */ "hU8T");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _shared_services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../../shared/services/users.service */ "QUjd");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "tyNb");
+
+
+
 
 
 
 
 let SeConnecterComponent = class SeConnecterComponent {
-    constructor() { }
+    constructor(fb, userService, router) {
+        this.fb = fb;
+        this.userService = userService;
+        this.router = router;
+    }
     ngOnInit() {
+        this.singinForm = this.fb.group({
+            email: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]
+        });
+    }
+    submit() {
+        this.userService.signin(this.singinForm.value).subscribe(() => {
+            console.log('la connexion cest bien deroule');
+            this.router.navigate(['acceuil']);
+        }, err => {
+            console.log('Apres soumission de la connection vous etes dans lerreur');
+            this.error = this.userService.error;
+        });
+    }
+    goSInscrire() {
+        this.router.navigate(['sInscrire']);
+    }
+    goggleConnection() {
+        this.userService.signinGoogle();
+    }
+    //Gestion des erreurs
+    seconnecterErreur() {
+        return this.error;
     }
 };
-SeConnecterComponent.ctorParameters = () => [];
+SeConnecterComponent.ctorParameters = () => [
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _shared_services_users_service__WEBPACK_IMPORTED_MODULE_3__["UsersService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
+];
 SeConnecterComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
         selector: 'app-se-connecter',
         template: _raw_loader_se_connecter_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_se_connecter_component_sass__WEBPACK_IMPORTED_MODULE_2__["default"]]
@@ -518,6 +766,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_pages_page_container_parcour_experiences_experience_experience_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/pages/page-container/parcour/experiences/experience/experience.component */ "+IiF");
 /* harmony import */ var src_app_pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! src/app/pages/page-container/parcour/formations/formation-form/formation-form.component */ "yXgP");
 /* harmony import */ var _services_parcour_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../services/parcour.service */ "t5SD");
+/* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../services/users.service */ "QUjd");
+/* harmony import */ var src_app_pages_page_container_parcour_formations_upload_image_form_upload_image_form_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component */ "0mEW");
+
+
 
 
 
@@ -550,6 +802,7 @@ const MODULES = [
     src_app_pages_page_container_parcour_experiences_experience_experience_component__WEBPACK_IMPORTED_MODULE_15__["ExperienceComponent"],
     src_app_pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_16__["FormationFormComponent"],
     src_app_pages_page_container_parcour_experiences_experience_form_experience_form_component__WEBPACK_IMPORTED_MODULE_14__["ExperienceFormComponent"],
+    src_app_pages_page_container_parcour_formations_upload_image_form_upload_image_form_component__WEBPACK_IMPORTED_MODULE_19__["UploadImageFormComponent"]
 ];
 let CoreModule = class CoreModule {
 };
@@ -567,7 +820,8 @@ CoreModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _layout_module__WEBPACK_IMPORTED_MODULE_3__["LayoutModule"],
         ],
         providers: [
-            _services_parcour_service__WEBPACK_IMPORTED_MODULE_17__["ParcourService"]
+            _services_parcour_service__WEBPACK_IMPORTED_MODULE_17__["ParcourService"],
+            _services_users_service__WEBPACK_IMPORTED_MODULE_18__["UsersService"],
         ]
     })
 ], CoreModule);
@@ -586,6 +840,19 @@ CoreModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='experienceForm' (ngSubmit)='onSaveExperience()'>\n        <mat-card style='min-width: 500px; max-width: 600px;'>\n            <mat-card-header>\n                <mat-card-title>Nouvelle Experience</mat-card-title>\n            </mat-card-header>\n\n            <!-- Les Dates -->\n            <mat-card-content>\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date d'entrée</mat-label>\n                        <input matInput [matDatepicker]='picker' formControlName='dateEntree'>\n                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>\n                        <mat-datepicker #picker></mat-datepicker>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date de sortie</mat-label>\n                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie'>\n                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>\n                        <mat-datepicker #pickerSortie></mat-datepicker>\n                    </mat-form-field>\n                </div>\n\n                <!-- image -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <input matInput type=\"text\" name=\"image\" formControlName='image' id=\"image\">\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Description Image</mat-label>\n                        <input matInput type=\"text\" formControlName='alt' placeholder='alt'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n\n                <!-- Contrat -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Type de Contrat</mat-label>\n                        <mat-select placeholder=\"type de contrat\" formControlName='typeContrat'>\n                            <mat-option *ngFor='let contrat of typeContrat' [value]=\"contrat\">{{ contrat }}</mat-option>\n                        </mat-select>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Enseigne</mat-label>\n                        <input matInput type=\"text\" placeholder=\"option\" formControlName='enseigne'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lieu</mat-label>\n                        <input type=\"text\" matInput formControlName='lieu' placeholder=\"Departement\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lien vers le site </mat-label>\n                        <input type='text' matInput placeholder=\"Liens\" formControlName='lien' />\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Fonction</mat-label>\n                        <textarea matInput placeholder=\"Quels rôle aviez vous\" formControlName='fonction'></textarea>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button mat-button type='button' (click)=\"envoyer(experienceForm)\">Enregistrer</button>\n                <button mat-raised-button (click)=\"retour()\">Annuler</button>\n            </mat-card-actions>\n            <mat-card-footer>\n            </mat-card-footer>\n        </mat-card>\n    </form>\n</section>");
+
+/***/ }),
+
+/***/ "GaKj":
+/*!************************************************************************************************************!*\
+  !*** ./src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component.sass ***!
+  \************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1cGxvYWQtaW1hZ2UtZm9ybS5jb21wb25lbnQuc2FzcyJ9 */");
 
 /***/ }),
 
@@ -677,6 +944,100 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "QUjd":
+/*!**********************************************!*\
+  !*** ./src/shared/services/users.service.ts ***!
+  \**********************************************/
+/*! exports provided: UsersService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsersService", function() { return UsersService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+
+
+
+
+
+
+let UsersService = class UsersService {
+    constructor(http, router) {
+        this.http = http;
+        this.router = router;
+        this.idSession$ = new rxjs__WEBPACK_IMPORTED_MODULE_4__["BehaviorSubject"]({
+            isAuth: null,
+            _id: null
+        });
+    }
+    // Queries
+    // Inscription
+    createUser(newUser) {
+        return this.http.post('/api/users/signup', newUser);
+    }
+    // Connexion en local
+    signin(user) {
+        return this.http.post('/api/users/signin', user).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((response) => {
+            this.idSession$.next({
+                isAuth: true,
+                _id: response._id
+            });
+        }, err => {
+            this.error = err.error.substr(104, 22);
+        }));
+    }
+    // Connexion Google
+    signinGoogle() {
+        const optionRequete = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+                'Access-Control-Allow-Origin': '*',
+            })
+        };
+        this.http.get('/api/auth/google').subscribe((res) => {
+            console.log(res);
+        }, err => {
+            console.log(err);
+        });
+    }
+    // userAPI(data): Observable<any> {
+    //   return this.http.get(this.baseurl, data, httpOptions)
+    //     .pipe(
+    //       tap((resultat) => console.log("Résultat de la requête : ",resultat)),
+    //       catchError(this.handleError('erreur lors de la requête CORS', []))
+    //     );
+    // }
+    // Deconnexion
+    loggout() {
+        return this.http.delete('api/users/signout').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])((response) => {
+            this.idSession$.next({
+                isAuth: false,
+                _id: ''
+            });
+            console.log(response);
+        }, err => {
+            console.log(err.error);
+        }));
+    }
+};
+UsersService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }
+];
+UsersService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Injectable"])({
+        providedIn: 'root'
+    })
+], UsersService);
+
+
+
+/***/ }),
+
 /***/ "S6iF":
 /*!***********************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/navbar/navbar.component.html ***!
@@ -734,7 +1095,7 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='form' (ngSubmit)=\"onSubmit()\">\n        <mat-card class='matCardSeCo' fxFlex='column'>\n            <mat-card-header>\n                <mat-card-title>S'enregistrer</mat-card-title>\n            </mat-card-header>\n            <mat-card-content fxLayout='column'>\n                <mat-form-field>\n                    <mat-label name='email'>Email</mat-label>\n                    <input matInput formControlName='email' type='email' />\n                    <mat-error *ngIf=\"this.form.invalid\">{{ errorMail() }}</mat-error>\n                </mat-form-field>\n\n                <mat-form-field>\n                    <mat-label name='password'>Mot de passe</mat-label>\n                    <input matInput formControlName='password' type='password' />\n                    <mat-error *ngIf=\"this.form.invalid\">{{ errorPassword() }}</mat-error>\n                </mat-form-field>\n\n                <mat-form-field>\n                    <mat-label name='passwordConfirm'>confirmer le mot de passe</mat-label>\n                    <input matInput name='passwordConfirm' formControlName='passwordConfirm' [errorStateMatcher]='errorPasswordConfirm()' type='password' />\n                    <mat-error *ngIf=\"this.form.invalid\">{{ errorPasswordConfirm() }}</mat-error>\n                </mat-form-field>\n\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button mat-raised-button>Envoyer</button>\n            </mat-card-actions>\n        </mat-card>\n    </form>\n</section>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='form'>\n        <mat-card class='matCardSeCo' fxFlex='column'>\n            <mat-card-header>\n                <mat-card-title>S'enregistrer</mat-card-title>\n            </mat-card-header>\n            <mat-card-content fxLayout='column'>\n                <mat-form-field>\n                    <mat-label name='pseudo'>Pseudo</mat-label>\n                    <input matInput formControlName='pseudo' type='text' />\n                    <mat-error *ngIf=\"this.form.invalid\"></mat-error>\n                </mat-form-field>\n                <mat-form-field>\n                    <mat-label name='email'>Email</mat-label>\n                    <input matInput formControlName='email' type='email' />\n                    <mat-error *ngIf=\"this.form.invalid\">{{ errorMail() }}</mat-error>\n                </mat-form-field>\n\n                <mat-form-field>\n                    <mat-label name='password'>Mot de passe</mat-label>\n                    <input matInput formControlName='password' type='password' />\n                    <mat-error *ngIf=\"this.form.invalid\">{{ errorPassword() }}</mat-error>\n                </mat-form-field>\n\n                <mat-form-field>\n                    <mat-label name='passwordConfirm'>confirmer le mot de passe</mat-label>\n                    <input matInput name='passwordConfirm' type='password' />\n                    <mat-error *ngIf=\"this.form.invalid\">{{ errorPasswordConfirm() }}</mat-error>\n                </mat-form-field>\n\n            </mat-card-content>\n            <mat-card-actions fx-flex='column'>\n                <button mat-raised-button [disabled]='this.form.invalid' (click)='onSubmit()'>Envoyer</button>\n                <button mat-raised-button (click)=\"goSeConnecter()\">\n                    J'ai deja un compte\n                </button>\n            </mat-card-actions>\n        </mat-card>\n    </form>\n</section>");
 
 /***/ }),
 
@@ -747,7 +1108,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section>\n    <div>\n        <h3 fxLayoutAlign='center center'>Expérience Professionnelle</h3>\n        <button mat-raised-button routerLink='/experienceForm'>Ajouter une expérience</button>\n    </div>\n\n    <div fxLayout='row wrap' fxLayoutAlign='center start'>\n        <mat-card *ngFor='let xp of experienceTab'>\n            <mat-card-header>\n                <mat-card-title>{{ xp.enseigne }}</mat-card-title>\n                <mat-card-subtitle>{{xp.dateEntree | date: \"MM/y\"}} - {{xp.dateSortie | date: 'MM/y'}}</mat-card-subtitle>\n            </mat-card-header>\n            <img class='imgBg' matCardImage src=\"{{xp.image}}\">\n            <mat-card-content>\n                {{ xp.fonction }}\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button mat-raised-button>En Savoir plus</button>\n            </mat-card-actions>\n        </mat-card>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<section>\n    <div>\n        <h3 fxLayoutAlign='center center'>Expérience Professionnelle</h3>\n        <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='/experienceForm'>Ajouter une expérience</button>\n    </div>\n\n    <div fxLayout='row wrap' fxLayoutAlign='center start'>\n        <mat-card *ngFor='let xp of experienceTab'>\n            <mat-card-header>\n                <mat-card-title>{{ xp.enseigne }}</mat-card-title>\n                <mat-card-subtitle>{{xp.dateEntree | date: \"MM/y\"}} - {{xp.dateSortie | date: 'MM/y'}}</mat-card-subtitle>\n            </mat-card-header>\n            <img class='imgBg' matCardImage src=\"{{xp.image}}\">\n            <mat-card-content>\n                {{ xp.fonction }}\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button mat-raised-button>En Savoir plus</button>\n            </mat-card-actions>\n        </mat-card>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -760,7 +1121,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n<router-outlet></router-outlet>\n<app-footer></app-footer>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n<router-outlet></router-outlet>\n<app-footer></app-footer>\n");
 
 /***/ }),
 
@@ -830,6 +1191,19 @@ LayoutModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], LayoutModule);
 
 
+
+/***/ }),
+
+/***/ "Z9o9":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component.html ***!
+  \**************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- <mat-form-field>\n    <ngx-mat-file-input name='imgFormation' [formControl]='formControl' [multiple]=\"multiple\" [accept]=\"accept\" [color]=\"color\">\n    </ngx-mat-file-input>\n</mat-form-field>\n<div class=\"progress\">\n    <mat-progress-bar class=\"progress-bar\" mode=\"determinate\" [value]=\"20\">\n    </mat-progress-bar>\n    <mat-icon class=\"cancel-upload\">delete_forever</mat-icon>\n</div> -->\n\n\n<div class=\"container\" fxLayout=\"row\" fxLayoutAlign=\"center center\">\n    <div class=\"content\" fxLayout=\"column\" fxLayoutGap=\"15px\">\n        <div class=\"upload\" *ngIf=\"!this.noFile\" [class.over]=\"over\" (click)=\"openFile()\" (drop)=\"dropFile($event); over = false\" (dragover)=\"$event.preventDefault()\" (dragenter)=\"over = true\" (dragleave)=\"over = false\" fxLayout=\"row\" fxLayoutAlign=\"center center\">\n            <mat-label>Ajouter une image</mat-label>\n            <input (change)='addFile($event)' #fileinput type=\"file\" fxHide=\"true\" />\n            <mat-icon> <span class=\"material-icons-outlined\">\n              file_download\n              </span></mat-icon>\n        </div>\n        <div class=\"file\" fxLayout='column' fxLayoutAlign=\"center center\">\n            <div class=\"fileUpload\" *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='row' fxLayoutAlign=\"space-between center\">\n                <div class=\"fileName\" fxLayoutAlign=\"space-arround center\" fxLayout='row'>\n                    <span fxFill>{{ fileHolder.file.name }}</span>\n                    <div fxLayout='row' *ngIf='fileHolder.progress$ | async ; let progress '>\n                        <span>{{ progress }}%</span>\n                        <mat-progress-bar style=\" width:200px \" mode=\"determinate\" [value]='progress'>\n                        </mat-progress-bar>\n                    </div>\n                </div>\n                <mat-icon><span class=\"material-icons\" (click)='deleteFile(i)'>clear</span></mat-icon>\n\n            </div>\n        </div>\n\n    </div>\n</div>");
 
 /***/ }),
 
@@ -930,7 +1304,7 @@ ParcourComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='formationForm'>\n        <mat-card style='min-width: 500px; max-width: 600px;'>\n            <mat-card-header>\n                <mat-card-title>Nouvelle Formation</mat-card-title>\n                <mat-card-subtitle>{{ id }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- INTIUTLE -->\n            <mat-card-content>\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Formation</mat-label>\n                        <input matInput type=\"text\" formControlName='nomFormation' placeholder=\"Nom de la formation\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Option de la Formation</mat-label>\n                        <input matInput type=\"text\" placeholder=\"option\" formControlName='option'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- IMAGE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <input matInput type=\"text\" name=\"image\" formControlName='image' placeholder=\"image\" id=\"image\">\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Description Image</mat-label>\n                        <input matInput type=\"text\" formControlName='alt' placeholder='alt'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- LOCALISATION -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lieu</mat-label>\n                        <input type=\"text\" matInput formControlName='lieu' placeholder=\"Departement\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Adresse</mat-label>\n                        <input type=\"text\" matInput formControlName='adresse' placeholder=\"lieu\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- DATE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date d'entrée</mat-label>\n                        <input matInput [matDatepicker]='picker' formControlName='dateEntree'>\n                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>\n                        <mat-datepicker #picker></mat-datepicker>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date de sortie</mat-label>\n                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie'>\n                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>\n                        <mat-datepicker #pickerSortie></mat-datepicker>\n                    </mat-form-field>\n                </div>\n                <!-- COMPLEMENT -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Contenu de la formation</mat-label>\n                        <textarea matInput placeholder=\"De quoi est fait la formation\" formControlName='contenu'></textarea>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n\n                    <div formArrayName='liste' fxLayout='column'>\n                        <button mat-raised-button (click)='addAxeListe()'>Ajouter un Objectif</button>\n                        <div *ngFor='let axe of liste.controls; let i = index' fxLayout='row'>\n                            <mat-form-field appearance='fill'>\n                                <mat-label>Les points de formation </mat-label>\n                                <input [formControlName]='i' type='text' matInput placeholder=\"Les différents axes\" />\n                                <mat-error *ngIf=\"\"></mat-error>\n                            </mat-form-field>\n                            <button mat-raised-button (click)=\"deleteAxe(i)\">-</button>\n                        </div>\n                    </div>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lien vers le site </mat-label>\n                        <input type='text' matInput placeholder=\"Liens\" formControlName='lien' />\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button *ngIf='!this.id' mat-raised-button (click)=\"onModify()\">Action</button>\n                <button *ngIf='!this.id' mat-raised-button (click)=\"onSaveFormation()\">Enregistrer</button>\n                <button mat-raised-button (click)=\"retour()\">Annuler</button>\n            </mat-card-actions>\n            <mat-card-footer>\n            </mat-card-footer>\n        </mat-card>\n    </form>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<section fxLayoutAlign='center center'>\n    <form [formGroup]='formationForm'>\n        <mat-card style='min-width: 500px; max-width: 600px;'>\n            <mat-card-header>\n                <mat-card-title>Nouvelle Formation</mat-card-title>\n                <mat-card-subtitle>{{ id }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- INTIUTLE -->\n            <mat-card-content>\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Formation</mat-label>\n                        <input matInput type=\"text\" formControlName='nomFormation' placeholder=\"Nom de la formation\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Option de la Formation</mat-label>\n                        <input matInput type=\"text\" placeholder=\"option\" formControlName='option'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- IMAGE -->\n                <div fxLayout='column'>\n                    <app-upload-image-form></app-upload-image-form>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Description Image</mat-label>\n                        <input matInput type=\"text\" formControlName='alt' placeholder='alt'>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- LOCALISATION -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lieu</mat-label>\n                        <input type=\"text\" matInput formControlName='lieu' placeholder=\"Departement\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Adresse</mat-label>\n                        <input type=\"text\" matInput formControlName='adresse' placeholder=\"lieu\">\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n                <!-- DATE -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date d'entrée</mat-label>\n                        <input matInput [matDatepicker]='picker' formControlName='dateEntree'>\n                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>\n                        <mat-datepicker #picker></mat-datepicker>\n                    </mat-form-field>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Date de sortie</mat-label>\n                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie'>\n                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>\n                        <mat-datepicker #pickerSortie></mat-datepicker>\n                    </mat-form-field>\n                </div>\n                <!-- COMPLEMENT -->\n                <div fxLayout='column'>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Contenu de la formation</mat-label>\n                        <textarea matInput placeholder=\"De quoi est fait la formation\" formControlName='contenu'></textarea>\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n\n                    <div formArrayName='liste' fxLayout='column'>\n                        <button mat-raised-button (click)='addAxeListe()'>Ajouter un Objectif</button>\n                        <div *ngFor='let axe of liste.controls; let i = index' fxLayout='row'>\n                            <mat-form-field appearance='fill'>\n                                <mat-label>Les points de formation </mat-label>\n                                <input [formControlName]='i' type='text' matInput placeholder=\"Les différents axes\" />\n                                <mat-error *ngIf=\"\"></mat-error>\n                            </mat-form-field>\n                            <button mat-raised-button (click)=\"deleteAxe(i)\">-</button>\n                        </div>\n                    </div>\n                    <mat-form-field appearance='fill'>\n                        <mat-label>Lien vers le site </mat-label>\n                        <input type='text' matInput placeholder=\"Liens\" formControlName='lien' />\n                        <mat-error *ngIf=\"\"></mat-error>\n                    </mat-form-field>\n                </div>\n            </mat-card-content>\n            <mat-card-actions align=\"start\">\n                <button *ngIf='this.id' mat-raised-button (click)=\"onModify()\">modifier\n                </button>\n                <button *ngIf='!this.id' mat-raised-button (click)=\"onSaveFormation()\">Enregistrer</button>\n                <button mat-raised-button (click)=\"retour()\">Annuler</button>\n            </mat-card-actions>\n            <mat-card-footer>\n            </mat-card-footer>\n        </mat-card>\n    </form>\n</section>");
 
 /***/ }),
 
@@ -947,16 +1321,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _components_auth_s_inscrire_s_inscrire_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/auth/s-inscrire/s-inscrire.component */ "fPFa");
-/* harmony import */ var _components_auth_se_connecter_se_connecter_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/auth/se-connecter/se-connecter.component */ "DksF");
-/* harmony import */ var _pages_page_container_acceuil_acceuil_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/page-container/acceuil/acceuil.component */ "dMIb");
-/* harmony import */ var _pages_page_container_contact_contact_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/page-container/contact/contact.component */ "BP8A");
-/* harmony import */ var _pages_page_container_page_container_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/page-container/page-container.component */ "6lop");
-/* harmony import */ var _pages_page_container_parcour_experiences_experience_form_experience_form_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/page-container/parcour/experiences/experience-form/experience-form.component */ "u3FG");
-/* harmony import */ var _pages_page_container_parcour_experiences_experience_experience_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/page-container/parcour/experiences/experience/experience.component */ "+IiF");
-/* harmony import */ var _pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/page-container/parcour/formations/formation-form/formation-form.component */ "yXgP");
-/* harmony import */ var _pages_page_container_parcour_formations_formation_formation_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/page-container/parcour/formations/formation/formation.component */ "CF18");
-/* harmony import */ var _pages_page_container_parcour_parcour_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/page-container/parcour/parcour.component */ "bAjM");
+/* harmony import */ var src_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/shared/auth.guard */ "kzQ5");
+/* harmony import */ var _components_auth_s_inscrire_s_inscrire_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/auth/s-inscrire/s-inscrire.component */ "fPFa");
+/* harmony import */ var _components_auth_se_connecter_se_connecter_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/auth/se-connecter/se-connecter.component */ "DksF");
+/* harmony import */ var _pages_page_container_acceuil_acceuil_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./pages/page-container/acceuil/acceuil.component */ "dMIb");
+/* harmony import */ var _pages_page_container_contact_contact_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./pages/page-container/contact/contact.component */ "BP8A");
+/* harmony import */ var _pages_page_container_page_container_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pages/page-container/page-container.component */ "6lop");
+/* harmony import */ var _pages_page_container_parcour_experiences_experience_form_experience_form_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./pages/page-container/parcour/experiences/experience-form/experience-form.component */ "u3FG");
+/* harmony import */ var _pages_page_container_parcour_experiences_experience_experience_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./pages/page-container/parcour/experiences/experience/experience.component */ "+IiF");
+/* harmony import */ var _pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./pages/page-container/parcour/formations/formation-form/formation-form.component */ "yXgP");
+/* harmony import */ var _pages_page_container_parcour_formations_formation_formation_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./pages/page-container/parcour/formations/formation/formation.component */ "CF18");
+/* harmony import */ var _pages_page_container_parcour_parcour_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./pages/page-container/parcour/parcour.component */ "bAjM");
+
 
 
 
@@ -971,18 +1347,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: 'acceuil', component: _pages_page_container_acceuil_acceuil_component__WEBPACK_IMPORTED_MODULE_5__["AcceuilComponent"] },
-    { path: 'seConnecter', component: _components_auth_se_connecter_se_connecter_component__WEBPACK_IMPORTED_MODULE_4__["SeConnecterComponent"] },
-    { path: 'sInscrire', component: _components_auth_s_inscrire_s_inscrire_component__WEBPACK_IMPORTED_MODULE_3__["SInscrireComponent"] },
-    { path: 'parcour', component: _pages_page_container_parcour_parcour_component__WEBPACK_IMPORTED_MODULE_12__["ParcourComponent"] },
-    { path: 'formation', component: _pages_page_container_parcour_formations_formation_formation_component__WEBPACK_IMPORTED_MODULE_11__["FormationComponent"] },
-    { path: 'formation/:_id', component: _pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_10__["FormationFormComponent"] },
-    { path: 'formationForm', component: _pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_10__["FormationFormComponent"] },
-    { path: 'experience', component: _pages_page_container_parcour_experiences_experience_experience_component__WEBPACK_IMPORTED_MODULE_9__["ExperienceComponent"] },
-    { path: 'experienceForm', component: _pages_page_container_parcour_experiences_experience_form_experience_form_component__WEBPACK_IMPORTED_MODULE_8__["ExperienceFormComponent"] },
-    { path: 'contact', component: _pages_page_container_contact_contact_component__WEBPACK_IMPORTED_MODULE_6__["ContactComponent"] },
+    { path: 'acceuil', component: _pages_page_container_acceuil_acceuil_component__WEBPACK_IMPORTED_MODULE_6__["AcceuilComponent"] },
+    { path: 'seConnecter', component: _components_auth_se_connecter_se_connecter_component__WEBPACK_IMPORTED_MODULE_5__["SeConnecterComponent"] },
+    { path: 'sInscrire', component: _components_auth_s_inscrire_s_inscrire_component__WEBPACK_IMPORTED_MODULE_4__["SInscrireComponent"] },
+    { path: 'parcour', component: _pages_page_container_parcour_parcour_component__WEBPACK_IMPORTED_MODULE_13__["ParcourComponent"] },
+    { path: 'formation', component: _pages_page_container_parcour_formations_formation_formation_component__WEBPACK_IMPORTED_MODULE_12__["FormationComponent"] },
+    { path: 'formation/:_id',
+        canActivate: [src_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+        component: _pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_11__["FormationFormComponent"] },
+    { path: 'formationForm',
+        canActivate: [src_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+        component: _pages_page_container_parcour_formations_formation_form_formation_form_component__WEBPACK_IMPORTED_MODULE_11__["FormationFormComponent"] },
+    { path: 'experience', component: _pages_page_container_parcour_experiences_experience_experience_component__WEBPACK_IMPORTED_MODULE_10__["ExperienceComponent"] },
+    { path: 'experienceForm',
+        canActivate: [src_shared_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]],
+        component: _pages_page_container_parcour_experiences_experience_form_experience_form_component__WEBPACK_IMPORTED_MODULE_9__["ExperienceFormComponent"] },
+    { path: 'contact', component: _pages_page_container_contact_contact_component__WEBPACK_IMPORTED_MODULE_7__["ContactComponent"] },
     { path: '', redirectTo: '/', pathMatch: 'full' },
-    { path: '**', component: _pages_page_container_page_container_component__WEBPACK_IMPORTED_MODULE_7__["PageContainerComponent"] }
+    { path: '**', component: _pages_page_container_page_container_component__WEBPACK_IMPORTED_MODULE_8__["PageContainerComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -1080,9 +1462,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_s_inscrire_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./s-inscrire.component.html */ "Ufru");
 /* harmony import */ var _s_inscrire_component_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./s-inscrire.component.sass */ "XV9S");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _shared_services_users_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../../../shared/services/users.service */ "QUjd");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+
 
 
 
@@ -1090,22 +1474,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SInscrireComponent = class SInscrireComponent {
-    constructor(fb, router) {
+    constructor(fb, router, usersService) {
         this.fb = fb;
         this.router = router;
+        this.usersService = usersService;
     }
     ngOnInit() {
         this.initForm();
     }
     initForm() {
         this.form = this.fb.group({
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].email]],
-            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].minLength(8)]],
-            passwordConfirm: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required]
+            pseudo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].email]],
+            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].minLength(8)]],
         });
     }
     // tslint:disable-next-line: typedef
     onSubmit() {
+        this.usersService.createUser(this.form.value).subscribe((response) => {
+            console.log(response);
+            this.router.navigate(['/seConnecter']);
+        }, err => {
+            this.error = err;
+        });
+        ;
+    }
+    goSeConnecter() {
+        this.router.navigate(['/seConnecter']);
     }
     // GESTION DES ERREURS
     // tslint:disable-next-line: typedef
@@ -1120,22 +1515,15 @@ let SInscrireComponent = class SInscrireComponent {
         }
     }
     errorPasswordConfirm() {
-        const recupPassword = this.form.get('password').value;
-        const recupPasswordConfirm = this.form.get('passwordConfirm').value;
-        console.log(recupPassword, recupPasswordConfirm);
-        if (this.form.get('recupPasswordConfirm')) {
-            if (recupPassword !== recupPasswordConfirm) {
-                return 'Les mot de passe ne correspondent pas';
-            }
-        }
     }
 };
 SInscrireComponent.ctorParameters = () => [
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _shared_services_users_service__WEBPACK_IMPORTED_MODULE_3__["UsersService"] }
 ];
 SInscrireComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
         selector: 'app-s-inscrire',
         template: _raw_loader_s_inscrire_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_s_inscrire_component_sass__WEBPACK_IMPORTED_MODULE_2__["default"]]
@@ -1230,7 +1618,7 @@ NavbarComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<section>\n\n    <div>\n        <h3 fxLayoutAlign='center center'> Formation</h3>\n        <button mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>\n    </div>\n    <div fxLayout='row wrap' fxLayoutAlign='center start'>\n        <mat-card *ngFor='let formation of parcourTab; let i = index'>\n            <div>\n                <button mat-raised-button (click)=\"deleteFormation(formation._id)\">Supprimer</button>\n                <button mat-raised-button [routerLink]=\"['/formation',formation._id]\">Modifier</button>\n                <p>{{ formation._id }}</p>\n            </div>\n            <mat-card-header>\n                <mat-card-title>{{ formation.nomFormation }}</mat-card-title>\n                <mat-card-subtitle>{{ formation.lieu }}</mat-card-subtitle>\n            </mat-card-header>\n            <!-- <img class='imgBg' matCardImage src=\"{{ formation.image }}\" alt='{{formation.alt}}'> -->\n            <mat-card-content>\n                <div fxLayout='row' fxLayoutAlign='space-around center'>\n                    <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>\n                    <p>Date de Sortie : {{ formation.dateSortie | date:'MM/y'}}</p>\n                </div>\n            </mat-card-content>\n            <mat-card-content>\n                <div>\n                    <p> Contennu de la formation : </p>\n                    <p> {{ formation.contenu}}</p>\n                    <mat-list dense>\n                        <mat-list-item *ngFor=\"let item of formation.liste\">\n                            {{ item }}\n                        </mat-list-item>\n                    </mat-list>\n                </div>\n            </mat-card-content>\n            <mat-card-actions>\n                <a href=\"{{ formation.lien}}\" target='blank'><button mat-raised-button> En savoir plus</button></a>\n            </mat-card-actions>\n        </mat-card>\n    </div>\n</section>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<section>\n    <div>\n        <h3 fxLayoutAlign='center center'> Formation</h3>\n        <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>\n    </div>\n    <div fxLayout='row wrap' fxLayoutAlign='center start'>\n        <mat-card *ngFor='let formation of parcourTab; let i = index'>\n            <div>\n                <button mat-raised-button *ngIf='this.userSession.isAuth' (click)=\"deleteFormation(formation._id)\">Supprimer</button>\n                <button mat-raised-button *ngIf='this.userSession.isAuth' [routerLink]=\"['/formation',formation._id]\">Modifier</button>\n                <p>{{ formation._id }}</p>\n            </div>\n            <mat-card-header>\n                <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>\n                <mat-card-subtitle>\n                    {{ formation.lieu }} <br> {{ formation.adresse }}\n                </mat-card-subtitle>\n            </mat-card-header>\n            <img class='imgBg' matCardImage src=\"{{ formation.image }}\" alt='{{formation.alt}}'>\n            <mat-card-content>\n                <div fxLayout='row' fxLayoutAlign='space-around center'>\n                    <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>\n                    <p>Date de Sortie : {{ formation.dateSortie | date:'MM/y'}}</p>\n                </div>\n            </mat-card-content>\n            <mat-card-content>\n                <div>\n                    <p> Contennu de la formation : </p>\n                    <p> {{ formation.contenu}}</p>\n                    <mat-list dense>\n                        <mat-list-item *ngFor=\"let item of formation.liste\">\n                            {{ item }}\n                        </mat-list-item>\n                    </mat-list>\n                </div>\n            </mat-card-content>\n            <mat-card-actions>\n                <a href=\"{{ formation.lien}}\" target='blank'><button mat-raised-button> En savoir plus</button></a>\n            </mat-card-actions>\n        </mat-card>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -1244,6 +1632,43 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJmb290ZXIuY29tcG9uZW50LnNhc3MifQ== */");
+
+/***/ }),
+
+/***/ "kzQ5":
+/*!**********************************!*\
+  !*** ./src/shared/auth.guard.ts ***!
+  \**********************************/
+/*! exports provided: AuthGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuard", function() { return AuthGuard; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _services_users_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/users.service */ "QUjd");
+
+
+
+let AuthGuard = class AuthGuard {
+    constructor(userService) {
+        this.userService = userService;
+    }
+    canActivate(route, state) {
+        return this.userService.idSession$.value.isAuth;
+    }
+};
+AuthGuard.ctorParameters = () => [
+    { type: _services_users_service__WEBPACK_IMPORTED_MODULE_2__["UsersService"] }
+];
+AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], AuthGuard);
+
+
 
 /***/ }),
 
@@ -1287,13 +1712,20 @@ let ParcourService = class ParcourService {
     emettreLesFormationsRecuperer() {
         this.formationTab$.next(this.formationTab);
     }
+    getFormation(index) {
+        return this.formationTab$.value[index];
+    }
     createNewFormation(newFormation) {
         this.formationTab.push(newFormation);
         this.saveFormations(newFormation);
         this.emettreLesFormationsRecuperer();
     }
+    // Queries
     saveFormations(formation) {
         this.http.post('/api/formations', formation).subscribe((formation) => { });
+    }
+    updateFormation(formation, id) {
+        this.http.post('/api/formations/update/' + id, formation).subscribe((id) => { });
     }
     recupFormations() {
         this.http.get('api/formations')
@@ -1436,38 +1868,38 @@ let FormationFormComponent = class FormationFormComponent {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((paramMap) => {
             this.id = paramMap.get('_id');
+            const index = paramMap.get('index');
             if (this.id) {
-                console.log('vous etes ici');
-                this.initForm();
+                this.formation = this.parcourService.getFormation(Number(index));
             }
-            else {
-                console.log('vous etes la');
-                this.initForm();
-            }
+            this.initForm(this.formation);
         });
     }
     initForm(formation = {
         nomFormation: '',
-        image: '',
+        option: '',
+        // image: null,
         alt: '',
         lieu: '',
         adresse: '',
         dateEntree: new Date,
         dateSortie: new Date,
-        contenu: ''
+        contenu: '',
+        liste: [],
+        lien: ''
     }) {
         this.formationForm = this.fb.group({
-            nomFormation: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            option: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
-            image: [null],
-            alt: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
-            lieu: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            adresse: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
-            dateEntree: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            dateSortie: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            contenu: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
-            liste: this.fb.array([]),
-            lien: [null]
+            nomFormation: [formation.nomFormation, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            option: [formation.option, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
+            // image: [formation.image],
+            alt: [formation.alt, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
+            lieu: [formation.lieu, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            adresse: [formation.adresse, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
+            dateEntree: [formation.dateEntree, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            dateSortie: [formation.dateSortie, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            contenu: [formation.contenu, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
+            liste: this.fb.array(formation.liste),
+            lien: [formation.lien]
         });
     }
     addAxeListe() {
@@ -1476,12 +1908,15 @@ let FormationFormComponent = class FormationFormComponent {
     deleteAxe(i) {
         this.liste.removeAt(i);
     }
+    // ACTION SUR LE SERVICE
     onSaveFormation() {
         this.parcourService.createNewFormation(this.formationForm.value);
-        this.router.navigate(['parcour']);
+        // this.router.navigate(['parcour']);
     }
-    onModify() {
-    }
+    // onModify(){
+    //   this.parcourService.updateFormation(this.formationForm.value, this.id);
+    //   this.router.navigate(['parcour']);
+    // }
     retour() {
         this.router.navigate(['parcour']);
     }
@@ -1513,7 +1948,7 @@ FormationFormComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<header fxLayout='row'>\n    <div fxLayout='row'>\n        <img src=\"./../../../assets/images/logo_sph3rik.png\" alt=\"logo\" fxFlex='90px'>\n        <h1 fxFill fxLayoutAlign='center center'>Sph3rik</h1>\n    </div>\n\n    <nav mat-tab-nav-bar fxLayoutAlign='end end' fxFlex='1 0 auto'>\n        <a mat-tab-link *ngFor=\"let link of listeMenu\" [routerLink]='link.lien' (click)=\"activeLink = link.lien\" [active]='activeLink == link.lien'> {{ link.lien }}</a>\n    </nav>\n</header>\n<div>\n    <button mat-raised-button [matMenuTriggerFor]=\"menuRef\">SeConnecter</button>\n    <mat-menu #menuRef=\"matMenu\">\n        <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>\n    </mat-menu>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<header fxLayout='column' fxLayoutAlign='center center'>\n    <div class='logoTitreMenuContainer' fxLayout='row' fxLayoutAlign=\"space-between center\">\n        <div class='logoTitre'>\n            <img src=\"./../../../assets/images/logo_sph3rik.png\" alt=\"logo\" fxFlex='90px'>\n            <h1 fxLayoutAlign='center center'>Sph2rik</h1>\n        </div>\n        <div fxLayout='column'>\n            <div class='menu'>\n                <button mat-raised-button *ngIf='!this.userSession.isAuth' [matMenuTriggerFor]=\"menuRef\">Se Connecter</button>\n                <mat-menu #menuRef=\"matMenu\">\n                    <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>\n                </mat-menu>\n                <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>\n            </div>\n            <nav mat-tab-nav-bar fxLayoutAlign='end end' fxFlex='1 0 auto'>\n                <a mat-tab-link *ngFor=\"let link of listeMenu\" [routerLink]='link.lien' (click)=\"activeLink = link.lien\" [active]='activeLink == link.lien'> {{ link.lien }}</a>\n            </nav>\n        </div>\n    </div>\n</header>");
 
 /***/ }),
 
@@ -1594,10 +2029,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/expansion */ "7EHt");
 /* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material/select */ "d3UM");
 /* harmony import */ var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material/checkbox */ "bSwM");
-/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/material/datepicker */ "iadO");
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material/core */ "FKr1");
-/* harmony import */ var _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/material/progress-bar */ "bv9b");
-/* harmony import */ var _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/tooltip */ "Qu3c");
+/* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/material/divider */ "f0Cb");
+/* harmony import */ var _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material/datepicker */ "iadO");
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @angular/material/core */ "FKr1");
+/* harmony import */ var _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/progress-bar */ "bv9b");
+/* harmony import */ var _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/material/tooltip */ "Qu3c");
+/* harmony import */ var _angular_material_components_file_input__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular-material-components/file-input */ "OC/Z");
+
+
 
 
 
@@ -1637,10 +2076,12 @@ const MATERIAL = [
     _angular_material_expansion__WEBPACK_IMPORTED_MODULE_15__["MatExpansionModule"],
     _angular_material_select__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
     _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_17__["MatCheckboxModule"],
-    _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_18__["MatDatepickerModule"],
-    _angular_material_core__WEBPACK_IMPORTED_MODULE_19__["MatNativeDateModule"],
-    _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_20__["MatProgressBarModule"],
-    _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_21__["MatTooltipModule"]
+    _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_19__["MatDatepickerModule"],
+    _angular_material_core__WEBPACK_IMPORTED_MODULE_20__["MatNativeDateModule"],
+    _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_21__["MatProgressBarModule"],
+    _angular_material_tooltip__WEBPACK_IMPORTED_MODULE_22__["MatTooltipModule"],
+    _angular_material_divider__WEBPACK_IMPORTED_MODULE_18__["MatDividerModule"],
+    _angular_material_components_file_input__WEBPACK_IMPORTED_MODULE_23__["NgxMatFileInputModule"]
 ];
 let MaterialModule = class MaterialModule {
 };

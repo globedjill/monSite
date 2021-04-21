@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Formation } from 'src/shared/modeles/formation.interface';
 import { UserSession } from 'src/shared/modeles/userSession.interface';
-import { AuthService } from 'src/shared/services/auth.service';
 import { ParcourService } from 'src/shared/services/parcour.service';
 import { UsersService } from 'src/shared/services/users.service';
 

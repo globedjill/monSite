@@ -1,7 +1,7 @@
 export interface Formation {
   nomFormation: string;
   option?: string;
-  image: string;
+  // image: File;
   alt: string;
   lieu: string;
   adresse?: string;

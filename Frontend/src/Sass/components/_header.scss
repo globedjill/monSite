@@ -1,4 +1,5 @@
 header {
+    padding: 0;
     box-sizing: border-box;
     background-image: url('../../assets/images/bg_header.jpeg');
     background-repeat: no-repeat;
@@ -19,14 +20,15 @@ header {
     }
     & div {
         & img {
-            height: 100px;
-            width: 100px;
+            height: 80px;
+            width: 80px;
             border: 1px solid rgb(243, 239, 239);
             border-radius: 60%;
             margin: 10px 30px;
         }
     }
     & nav {
+        padding: 0;
         // margin-left: 150px;
         // background-color: rgb(126, 250, 44);
         & .mat-tab-link {
@@ -42,6 +44,20 @@ header {
         & a {
             text-decoration: none;
             font-size: $fontSize_a;
+        }
+    }
+}
+
+header {
+    .logoTitreMenuContainer {
+        // background-color: yellowgreen;
+        width: 100%;
+        .logoTitre {
+            width: 300px;
+        }
+        .menu {
+            // background-color: #2b0261;
+            margin-right: 20px;
         }
     }
 }

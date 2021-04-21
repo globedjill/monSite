@@ -140,3 +140,5 @@ exports.formationDelete = function _callee4(req, res, next) {
     }
   }, null, null, [[0, 10]]);
 };
+
+exports.uploadImgFormation = function (res, req, next) {};

@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 
 const MATERIAL = [
@@ -46,7 +47,8 @@ const MATERIAL = [
   MatNativeDateModule,
   MatProgressBarModule,
   MatTooltipModule,
-  MatDividerModule
+  MatDividerModule,
+  NgxMatFileInputModule
 ];
 
 @NgModule({

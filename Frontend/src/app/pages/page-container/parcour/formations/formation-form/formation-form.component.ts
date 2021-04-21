@@ -1,4 +1,6 @@
+import { Observable } from 'rxjs';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Formation } from 'src/shared/modeles/formation.interface';
@@ -20,7 +22,7 @@ export class FormationFormComponent implements OnInit {
     private router: Router,
     private parcourService: ParcourService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
     get liste(){
       return this.formationForm.get('liste') as FormArray;
@@ -34,14 +36,14 @@ export class FormationFormComponent implements OnInit {
             this.formation = this.parcourService.getFormation(Number(index));
           }
           this.initForm(this.formation);
-        })
+        });
   }
 
   initForm(
     formation: Formation = {
     nomFormation:'',
     option:'',
-    image:'',
+    // image: null,
     alt:'',
     lieu:'',
     adresse:'',
@@ -55,7 +57,7 @@ export class FormationFormComponent implements OnInit {
     this.formationForm = this.fb.group({
       nomFormation: [formation.nomFormation, Validators.required],
       option: [formation.option, Validators.minLength(3)],
-      image: [formation.image],
+      // image: [formation.image],
       alt: [formation.alt, Validators.minLength(3)],
       lieu: [formation.lieu, Validators.required],
       adresse: [formation.adresse, Validators.minLength(3)],
@@ -74,17 +76,17 @@ export class FormationFormComponent implements OnInit {
     this.liste.removeAt(i)
   }
 
-
   // ACTION SUR LE SERVICE
   onSaveFormation(){
-    this.parcourService.createNewFormation(this.formationForm.value);
-    this.router.navigate(['parcour']);
+  this.parcourService.createNewFormation(this.formationForm.value);
+
+    // this.router.navigate(['parcour']);
   }
 
-  onModify(){
-    this.parcourService.updateFormation(this.formationForm.value, this.id);
-    this.router.navigate(['parcour']);
-  }
+  // onModify(){
+  //   this.parcourService.updateFormation(this.formationForm.value, this.id);
+  //   this.router.navigate(['parcour']);
+  // }
 
   retour(){
     this.router.navigate(['parcour']);

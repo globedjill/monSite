@@ -38,7 +38,7 @@ var FormationFormComponent = /** @class */ (function () {
         if (formation === void 0) { formation = {
             nomFormation: '',
             option: '',
-            image: '',
+            // image: null,
             alt: '',
             lieu: '',
             adresse: '',
@@ -51,7 +51,7 @@ var FormationFormComponent = /** @class */ (function () {
         this.formationForm = this.fb.group({
             nomFormation: [formation.nomFormation, forms_1.Validators.required],
             option: [formation.option, forms_1.Validators.minLength(3)],
-            image: [formation.image],
+            // image: [formation.image],
             alt: [formation.alt, forms_1.Validators.minLength(3)],
             lieu: [formation.lieu, forms_1.Validators.required],
             adresse: [formation.adresse, forms_1.Validators.minLength(3)],
@@ -71,12 +71,12 @@ var FormationFormComponent = /** @class */ (function () {
     // ACTION SUR LE SERVICE
     FormationFormComponent.prototype.onSaveFormation = function () {
         this.parcourService.createNewFormation(this.formationForm.value);
-        this.router.navigate(['parcour']);
+        // this.router.navigate(['parcour']);
     };
-    FormationFormComponent.prototype.onModify = function () {
-        this.parcourService.updateFormation(this.formationForm.value, this.id);
-        this.router.navigate(['parcour']);
-    };
+    // onModify(){
+    //   this.parcourService.updateFormation(this.formationForm.value, this.id);
+    //   this.router.navigate(['parcour']);
+    // }
     FormationFormComponent.prototype.retour = function () {
         this.router.navigate(['parcour']);
     };

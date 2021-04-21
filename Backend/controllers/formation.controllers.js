@@ -45,3 +45,7 @@ exports.formationDelete = async(req, res, next) => {
         next(e);
     }
 };
+
+exports.uploadImgFormation = (res, req, next) => {
+
+};

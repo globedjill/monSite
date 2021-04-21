@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.UsersService = void 0;
+var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var rxjs_1 = require("rxjs");
 var operators_1 = require("rxjs/operators");
@@ -24,7 +25,7 @@ var UsersService = /** @class */ (function () {
     UsersService.prototype.createUser = function (newUser) {
         return this.http.post('/api/users/signup', newUser);
     };
-    // Connexion
+    // Connexion en local
     UsersService.prototype.signin = function (user) {
         var _this = this;
         return this.http.post('/api/users/signin', user).pipe(operators_1.tap(function (response) {
@@ -32,22 +33,41 @@ var UsersService = /** @class */ (function () {
                 isAuth: true,
                 _id: response._id
             });
-            console.log(response);
         }, function (err) {
-            console.log(err);
+            _this.error = err.error.substr(104, 22);
         }));
     };
+    // Connexion Google
+    UsersService.prototype.signinGoogle = function () {
+        var optionRequete = {
+            headers: new http_1.HttpHeaders({
+                'Access-Control-Allow-Origin': '*'
+            })
+        };
+        this.http.get('/api/auth/google').subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    // userAPI(data): Observable<any> {
+    //   return this.http.get(this.baseurl, data, httpOptions)
+    //     .pipe(
+    //       tap((resultat) => console.log("Résultat de la requête : ",resultat)),
+    //       catchError(this.handleError('erreur lors de la requête CORS', []))
+    //     );
+    // }
     // Deconnexion
     UsersService.prototype.loggout = function () {
         var _this = this;
-        return this.http.get('api/users/signout').pipe(operators_1.tap(function (response) {
+        return this.http["delete"]('api/users/signout').pipe(operators_1.tap(function (response) {
             _this.idSession$.next({
                 isAuth: false,
-                _id: response._id
+                _id: ''
             });
             console.log(response);
         }, function (err) {
-            console.log(err);
+            console.log(err.error);
         }));
     };
     UsersService = __decorate([

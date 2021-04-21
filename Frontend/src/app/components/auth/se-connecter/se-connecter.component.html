@@ -15,6 +15,9 @@
                     <input matInput type='password' formControlName='password' />
                     <mat-error *ngIf=""></mat-error>
                 </mat-form-field>
+                <button mat-raised-button (click)="goggleConnection()"><span class="material-icons-outlined">
+                  g_translate
+                  </span></button>
             </mat-card-content>
             <mat-card-actions align="start">
                 <mat-error *ngIf='error'>{{ seconnecterErreur() }}</mat-error>

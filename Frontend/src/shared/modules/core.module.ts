@@ -19,7 +19,7 @@ import { FormationFormComponent } from 'src/app/pages/page-container/parcour/for
 
 import { ParcourService } from '../services/parcour.service';
 import { UsersService } from '../services/users.service';
-import { AuthService } from '../services/auth.service';
+import { UploadImageFormComponent } from 'src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component';
 
 
 const MODULES = [
@@ -36,6 +36,7 @@ const MODULES = [
     ExperienceComponent,
     FormationFormComponent,
     ExperienceFormComponent,
+    UploadImageFormComponent
 ];
 
 @NgModule({
@@ -53,7 +54,6 @@ const MODULES = [
   providers:[
     ParcourService,
     UsersService,
-    AuthService
   ]
 
 })

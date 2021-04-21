@@ -1,7 +1,8 @@
 import { Formation } from 'src/shared/modeles/formation.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { finalize } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +27,8 @@ export class ParcourService  {
   createNewFormation(newFormation: Formation){
     this.formationTab.push(newFormation);
     this.saveFormations(newFormation);
-    this.emettreLesFormationsRecuperer()
+    this.emettreLesFormationsRecuperer();
   }
-
 
   // Queries
   saveFormations(formation: Formation){

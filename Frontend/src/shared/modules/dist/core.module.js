@@ -25,7 +25,7 @@ var experience_component_1 = require("src/app/pages/page-container/parcour/exper
 var formation_form_component_1 = require("src/app/pages/page-container/parcour/formations/formation-form/formation-form.component");
 var parcour_service_1 = require("../services/parcour.service");
 var users_service_1 = require("../services/users.service");
-var auth_service_1 = require("../services/auth.service");
+var upload_image_form_component_1 = require("src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component");
 var MODULES = [
     header_component_1.HeaderComponent,
     footer_component_1.FooterComponent,
@@ -40,6 +40,7 @@ var MODULES = [
     experience_component_1.ExperienceComponent,
     formation_form_component_1.FormationFormComponent,
     experience_form_component_1.ExperienceFormComponent,
+    upload_image_form_component_1.UploadImageFormComponent
 ];
 var CoreModule = /** @class */ (function () {
     function CoreModule() {
@@ -60,7 +61,6 @@ var CoreModule = /** @class */ (function () {
             providers: [
                 parcour_service_1.ParcourService,
                 users_service_1.UsersService,
-                auth_service_1.AuthService
             ]
         })
     ], CoreModule);

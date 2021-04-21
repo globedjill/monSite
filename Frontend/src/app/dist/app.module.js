@@ -14,6 +14,7 @@ var app_routing_1 = require("./app.routing");
 var app_component_1 = require("./app.component");
 var animations_1 = require("@angular/platform-browser/animations");
 var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/common/http");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -28,6 +29,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.FormsModule,
                 animations_1.BrowserAnimationsModule,
                 app_routing_1.AppRoutingModule,
+                http_1.HttpClientModule
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

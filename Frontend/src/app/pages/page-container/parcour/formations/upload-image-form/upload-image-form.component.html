@@ -1,0 +1,37 @@
+<!-- <mat-form-field>
+    <ngx-mat-file-input name='imgFormation' [formControl]='formControl' [multiple]="multiple" [accept]="accept" [color]="color">
+    </ngx-mat-file-input>
+</mat-form-field>
+<div class="progress">
+    <mat-progress-bar class="progress-bar" mode="determinate" [value]="20">
+    </mat-progress-bar>
+    <mat-icon class="cancel-upload">delete_forever</mat-icon>
+</div> -->
+
+
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+    <div class="content" fxLayout="column" fxLayoutGap="15px">
+        <div class="upload" *ngIf="!this.noFile" [class.over]="over" (click)="openFile()" (drop)="dropFile($event); over = false" (dragover)="$event.preventDefault()" (dragenter)="over = true" (dragleave)="over = false" fxLayout="row" fxLayoutAlign="center center">
+            <mat-label>Ajouter une image</mat-label>
+            <input (change)='addFile($event)' #fileinput type="file" fxHide="true" />
+            <mat-icon> <span class="material-icons-outlined">
+              file_download
+              </span></mat-icon>
+        </div>
+        <div class="file" fxLayout='column' fxLayoutAlign="center center">
+            <div class="fileUpload" *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='row' fxLayoutAlign="space-between center">
+                <div class="fileName" fxLayoutAlign="space-arround center" fxLayout='row'>
+                    <span fxFill>{{ fileHolder.file.name }}</span>
+                    <div fxLayout='row' *ngIf='fileHolder.progress$ | async ; let progress '>
+                        <span>{{ progress }}%</span>
+                        <mat-progress-bar style=" width:200px " mode="determinate" [value]='progress'>
+                        </mat-progress-bar>
+                    </div>
+                </div>
+                <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
+
+            </div>
+        </div>
+
+    </div>
+</div>

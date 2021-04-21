@@ -21,9 +21,7 @@
                 </div>
                 <!-- IMAGE -->
                 <div fxLayout='column'>
-                    <mat-form-field appearance='fill'>
-                        <input matInput type="text" name="image" formControlName='image' placeholder="image" id="image">
-                    </mat-form-field>
+                    <app-upload-image-form></app-upload-image-form>
                     <mat-form-field appearance='fill'>
                         <mat-label>Description Image</mat-label>
                         <input matInput type="text" formControlName='alt' placeholder='alt'>

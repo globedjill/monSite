@@ -7,9 +7,13 @@ var passport = require('passport');
 
 var LocalStrategy = require('passport-local').Strategy;
 
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
+
 var _require2 = require('../queries/users.queries'),
     findUserPerEmail = _require2.findUserPerEmail,
     findUserPerId = _require2.findUserPerId;
+
+var util = require('util');
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -101,4 +105,18 @@ passport.use('local', new LocalStrategy({
       }
     }
   }, null, null, [[0, 14]]);
+}));
+passport.use('google', new GoogleStrategy({
+  clientID: '636533097414-m3o3licsluhjnqb2dv44eudvo9anuf76.apps.googleusercontent.com',
+  clientSecret: '2OICi0OY2ouOqYTm9bidq9cJ',
+  callbackURL: '/api/auth/google'
+}, function (accessToken, refreshToken, profile, done) {
+  console.log(util.inspect(profile, {
+    compact: true,
+    depth: 5,
+    breackLength: 80
+  }));
+  done(null, false, {
+    message: 'test'
+  });
 }));

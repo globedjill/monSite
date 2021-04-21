@@ -16,14 +16,12 @@ exports.signup = async(req, res, next) => {
 exports.signIn = (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if (err) {
-            console.log('erreur systeme')
             next(err);
         } else if (!user) {
-            res.json({ errors: info.message });
+            next(info.message);
         } else {
             req.login(user, (err) => {
                 if (err) {
-                    console.log('quelque chose na pas fonctionner')
                     next(err);
                 } else {
                     res.json(user);
@@ -35,7 +33,6 @@ exports.signIn = (req, res, next) => {
 
 // Deconnexion
 exports.signOut = (req, res, next) => {
-    console.log(res.json(req.user));
     req.logOut();
-    res.end()
+    res.end();
 }

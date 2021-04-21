@@ -24,11 +24,11 @@ const routes: Routes = [
 
   { path: 'formation', component: FormationComponent},
   { path: 'formation/:_id',
-      canActivate:[AuthGuard],
-      component: FormationFormComponent},
+    canActivate:[AuthGuard],
+    component: FormationFormComponent},
   { path: 'formationForm',
-      canActivate:[AuthGuard],
-      component: FormationFormComponent},
+    canActivate:[AuthGuard],
+    component: FormationFormComponent},
 
   { path: 'experience', component: ExperienceComponent},
   { path: 'experienceForm',

@@ -11,8 +11,57 @@ p {
   text-align: justify;
 }
 
+a {
+  cursor: pointer;
+}
+
+.container .content {
+  width: 800px;
+}
+
+.container .content .upload {
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  height: 80px;
+  cursor: copy;
+}
+
+.container .content .upload .upload-icon {
+  font-size: 30px;
+  color: #ccc;
+}
+
+.container .content .over {
+  background-color: #eee;
+}
+
+.container .content .show {
+  display: none;
+}
+
+.container .file {
+  width: 100%;
+}
+
+.container .file .fileUpload {
+  width: 100%;
+  padding: 7px;
+  margin: 2px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.container .file .fileUpload span {
+  width: 20px;
+  margin-right: 3px;
+}
+
 .mat-tab-label {
   color: white !important;
+}
+
+.mat-tab-link {
+  height: 30px !important;
 }
 
 .mat-card {
@@ -31,7 +80,13 @@ p {
   margin: 8px 0;
 }
 
+.mat-divider {
+  width: 80% !important;
+}
+
 header {
+  padding: 0;
+  box-sizing: border-box;
   background-image: url('bg_header.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -52,15 +107,15 @@ header::before {
 }
 
 header div img {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   border: 1px solid #f3efef;
   border-radius: 60%;
   margin: 10px 30px;
 }
 
 header nav {
-  margin-left: 150px;
+  padding: 0;
 }
 
 header nav .mat-tab-link {
@@ -81,6 +136,18 @@ header nav a {
   font-size: 1.2em;
 }
 
+header .logoTitreMenuContainer {
+  width: 100%;
+}
+
+header .logoTitreMenuContainer .logoTitre {
+  width: 300px;
+}
+
+header .logoTitreMenuContainer .menu {
+  margin-right: 20px;
+}
+
 main section h3 {
   margin: 40px 0 20px 0 !important;
   font-size: 3em !important;
@@ -96,6 +163,14 @@ main section div .mat-card .imgBg {
 
 .matCardSeCo {
   max-width: 500px;
+}
+
+button {
+  margin-bottom: 20px !important;
+}
+
+a {
+  margin: 10px 10px 0 10px;
 }
 
 p {

@@ -40,16 +40,12 @@ exports.signup = function _callee(req, res, next) {
 exports.signIn = function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) {
-      console.log('erreur systeme');
       next(err);
     } else if (!user) {
-      res.json({
-        errors: info.message
-      });
+      next(info.message);
     } else {
       req.login(user, function (err) {
         if (err) {
-          console.log('quelque chose na pas fonctionner');
           next(err);
         } else {
           res.json(user);
@@ -61,7 +57,6 @@ exports.signIn = function (req, res, next) {
 
 
 exports.signOut = function (req, res, next) {
-  console.log(res.json(req.user));
   req.logOut();
   res.end();
 };

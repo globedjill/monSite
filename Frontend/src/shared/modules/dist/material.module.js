@@ -29,6 +29,7 @@ var datepicker_1 = require("@angular/material/datepicker");
 var core_2 = require("@angular/material/core");
 var progress_bar_1 = require("@angular/material/progress-bar");
 var tooltip_1 = require("@angular/material/tooltip");
+var file_input_1 = require("@angular-material-components/file-input");
 var MATERIAL = [
     autocomplete_1.MatAutocompleteModule,
     badge_1.MatBadgeModule,
@@ -50,7 +51,8 @@ var MATERIAL = [
     core_2.MatNativeDateModule,
     progress_bar_1.MatProgressBarModule,
     tooltip_1.MatTooltipModule,
-    divider_1.MatDividerModule
+    divider_1.MatDividerModule,
+    file_input_1.NgxMatFileInputModule
 ];
 var MaterialModule = /** @class */ (function () {
     function MaterialModule() {

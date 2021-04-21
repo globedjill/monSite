@@ -2,26 +2,17 @@
 
 var passport = require('passport');
 
-exports.signIn = function (req, res, next) {
-  passport.authenticate('local', function (err, user, info) {
-    if (err) {
-      next(err);
-    } else if (!user) {
-      res.json({
-        errors: info.message
-      });
-    } else {
-      req.login(user, function (err) {
-        if (err) {
-          next(err);
-        } else {
-          res.redirect('/');
-        }
-      });
-    }
+exports.googleAuth = function (req, res, next) {
+  res.set('Access-Control-Allow-Origin', '*');
+  console.log(res);
+  passport.authenticate('google', {
+    scope: 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
   })(req, res, next);
 };
 
-exports.signOut = function (req, res, next) {
-  req.logOut();
+exports.googleAuthCb = function (req, res, next) {
+  passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/'
+  })(req, res, next);
 };

@@ -13,5 +13,5 @@ router.post('/signup', signup); // Logged du user
 
 router.post('/signin', signIn); // Deconnexion
 
-router.get('/signout', signOut);
+router["delete"]('/signout', signOut);
 module.exports = router;

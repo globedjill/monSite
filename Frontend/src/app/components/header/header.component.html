@@ -1,17 +1,20 @@
-<header fxLayout='row'>
-    <div fxLayout='row'>
-        <img src="./../../../assets/images/logo_sph3rik.png" alt="logo" fxFlex='90px'>
-        <h1 fxFill fxLayoutAlign='center center'>Sph2rik</h1>
+<header fxLayout='column' fxLayoutAlign='center center'>
+    <div class='logoTitreMenuContainer' fxLayout='row' fxLayoutAlign="space-between center">
+        <div class='logoTitre'>
+            <img src="./../../../assets/images/logo_sph3rik.png" alt="logo" fxFlex='90px'>
+            <h1 fxLayoutAlign='center center'>Sph2rik</h1>
+        </div>
+        <div fxLayout='column'>
+            <div class='menu'>
+                <button mat-raised-button *ngIf='!this.userSession.isAuth' [matMenuTriggerFor]="menuRef">Se Connecter</button>
+                <mat-menu #menuRef="matMenu">
+                    <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>
+                </mat-menu>
+                <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>
+            </div>
+            <nav mat-tab-nav-bar fxLayoutAlign='end end' fxFlex='1 0 auto'>
+                <a mat-tab-link *ngFor="let link of listeMenu" [routerLink]='link.lien' (click)="activeLink = link.lien" [active]='activeLink == link.lien'> {{ link.lien }}</a>
+            </nav>
+        </div>
     </div>
-
-    <nav mat-tab-nav-bar fxLayoutAlign='end end' fxFlex='1 0 auto'>
-        <a mat-tab-link *ngFor="let link of listeMenu" [routerLink]='link.lien' (click)="activeLink = link.lien" [active]='activeLink == link.lien'> {{ link.lien }}</a>
-    </nav>
 </header>
-<div>
-    <button mat-raised-button *ngIf='!this.userSession.isAuth' [matMenuTriggerFor]="menuRef">Se Connecter</button>
-    <mat-menu #menuRef="matMenu">
-        <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>
-    </mat-menu>
-    <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>
-</div>
