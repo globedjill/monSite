@@ -1,12 +1,4 @@
 "use strict";
-// import { MatInputModule } from '@angular/material/input';
-// import { HttpClient } from '@angular/common/http';
-// import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-// import { FormControl, Validators } from '@angular/forms';
-// import { ThemePalette } from '@angular/material/core';
-// import { Observable, Subscription } from 'rxjs';
-// import { NgxMatFileInputModule, NgxMatFileInputIcon, AcceptValidator, MaxSizeValidator } from '@angular-material-components/file-input';
-// import { UploadFileService } from 'src/shared/services/upload-file.service';
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,29 +7,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.UploadImageFormComponent = void 0;
-// @Component({
-//   selector: 'app-upload-image-form',
-//   templateUrl: './upload-image-form.component.html',
-//   styleUrls: ['./upload-image-form.component.sass']
-// })
-// export class UploadImageFormComponent implements OnInit {
-//   public filesHolder$: Observable<File[]> = this.uploadService.fileHolders$.asObservable();
-//   public filetabSub: Subscription;
-//   fileTab: [];
-//   @ViewChild('fileInput', {static: true}) inputRef: ElementRef;
-//   color: ThemePalette = 'primary';
-//   disabled: boolean = false;
-//   multiple: boolean = false;
-//   accept: string;
-//   formControl: FormControl;
-//   constructor(
-//     private uploadService: UploadFileService,
-//     private http: HttpClient,
-//   ) {}
-//   ngOnInit(): void {
-//     this.formControl = new FormControl([Validators.required]);
-//   }
-// }
 var core_1 = require("@angular/core");
 var UploadImageFormComponent = /** @class */ (function () {
     function UploadImageFormComponent(upLoadFileService) {

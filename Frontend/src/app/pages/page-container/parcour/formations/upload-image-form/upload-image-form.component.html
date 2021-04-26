@@ -9,11 +9,11 @@
 </div> -->
 
 
-<div class="container" fxLayout="row" fxLayoutAlign="center center">
+<!-- <div class="container" fxLayout="row" fxLayoutAlign="center center">
     <div class="content" fxLayout="column" fxLayoutGap="15px">
         <div class="upload" *ngIf="!this.noFile" [class.over]="over" (click)="openFile()" (drop)="dropFile($event); over = false" (dragover)="$event.preventDefault()" (dragenter)="over = true" (dragleave)="over = false" fxLayout="row" fxLayoutAlign="center center">
             <mat-label>Ajouter une image</mat-label>
-            <input (change)='addFile($event)' #fileinput type="file" fxHide="true" />
+            <input (change)='addFile($event)' #fileinput formControlName='image' type="file" fxHide="true" />
             <mat-icon> <span class="material-icons-outlined">
               file_download
               </span></mat-icon>
@@ -29,9 +29,7 @@
                     </div>
                 </div>
                 <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
-
             </div>
         </div>
-
     </div>
-</div>
+</div> -->

@@ -13,10 +13,10 @@ var multer = require('multer');
 var upload = multer({
   storage: multer.diskStorage({
     destination: function destination(req, file, cb) {
-      cb(null, path.join(__dirname, 'upload'));
+      cb(null, path.join(__dirname, './public/upload'));
     },
     filename: function filename(req, file, cd) {
-      cd(null, file.originalname);
+      cd(null, "".concat(file.originalname));
     }
   })
 });
@@ -47,23 +47,21 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-app.use(routing); // app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     // res.setHeader('Access-Control-Allow-Credentials', 'true');
-// })
-// Multer
-
+app.use(routing);
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
+app.use(express["static"](path.join(__dirname, '/public')));
+app.use(express["static"](path.join(__dirname, '/public/upload')));
 app.post("/api/upload", upload.array('f'), function (req, res, next) {
   res.end();
 });
 app["delete"]('/api/upload/:filename', function (req, res, next) {
   var filename = req.params.filename;
+  var e = req.params;
   fs.unlink(path.join(__dirname, "upload/".concat(filename)), function (err) {
     res.end();
   });
-});
-app.use(express["static"](path.join(__dirname, '/../public')));
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
+  console.log(e);
 });
 module.exports = app;

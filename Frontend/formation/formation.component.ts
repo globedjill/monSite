@@ -1,3 +1,4 @@
+import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,29 +16,32 @@ export class FormationComponent implements OnInit, OnDestroy {
 
   tableauDeFormationSubscription: Subscription;
   parcourTab: Formation[];
-  formation: Formation;
 
-  subscription: Subscription;
+  userSub: Subscription;
   userSession: UserSession;
 
   constructor(
     private parcourService: ParcourService,
     private userService: UsersService,
-    private router: Router
+
   ) {}
 
   ngOnInit(): void {
-    this.subscription = this.userService.idSession$.subscribe(
+    this.userSub = this.userService.idSession$.subscribe(
       (userSession: UserSession) => {
         this.userSession = userSession;
-    })
+    });
 
     this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe(
       (formationTab: Formation[]) => {
         this.parcourTab = formationTab;
-      }
-    );
+    });
+
     this.parcourService.recupFormations();
+  }
+
+  editFormation(formation: Formation){
+    this.parcourService.formation = formation;
   }
 
   deleteFormation(id: String){
@@ -46,7 +50,7 @@ export class FormationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.tableauDeFormationSubscription.unsubscribe();
-    if(this.subscription){this.subscription.unsubscribe()};
+    if(this.userSub){this.userSub.unsubscribe()};
    }
 }
 

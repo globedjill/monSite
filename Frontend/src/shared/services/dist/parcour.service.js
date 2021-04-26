@@ -18,9 +18,6 @@ var ParcourService = /** @class */ (function () {
     ParcourService.prototype.emettreLesFormationsRecuperer = function () {
         this.formationTab$.next(this.formationTab);
     };
-    ParcourService.prototype.getFormation = function (index) {
-        return this.formationTab$.value[index];
-    };
     ParcourService.prototype.createNewFormation = function (newFormation) {
         this.formationTab.push(newFormation);
         this.saveFormations(newFormation);
@@ -28,14 +25,14 @@ var ParcourService = /** @class */ (function () {
     };
     // Queries
     ParcourService.prototype.saveFormations = function (formation) {
-        this.http.post('/api/formations', formation).subscribe(function (formation) { });
+        this.http.post('/api/formations', formation).subscribe(function () { });
     };
     ParcourService.prototype.updateFormation = function (formation, id) {
-        this.http.post('/api/formations/update/' + id, formation).subscribe(function (id) { });
+        this.http.post('/api/formations/update/' + id, formation).subscribe(function () { });
     };
     ParcourService.prototype.recupFormations = function () {
         var _this = this;
-        this.http.get('api/formations')
+        this.http.get('/api/formations')
             .subscribe(function (formations) {
             _this.formationTab = formations;
             _this.emettreLesFormationsRecuperer();

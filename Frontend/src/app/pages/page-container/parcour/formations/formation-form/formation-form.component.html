@@ -21,7 +21,32 @@
                 </div>
                 <!-- IMAGE -->
                 <div fxLayout='column'>
-                    <app-upload-image-form></app-upload-image-form>
+                    <!-- <app-upload-image-form></app-upload-image-form> -->
+                    <div class="container" fxLayout="row" fxLayoutAlign="center center">
+                        <div class="content" fxLayout="column" fxLayoutGap="15px">
+                            <div class="upload" *ngIf="!this.noFile" [class.over]="over" (click)="openFile()" (drop)="dropFile($event); over = false" (dragover)="$event.preventDefault()" (dragenter)="over = true" (dragleave)="over = false" fxLayout="row" fxLayoutAlign="center center">
+                                <mat-label>Ajouter une image</mat-label>
+                                <input (change)='addFile($event)' #fileinput formControlName='image' type="file" fxHide="true" />
+                                <mat-icon> <span class="material-icons-outlined">
+                                file_download
+                                </span></mat-icon>
+                            </div>
+                            <div class="file" fxLayout='column' fxLayoutAlign="center center">
+                                <div class="fileUpload" *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='row' fxLayoutAlign="space-between center">
+                                    <div class="fileName" fxLayoutAlign="space-arround center" fxLayout='row'>
+                                        <span fxFill>{{ fileHolder.file.name }}</span>
+                                        <div fxLayout='row' *ngIf='fileHolder.progress$ | async ; let progress '>
+                                            <span>{{ progress }}%</span>
+                                            <mat-progress-bar style=" width:150px " mode="determinate" [value]='progress'>
+                                            </mat-progress-bar>
+                                        </div>
+                                    </div>
+                                    <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <mat-form-field appearance='fill'>
                         <mat-label>Description Image</mat-label>
                         <input matInput type="text" formControlName='alt' placeholder='alt'>

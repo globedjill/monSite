@@ -4,10 +4,8 @@ exports.saveFormation = async(req, res, next) => {
     try {
         const body = req.body;
         await createFormation(body);
-        // res.json(body);
     } catch (e) {
         next(e);
-        console.error(e);
     }
 }
 
@@ -46,6 +44,6 @@ exports.formationDelete = async(req, res, next) => {
     }
 };
 
-exports.uploadImgFormation = (res, req, next) => {
+exports.getImageDefault = (res, req, next) => {
 
 };

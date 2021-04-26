@@ -9,14 +9,13 @@ exports.__esModule = true;
 exports.FormationComponent = void 0;
 var core_1 = require("@angular/core");
 var FormationComponent = /** @class */ (function () {
-    function FormationComponent(parcourService, userService, router) {
+    function FormationComponent(parcourService, userService) {
         this.parcourService = parcourService;
         this.userService = userService;
-        this.router = router;
     }
     FormationComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.userService.idSession$.subscribe(function (userSession) {
+        this.userSub = this.userService.idSession$.subscribe(function (userSession) {
             _this.userSession = userSession;
         });
         this.tableauDeFormationSubscription = this.parcourService.formationTab$.subscribe(function (formationTab) {
@@ -24,13 +23,16 @@ var FormationComponent = /** @class */ (function () {
         });
         this.parcourService.recupFormations();
     };
+    FormationComponent.prototype.editFormation = function (formation) {
+        this.parcourService.formation = formation;
+    };
     FormationComponent.prototype.deleteFormation = function (id) {
         this.parcourService.supprimerUneFormation(id);
     };
     FormationComponent.prototype.ngOnDestroy = function () {
         this.tableauDeFormationSubscription.unsubscribe();
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+        if (this.userSub) {
+            this.userSub.unsubscribe();
         }
         ;
     };

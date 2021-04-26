@@ -19,16 +19,15 @@ exports.saveFormation = function _callee(req, res, next) {
           return regeneratorRuntime.awrap(createFormation(body));
 
         case 4:
-          _context.next = 10;
+          _context.next = 9;
           break;
 
         case 6:
           _context.prev = 6;
           _context.t0 = _context["catch"](0);
           next(_context.t0);
-          console.error(_context.t0);
 
-        case 10:
+        case 9:
         case "end":
           return _context.stop();
       }
@@ -141,4 +140,4 @@ exports.formationDelete = function _callee4(req, res, next) {
   }, null, null, [[0, 10]]);
 };
 
-exports.uploadImgFormation = function (res, req, next) {};
+exports.getImageDefault = function (res, req, next) {};

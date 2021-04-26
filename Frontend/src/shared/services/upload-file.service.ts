@@ -16,7 +16,7 @@ export class UploadFileService {
     private http: HttpClient,
   ) { }
 
-  public addFile(files){
+  public addFile(files: []){
     this.filesHolder$.next([
       ...this.filesHolder$.value,
        ...Array.from(files).map( (f: File) => {
@@ -50,10 +50,10 @@ export class UploadFileService {
   ]);
   }
 
-  public removeFile(index){
+  public removeFile(index:number){
     const files = this.filesHolder$.value.slice();
     this.http.delete(`/api/upload/${files[index].file.name}`).subscribe();
     files.splice(index, 1);
-    this.filesHolder$.next(files)
+    this.filesHolder$.next(files);
   }
 }

@@ -1,13 +1,13 @@
 <section>
     <div>
         <h3 fxLayoutAlign='center center'> Formation</h3>
-        <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>
+        <button mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>
     </div>
     <div fxLayout='row wrap' fxLayoutAlign='center start'>
         <mat-card *ngFor='let formation of parcourTab; let i = index'>
             <div>
                 <button mat-raised-button *ngIf='this.userSession.isAuth' (click)="deleteFormation(formation._id)">Supprimer</button>
-                <button mat-raised-button *ngIf='this.userSession.isAuth' [routerLink]="['/formation',formation._id]">Modifier</button>
+                <button mat-raised-button *ngIf='this.userSession.isAuth' (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
                 <p>{{ formation._id }}</p>
             </div>
             <mat-card-header>

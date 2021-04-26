@@ -18,7 +18,7 @@ var page_container_component_1 = require("./pages/page-container/page-container.
 var experience_form_component_1 = require("./pages/page-container/parcour/experiences/experience-form/experience-form.component");
 var experience_component_1 = require("./pages/page-container/parcour/experiences/experience/experience.component");
 var formation_form_component_1 = require("./pages/page-container/parcour/formations/formation-form/formation-form.component");
-var formation_component_1 = require("./pages/page-container/parcour/formations/formation/formation.component");
+var formation_component_1 = require("../../formation/formation.component");
 var parcour_component_1 = require("./pages/page-container/parcour/parcour.component");
 var routes = [
     { path: 'acceuil', component: acceuil_component_1.AcceuilComponent },
@@ -27,10 +27,10 @@ var routes = [
     { path: 'parcour', component: parcour_component_1.ParcourComponent },
     { path: 'formation', component: formation_component_1.FormationComponent },
     { path: 'formation/:_id',
-        canActivate: [auth_guard_1.AuthGuard],
+        // canActivate:[AuthGuard],
         component: formation_form_component_1.FormationFormComponent },
     { path: 'formationForm',
-        canActivate: [auth_guard_1.AuthGuard],
+        // canActivate:[AuthGuard],
         component: formation_form_component_1.FormationFormComponent },
     { path: 'experience', component: experience_component_1.ExperienceComponent },
     { path: 'experienceForm',

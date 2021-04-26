@@ -1713,6 +1713,7 @@ let ParcourService = class ParcourService {
         this.formationTab$.next(this.formationTab);
     }
     getFormation(index) {
+        console.log(index);
         return this.formationTab$.value[index];
     }
     createNewFormation(newFormation) {
@@ -1868,9 +1869,12 @@ let FormationFormComponent = class FormationFormComponent {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((paramMap) => {
             this.id = paramMap.get('_id');
-            const index = paramMap.get('index');
+            // const index = paramMap.get('index');
+            console.log(this.id);
+            // console.log(index);
             if (this.id) {
-                this.formation = this.parcourService.getFormation(Number(index));
+                this.formation = this.parcourService.getFormation(Number(this.id));
+                console.log('tu rentre bien dans la condition');
             }
             this.initForm(this.formation);
         });
@@ -1878,7 +1882,7 @@ let FormationFormComponent = class FormationFormComponent {
     initForm(formation = {
         nomFormation: '',
         option: '',
-        // image: null,
+        image: null,
         alt: '',
         lieu: '',
         adresse: '',
@@ -1891,7 +1895,7 @@ let FormationFormComponent = class FormationFormComponent {
         this.formationForm = this.fb.group({
             nomFormation: [formation.nomFormation, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             option: [formation.option, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
-            // image: [formation.image],
+            image: [formation.image],
             alt: [formation.alt, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],
             lieu: [formation.lieu, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required],
             adresse: [formation.adresse, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].minLength(3)],

@@ -10,7 +10,7 @@ const formationSchema = schema({
         // index: Number
     },
     option: { type: String },
-    image: { type: String },
+    image: { type: String, default: '' },
     alt: { type: String },
     lieu: { type: String },
     adresse: { type: String },
@@ -22,10 +22,6 @@ const formationSchema = schema({
 }, {
     timestamps: true
 });
-
-// formationSchema.pre('save', function() {
-//     return Formation.countDocuments().exec().then(nbr => this.index = nbr + 1);
-// })
 
 const Formation = mongoose.model('formation', formationSchema);
 

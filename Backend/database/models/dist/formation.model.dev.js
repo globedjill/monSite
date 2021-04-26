@@ -17,7 +17,8 @@ var formationSchema = schema(_defineProperty({
     type: String
   },
   image: {
-    type: String
+    type: String,
+    "default": ''
   },
   alt: {
     type: String
@@ -44,9 +45,6 @@ var formationSchema = schema(_defineProperty({
   type: String
 }), {
   timestamps: true
-}); // formationSchema.pre('save', function() {
-//     return Formation.countDocuments().exec().then(nbr => this.index = nbr + 1);
-// })
-
+});
 var Formation = mongoose.model('formation', formationSchema);
 module.exports = Formation;
