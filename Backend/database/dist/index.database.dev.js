@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-exports.clientPromise = mongoose.connect('mongodb+srv://virgil_admin:Evan25082010@cluster0.z3wus.mongodb.net/monSite?retryWrites=true&w=majority', {
+exports.clientPromise = mongoose.connect('mongodb+srv://virgil_admin:@cluster0.z3wus.mongodb.net/monSite?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(function _callee() {
