@@ -1,4 +1,3 @@
-import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';

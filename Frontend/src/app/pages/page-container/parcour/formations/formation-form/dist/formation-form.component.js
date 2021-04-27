@@ -90,7 +90,7 @@ var FormationFormComponent = /** @class */ (function () {
         this.inputRef.nativeElement.click();
     };
     FormationFormComponent.prototype.addFile = function ($event) {
-        this.imageVal = 'upload/' + $event.target.files[0].name;
+        this.imageVal = './public/assets/' + $event.target.files[0].name;
         var file = $event.target.files;
         this.upLoadFileService.addFile(file);
         this.noFile = this.upLoadFileService.filesHolder$.value.length;

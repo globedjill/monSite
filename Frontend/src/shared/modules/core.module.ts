@@ -12,7 +12,7 @@ import { PageContainerComponent } from 'src/app/pages/page-container/page-contai
 import { ParcourComponent } from 'src/app/pages/page-container/parcour/parcour.component';
 import { SInscrireComponent } from 'src/app/components/auth/s-inscrire/s-inscrire.component';
 import { SeConnecterComponent } from 'src/app/components/auth/se-connecter/se-connecter.component';
-import { FormationComponent } from 'formation/formation.component';
+import { FormationComponent } from 'src/app/pages/page-container/parcour/formations/formation/formation.component';
 import { ExperienceFormComponent } from 'src/app/pages/page-container/parcour/experiences/experience-form/experience-form.component';
 import { ExperienceComponent } from 'src/app/pages/page-container/parcour/experiences/experience/experience.component';
 import { FormationFormComponent } from 'src/app/pages/page-container/parcour/formations/formation-form/formation-form.component';

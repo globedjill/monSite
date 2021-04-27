@@ -7,7 +7,7 @@ const multer = require('multer');
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
-            cb(null, path.join(__dirname, './public/upload'));
+            cb(null, path.join(__dirname, '../public/assets'));
         },
         filename: (req, file, cd) => {
             cd(null, `${ file.originalname }`);
@@ -40,7 +40,7 @@ app.get('*', (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '/public/upload')));
+app.use(express.static(path.join(__dirname, '../public/assets')));
 
 app.post("/api/upload", upload.array('f'), (req, res, next) => {
     res.end();

@@ -116,7 +116,7 @@ export class FormationFormComponent implements OnInit {
   }
 
   addFile($event){
-    this.imageVal ='upload/' + $event.target.files[0].name;
+    this.imageVal ='./public/assets/' + $event.target.files[0].name;
     const file = $event.target.files;
     this.upLoadFileService.addFile(file);
     this.noFile = this.upLoadFileService.filesHolder$.value.length;

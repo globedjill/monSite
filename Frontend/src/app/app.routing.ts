@@ -11,7 +11,7 @@ import { PageContainerComponent } from './pages/page-container/page-container.co
 import { ExperienceFormComponent } from './pages/page-container/parcour/experiences/experience-form/experience-form.component';
 import { ExperienceComponent } from './pages/page-container/parcour/experiences/experience/experience.component';
 import { FormationFormComponent } from './pages/page-container/parcour/formations/formation-form/formation-form.component';
-import { FormationComponent } from '../../formation/formation.component';
+import { FormationComponent } from './pages/page-container/parcour/formations/formation/formation.component';
 import { ParcourComponent } from './pages/page-container/parcour/parcour.component';
 
 const routes: Routes = [
