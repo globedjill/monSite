@@ -56,4 +56,8 @@ export class UploadFileService {
     files.splice(index, 1);
     this.filesHolder$.next(files);
   }
+
+  public removeFileOfCard(nom:string){
+    this.http.delete(`/api/upload/${nom}`).subscribe();
+  }
 }

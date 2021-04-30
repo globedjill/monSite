@@ -48,9 +48,6 @@ export class UsersService {
       const optionRequete = {
         headers: new HttpHeaders({
         'Access-Control-Allow-Origin': '*',
-        // 'Access-Control-Allow-Headers': 'Origin,X-Requested-With,Content,Accept,Content-Type,Authorization',
-        // 'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,PATCH,OPTIONS',
-        // 'Access-Control-Allow-Credentials': 'true'
         })
       };
 
@@ -60,16 +57,6 @@ export class UsersService {
         console.log(err);
       });
     }
-
-
-    // userAPI(data): Observable<any> {
-    //   return this.http.get(this.baseurl, data, httpOptions)
-    //     .pipe(
-    //       tap((resultat) => console.log("Résultat de la requête : ",resultat)),
-    //       catchError(this.handleError('erreur lors de la requête CORS', []))
-    //     );
-    // }
-
 
     // Deconnexion
     loggout(): Observable<any>{

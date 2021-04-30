@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
        lien: 'seConnecter'
       },
       {
-        titre: 's\'inscrire',
-        lien: 'sInscrire'
+        // titre: 's\'inscrire',
+        // lien: 'sInscrire'
       }
    ];
     this.activeLink = this.listeMenu[0];

@@ -8,18 +8,6 @@ var path = require('path');
 
 var fs = require('fs');
 
-var multer = require('multer');
-
-var upload = multer({
-  storage: multer.diskStorage({
-    destination: function destination(req, file, cb) {
-      cb(null, path.join(__dirname, '../public/assets'));
-    },
-    filename: function filename(req, file, cd) {
-      cd(null, "".concat(file.originalname));
-    }
-  })
-});
 var app = express();
 exports.app = app;
 
@@ -48,18 +36,31 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(routing);
+app.use(express["static"](path.join(__dirname, 'public')));
+app.use(express["static"](path.join(__dirname, 'public/img')));
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
-app.use(express["static"](path.join(__dirname, '/public')));
-app.use(express["static"](path.join(__dirname, '../public/assets')));
+
+var multer = require('multer');
+
+var upload = multer({
+  storage: multer.diskStorage({
+    destination: function destination(req, file, cb) {
+      cb(null, path.join(__dirname, 'public/img'));
+    },
+    filename: function filename(req, file, cd) {
+      cd(null, "".concat(file.originalname));
+    }
+  })
+});
 app.post("/api/upload", upload.array('f'), function (req, res, next) {
   res.end();
 });
 app["delete"]('/api/upload/:filename', function (req, res, next) {
   var filename = req.params.filename;
   var e = req.params;
-  fs.unlink(path.join(__dirname, "upload/".concat(filename)), function (err) {
+  fs.unlink(path.join(__dirname, "public/img/".concat(filename)), function (err) {
     res.end();
   });
   console.log(e);

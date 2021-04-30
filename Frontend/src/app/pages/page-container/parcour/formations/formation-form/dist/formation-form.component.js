@@ -41,22 +41,22 @@ var FormationFormComponent = /** @class */ (function () {
     };
     FormationFormComponent.prototype.initForm = function (formation) {
         if (formation === void 0) { formation = {
-            nomFormation: '',
-            option: '',
+            nomFormation: null,
+            option: null,
             image: '',
-            alt: '',
-            lieu: '',
-            adresse: '',
+            alt: null,
+            lieu: null,
+            adresse: null,
             dateEntree: new Date,
             dateSortie: new Date,
-            contenu: '',
+            contenu: null,
             liste: [],
-            lien: ''
+            lien: null
         }; }
         this.formationForm = this.fb.group({
             nomFormation: [formation.nomFormation, forms_1.Validators.required],
             option: [formation.option, forms_1.Validators.minLength(3)],
-            image: [formation.image],
+            image: [''],
             alt: [formation.alt, forms_1.Validators.minLength(3)],
             lieu: [formation.lieu, forms_1.Validators.required],
             adresse: [formation.adresse, forms_1.Validators.minLength(3)],
@@ -77,10 +77,17 @@ var FormationFormComponent = /** @class */ (function () {
     FormationFormComponent.prototype.onSaveFormation = function () {
         this.formationForm.controls.image.setValue(this.imageVal);
         this.parcourService.createNewFormation(this.formationForm.value);
+        var files = this.upLoadFileService.filesHolder$.value.slice();
+        files.splice(this.index, 1);
+        this.upLoadFileService.filesHolder$.next(files);
         this.router.navigate(['parcour']);
     };
     FormationFormComponent.prototype.onModify = function () {
+        this.formationForm.controls.image.setValue(this.imageVal);
         this.parcourService.updateFormation(this.formationForm.value, this.id);
+        var files = this.upLoadFileService.filesHolder$.value.slice();
+        files.splice(this.index, 1);
+        this.upLoadFileService.filesHolder$.next(files);
         this.router.navigate(['parcour']);
     };
     FormationFormComponent.prototype.retour = function () {
@@ -90,7 +97,7 @@ var FormationFormComponent = /** @class */ (function () {
         this.inputRef.nativeElement.click();
     };
     FormationFormComponent.prototype.addFile = function ($event) {
-        this.imageVal = './public/assets/' + $event.target.files[0].name;
+        this.imageVal = 'http://localhost:3000/' + $event.target.files[0].name;
         var file = $event.target.files;
         this.upLoadFileService.addFile(file);
         this.noFile = this.upLoadFileService.filesHolder$.value.length;

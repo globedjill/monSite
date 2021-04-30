@@ -10,6 +10,8 @@ const experienceSchema = schema({
     enseigne: { type: String },
     lieu: { type: String },
     fonction: { type: String },
+}, {
+    timestamps: true
 });
 
 const Experience = mongoose.model('experience', experienceSchema);

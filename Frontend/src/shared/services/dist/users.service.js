@@ -50,13 +50,6 @@ var UsersService = /** @class */ (function () {
             console.log(err);
         });
     };
-    // userAPI(data): Observable<any> {
-    //   return this.http.get(this.baseurl, data, httpOptions)
-    //     .pipe(
-    //       tap((resultat) => console.log("Résultat de la requête : ",resultat)),
-    //       catchError(this.handleError('erreur lors de la requête CORS', []))
-    //     );
-    // }
     // Deconnexion
     UsersService.prototype.loggout = function () {
         var _this = this;

@@ -43,7 +43,3 @@ exports.formationDelete = async(req, res, next) => {
         next(e);
     }
 };
-
-exports.getImageDefault = (res, req, next) => {
-
-};

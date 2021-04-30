@@ -14,7 +14,7 @@ var auth = require('./api.auth.routes'); //declarationdes routes sur /api
 router.use('/users', users);
 router.use('/auth', auth);
 router.use('/formations', formations);
-router.use('/experiences', experiences);
+router.use('/experience', experiences);
 router.get('/', function (req, res) {
   res.json(req.user);
 });

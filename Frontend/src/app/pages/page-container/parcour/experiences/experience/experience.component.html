@@ -1,18 +1,28 @@
 <section>
     <div>
+        <!-- *ngIf='this.userSession.isAuth' -->
         <h3 fxLayoutAlign='center center'>Expérience Professionnelle</h3>
-        <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='/experienceForm'>Ajouter une expérience</button>
+        <button mat-raised-button routerLink='/experienceForm'>Ajouter une expérience</button>
     </div>
 
     <div fxLayout='row wrap' fxLayoutAlign='center start'>
         <mat-card *ngFor='let xp of experienceTab'>
+            <div>
+                <button mat-raised-button (click)='deleteLinkImage(xp.image)' (click)="deleteExperience(xp._id)">Supprimer</button>
+                <button mat-raised-button (click)="editExperience(xp)" [routerLink]="['/experience',xp._id]">Modifier</button>
+            </div>
             <mat-card-header>
-                <mat-card-title>{{ xp.enseigne }}</mat-card-title>
-                <mat-card-subtitle>{{xp.dateEntree | date: "MM/y"}} - {{xp.dateSortie | date: 'MM/y'}}</mat-card-subtitle>
+                <div fxFlex='column'>
+                    <mat-card-title>{{ xp.enseigne }}</mat-card-title>
+                    <div fxflex='row' fxLayoutAlign='space-between center'>
+                        <mat-card-subtitle>{{xp.dateEntree | date: "MM/y"}} - {{xp.dateSortie | date: 'MM/y'}}</mat-card-subtitle>
+                        <mat-card-subtitle>{{ tempsTravailler(xp.dateSortie, xp.dateEntree) }}</mat-card-subtitle>
+                    </div>
+                </div>
             </mat-card-header>
-            <img class='imgBg' matCardImage src="{{xp.image}}">
+            <img class='imgBg' matCardImage src="{{xp.image}}" alt='{{ xp.alt }}'>
             <mat-card-content>
-                {{ xp.fonction }}
+                {{ xp.typeContrat }} <br><br> {{ xp.lieu }} <br><br> {{ xp.lien }} <br><br> {{ xp.fonction }}
             </mat-card-content>
             <mat-card-actions align="start">
                 <button mat-raised-button>En Savoir plus</button>

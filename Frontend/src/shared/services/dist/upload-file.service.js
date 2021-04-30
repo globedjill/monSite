@@ -58,6 +58,9 @@ var UploadFileService = /** @class */ (function () {
         files.splice(index, 1);
         this.filesHolder$.next(files);
     };
+    UploadFileService.prototype.removeFileOfCard = function (nom) {
+        this.http["delete"]("/api/upload/" + nom).subscribe();
+    };
     UploadFileService = __decorate([
         core_1.Injectable({
             providedIn: 'root'

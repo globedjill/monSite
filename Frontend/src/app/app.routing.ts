@@ -18,22 +18,28 @@ const routes: Routes = [
 
   { path: 'acceuil', component: AcceuilComponent},
   { path: 'seConnecter', component: SeConnecterComponent},
-  { path: 'sInscrire', component: SInscrireComponent},
+  { path: 'sInscrire', component: SInscrireComponent,
+    canActivate: [AuthGuard],
+  },
 
   { path: 'parcour', component: ParcourComponent},
 
   { path: 'formation', component: FormationComponent},
   { path: 'formation/:_id',
-    // canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     component: FormationFormComponent},
   { path: 'formationForm',
-    // canActivate:[AuthGuard],
+    canActivate:[AuthGuard],
     component: FormationFormComponent},
 
   { path: 'experience', component: ExperienceComponent},
+  { path: 'experience/:_id',
+    // canActivate: [AuthGuard],
+    component: ExperienceFormComponent
+  },
   { path: 'experienceForm',
-      canActivate:[AuthGuard],
-      component:ExperienceFormComponent},
+    // canActivate:[AuthGuard],
+    component:ExperienceFormComponent},
 
   { path: 'contact', component: ContactComponent},
   { path: '', redirectTo: '/', pathMatch: 'full' },

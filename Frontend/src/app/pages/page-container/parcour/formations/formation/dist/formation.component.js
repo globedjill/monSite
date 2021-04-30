@@ -9,9 +9,10 @@ exports.__esModule = true;
 exports.FormationComponent = void 0;
 var core_1 = require("@angular/core");
 var FormationComponent = /** @class */ (function () {
-    function FormationComponent(parcourService, userService) {
+    function FormationComponent(parcourService, userService, uploadFileService) {
         this.parcourService = parcourService;
         this.userService = userService;
+        this.uploadFileService = uploadFileService;
     }
     FormationComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -24,6 +25,7 @@ var FormationComponent = /** @class */ (function () {
         this.parcourService.recupFormations();
     };
     FormationComponent.prototype.editFormation = function (formation) {
+        console.log(formation);
         this.parcourService.formation = formation;
     };
     FormationComponent.prototype.deleteFormation = function (id) {
@@ -35,6 +37,9 @@ var FormationComponent = /** @class */ (function () {
             this.userSub.unsubscribe();
         }
         ;
+    };
+    FormationComponent.prototype.deleteImageLink = function (formation) {
+        this.uploadFileService.removeFileOfCard(formation.split('/')[3]);
     };
     FormationComponent = __decorate([
         core_1.Component({

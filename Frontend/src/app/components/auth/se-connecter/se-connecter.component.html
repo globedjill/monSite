@@ -22,7 +22,7 @@
             <mat-card-actions align="start">
                 <mat-error *ngIf='error'>{{ seconnecterErreur() }}</mat-error>
                 <button mat-raised-button [disabled]='this.singinForm.invalid' (click)='submit()'>Envoyer</button>
-                <button mat-raised-button (click)='goSInscrire()'>Je n'ai pas de compte
+                <button mat-raised-button disabled (click)='goSInscrire()'>Je n'ai pas de compte
                 </button>
             </mat-card-actions>
 

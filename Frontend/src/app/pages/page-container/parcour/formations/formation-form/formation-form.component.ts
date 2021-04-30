@@ -21,6 +21,14 @@ export class FormationFormComponent implements OnInit {
   public formationForm: FormGroup;
   public index: number;
   public imageVal: string;
+  public noFile: number;
+
+  @ViewChild('fileinput', { static: false }) inputRef: ElementRef;
+
+  public filesHolder$: Observable<{
+    file: File,
+    progress$: Observable<number>
+  }[]> = this.upLoadFileService.filesHolder$.asObservable();
 
   constructor(
     private fb:FormBuilder,
@@ -28,7 +36,6 @@ export class FormationFormComponent implements OnInit {
     private parcourService: ParcourService,
     private activatedRoute: ActivatedRoute,
     private upLoadFileService: UploadFileService,
-
   ) {}
 
     get liste(){
@@ -49,24 +56,24 @@ export class FormationFormComponent implements OnInit {
 
   initForm(
     formation: Formation = {
-    nomFormation:'',
-    option:'',
+    nomFormation:null,
+    option:null,
     image: '',
-    alt:'',
-    lieu:'',
-    adresse:'',
+    alt: null,
+    lieu: null,
+    adresse: null,
     dateEntree: new Date,
     dateSortie: new Date,
-    contenu:'',
+    contenu: null,
     liste:[],
-    lien:''
-  },
+    lien: null
+  }
 
   ): void {
     this.formationForm = this.fb.group({
       nomFormation: [formation.nomFormation, Validators.required],
       option: [formation.option, Validators.minLength(3)],
-      image: [formation.image],
+      image: [''],
       alt: [formation.alt, Validators.minLength(3)],
       lieu: [formation.lieu, Validators.required],
       adresse: [formation.adresse, Validators.minLength(3)],
@@ -90,11 +97,21 @@ export class FormationFormComponent implements OnInit {
   this.formationForm.controls.image.setValue(this.imageVal);
 
   this.parcourService.createNewFormation(this.formationForm.value);
+
+  const files = this.upLoadFileService.filesHolder$.value.slice();
+  files.splice(this.index, 1);
+  this.upLoadFileService.filesHolder$.next(files);
   this.router.navigate(['parcour']);
   }
 
   onModify(){
+    this.formationForm.controls.image.setValue(this.imageVal);
+
     this.parcourService.updateFormation(this.formationForm.value, this.id);
+
+    const files = this.upLoadFileService.filesHolder$.value.slice();
+    files.splice(this.index, 1);
+    this.upLoadFileService.filesHolder$.next(files);
     this.router.navigate(['parcour']);
   }
 
@@ -102,21 +119,12 @@ export class FormationFormComponent implements OnInit {
     this.router.navigate(['parcour']);
   }
 
-  noFile: number;
-
-  public filesHolder$: Observable<{
-    file: File,
-    progress$: Observable<number>
-  }[]> = this.upLoadFileService.filesHolder$.asObservable();
-
-  @ViewChild('fileinput', { static: false }) inputRef: ElementRef;
-
   openFile() {
     this.inputRef.nativeElement.click();
   }
 
   addFile($event){
-    this.imageVal ='./public/assets/' + $event.target.files[0].name;
+    this.imageVal ='http://localhost:3000/' + $event.target.files[0].name;
     const file = $event.target.files;
     this.upLoadFileService.addFile(file);
     this.noFile = this.upLoadFileService.filesHolder$.value.length;

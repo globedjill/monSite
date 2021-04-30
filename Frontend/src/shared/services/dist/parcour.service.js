@@ -14,6 +14,8 @@ var ParcourService = /** @class */ (function () {
         this.http = http;
         this.formationTab = [];
         this.formationTab$ = new rxjs_1.BehaviorSubject([]);
+        this.experienceTab = [];
+        this.experienceTab$ = new rxjs_1.BehaviorSubject([]);
     }
     ParcourService.prototype.emettreLesFormationsRecuperer = function () {
         this.formationTab$.next(this.formationTab);
@@ -23,9 +25,19 @@ var ParcourService = /** @class */ (function () {
         this.saveFormations(newFormation);
         this.emettreLesFormationsRecuperer();
     };
+    ParcourService.prototype.emettreLesExperienceRecuperer = function () {
+        this.experienceTab$.next(this.experienceTab);
+    };
+    ParcourService.prototype.createNewExperience = function (newExperience) {
+        this.experienceTab.push(newExperience);
+        this.saveExperiences(newExperience);
+        this.emettreLesFormationsRecuperer();
+    };
     // Queries
+    // Formations
     ParcourService.prototype.saveFormations = function (formation) {
-        this.http.post('/api/formations', formation).subscribe(function () { });
+        this.http.post('/api/formations', formation).subscribe(function () {
+        });
     };
     ParcourService.prototype.updateFormation = function (formation, id) {
         this.http.post('/api/formations/update/' + id, formation).subscribe(function () { });
@@ -47,6 +59,31 @@ var ParcourService = /** @class */ (function () {
         });
         this.recupFormations();
         this.emettreLesFormationsRecuperer();
+    };
+    // Experiences
+    ParcourService.prototype.saveExperiences = function (experience) {
+        this.http.post('/api/experience', experience).subscribe(function () { });
+    };
+    ParcourService.prototype.updateExperience = function (experience, id) {
+        this.http.post('/api/experience/update/' + id, experience).subscribe(function () { });
+    };
+    ParcourService.prototype.recupExperience = function () {
+        var _this = this;
+        this.http.get('/api/experience')
+            .subscribe(function (experiences) {
+            _this.experienceTab = experiences;
+            _this.emettreLesExperienceRecuperer();
+        });
+    };
+    ParcourService.prototype.supprimerUneExperience = function (id) {
+        var _this = this;
+        this.http["delete"]('/api/experience/' + id).subscribe(function () {
+            (function (experiences) {
+                _this.experienceTab = experiences;
+            });
+        });
+        this.recupExperience();
+        this.emettreLesExperienceRecuperer();
     };
     ParcourService = __decorate([
         core_1.Injectable({

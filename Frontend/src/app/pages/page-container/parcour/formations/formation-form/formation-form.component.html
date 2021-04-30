@@ -3,7 +3,6 @@
         <mat-card style='min-width: 500px; max-width: 600px;'>
             <mat-card-header>
                 <mat-card-title>Nouvelle Formation</mat-card-title>
-                <mat-card-subtitle>{{ id }}</mat-card-subtitle>
             </mat-card-header>
             <!-- INTIUTLE -->
             <mat-card-content>
@@ -31,8 +30,8 @@
                                 file_download
                                 </span></mat-icon>
                             </div>
-                            <div class="file" fxLayout='column' fxLayoutAlign="center center">
-                                <div class="fileUpload" *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='row' fxLayoutAlign="space-between center">
+                            <div class="file" fxLayout='column' *ngIf="this.noFile " fxLayoutAlign="center center">
+                                <div class="fileUpload" *ngFor='let fileHolder of (filesHolder$ | async); let i = index' fxLayout='row' fxLayoutAlign="space-between center">
                                     <div class="fileName" fxLayoutAlign="space-arround center" fxLayout='row'>
                                         <span fxFill>{{ fileHolder.file.name }}</span>
                                         <div fxLayout='row' *ngIf='fileHolder.progress$ | async ; let progress '>
@@ -100,7 +99,7 @@
                             <button mat-raised-button (click)="deleteAxe(i)">-</button>
                         </div>
                     </div>
-                    <mat-form-field appearance='fill'>
+                    <mat-form-field appearance='fill' fxLAyoutAlign='start center'>
                         <mat-label>Lien vers le site </mat-label>
                         <input type='text' matInput placeholder="Liens" formControlName='lien' />
                         <mat-error *ngIf=""></mat-error>
@@ -110,7 +109,7 @@
             <mat-card-actions align="start">
                 <button *ngIf='this.id' mat-raised-button (click)="onModify()">modifier
                 </button>
-                <button *ngIf='!this.id' mat-raised-button (click)="onSaveFormation()">Enregistrer</button>
+                <button *ngIf='!this.id' mat-raised-button ngSubmit (click)="onSaveFormation()">Enregistrer</button>
                 <button mat-raised-button (click)="retour()">Annuler</button>
             </mat-card-actions>
             <mat-card-footer>

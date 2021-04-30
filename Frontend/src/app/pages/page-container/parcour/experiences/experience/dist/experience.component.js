@@ -9,34 +9,57 @@ exports.__esModule = true;
 exports.ExperienceComponent = void 0;
 var core_1 = require("@angular/core");
 var ExperienceComponent = /** @class */ (function () {
-    function ExperienceComponent(userService) {
+    function ExperienceComponent(userService, ParcourService, uploadService) {
         this.userService = userService;
-        this.experienceTab = [
-            {
-                dateEntree: new Date('2018/01/05'),
-                dateSortie: new Date('2021/02/01'),
-                image: '../../../../assets/images/ban_bricoDepot.png',
-                typeContrat: 'CDI',
-                enseigne: 'Bricot Dépot',
-                lieu: 'Trélissac (24000)',
-                fonction: 'Vendeur Polyvalent - Secteur Outillage/Peinture/Electicité '
-            },
-            {
-                dateEntree: new Date('2009/01/05'),
-                dateSortie: new Date('2017/05/01'),
-                image: '../../../../assets/images/ban-cashexpress.png',
-                typeContrat: 'CDI',
-                enseigne: 'CashExpress',
-                lieu: 'Trélissac (24000)',
-                fonction: 'Acheteur Vendeur Polyvalent - Gestion '
-            }
-        ];
+        this.ParcourService = ParcourService;
+        this.uploadService = uploadService;
     }
     ExperienceComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.subscription = this.userService.idSession$.subscribe(function (usersession) {
             _this.userSession = usersession;
         });
+        this.tableaurecupExperienceSubscription = this.ParcourService.experienceTab$.subscribe(function (experienceTab) {
+            _this.experienceTab = experienceTab;
+        });
+        this.ParcourService.recupExperience();
+        console.log(this.experienceTab);
+    };
+    ExperienceComponent.prototype.editExperience = function (experience) {
+        this.ParcourService.experience = experience;
+    };
+    ExperienceComponent.prototype.deleteExperience = function (id) {
+        this.ParcourService.supprimerUneExperience(id);
+    };
+    ExperienceComponent.prototype.deleteLinkImage = function (experienceImage) {
+        this.uploadService.removeFileOfCard(experienceImage.split('/')[3]);
+    };
+    ExperienceComponent.prototype.ngOnDestroy = function () {
+        this.subscription.unsubscribe();
+        this.tableaurecupExperienceSubscription.unsubscribe();
+    };
+    ExperienceComponent.prototype.tempsTravailler = function (dateSortie, dateEntree) {
+        var minute = 1000 * 60;
+        var heure = minute * 60;
+        var journee = heure * 24;
+        var annee = 365 * journee;
+        var moi = annee / 12;
+        // Ratio 1 mois
+        var ratio = 1 / 12;
+        var dateFin = new Date(dateSortie).getTime();
+        var dateDebut = new Date(dateEntree).getTime();
+        var nbAnnee = parseInt(new Number((dateFin - dateDebut) / (annee)).toPrecision(2).split('.')[0]);
+        var mois1 = (parseInt((((dateFin - dateDebut) / (moi)) / 12).toFixed(5).split('.')[1])) / 100000;
+        var nbMois = (mois1 / ratio).toFixed(0);
+        if (nbAnnee === 0) {
+            return nbMois + ' mois';
+        }
+        else if (mois1 === 0) {
+            return nbAnnee + ' ans';
+        }
+        else {
+            return nbAnnee + ' ans et ' + nbMois + ' mois';
+        }
     };
     ExperienceComponent = __decorate([
         core_1.Component({

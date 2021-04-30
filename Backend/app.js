@@ -3,17 +3,6 @@ const morgan = require('morgan');
 var path = require('path');
 const fs = require('fs');
 
-const multer = require('multer');
-const upload = multer({
-    storage: multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, path.join(__dirname, '../public/assets'));
-        },
-        filename: (req, file, cd) => {
-            cd(null, `${ file.originalname }`);
-        }
-    })
-});
 
 const app = express();
 exports.app = app;
@@ -35,12 +24,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(routing);
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/img')));
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '../public/assets')));
+
+const multer = require('multer');
+const upload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, path.join(__dirname, 'public/img'));
+        },
+        filename: (req, file, cd) => {
+            cd(null, `${ file.originalname }`);
+        }
+    })
+});
 
 app.post("/api/upload", upload.array('f'), (req, res, next) => {
     res.end();
@@ -49,7 +51,7 @@ app.post("/api/upload", upload.array('f'), (req, res, next) => {
 app.delete('/api/upload/:filename', (req, res, next) => {
     const { filename } = req.params;
     const e = req.params;
-    fs.unlink(path.join(__dirname, `upload/${filename}`), err => {
+    fs.unlink(path.join(__dirname, `public/img/${filename}`), err => {
         res.end();
     })
     console.log(e);

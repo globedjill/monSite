@@ -9,7 +9,7 @@ const auth = require('./api.auth.routes');
 router.use('/users', users);
 router.use('/auth', auth);
 router.use('/formations', formations);
-router.use('/experiences', experiences);
+router.use('/experience', experiences);
 
 router.get('/', (req, res) => {
     res.json(req.user);

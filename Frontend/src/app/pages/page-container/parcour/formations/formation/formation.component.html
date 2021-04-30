@@ -1,14 +1,13 @@
 <section>
     <div>
         <h3 fxLayoutAlign='center center'> Formation</h3>
-        <button mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>
+        <button *ngIf='this.userSession.isAuth' mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>
     </div>
     <div fxLayout='row wrap' fxLayoutAlign='center start'>
         <mat-card *ngFor='let formation of parcourTab; let i = index'>
             <div>
-                <button mat-raised-button *ngIf='this.userSession.isAuth' (click)="deleteFormation(formation._id)">Supprimer</button>
+                <button mat-raised-button *ngIf='this.userSession.isAuth' (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
                 <button mat-raised-button *ngIf='this.userSession.isAuth' (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
-                <p>{{ formation._id }}</p>
             </div>
             <mat-card-header>
                 <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>
@@ -35,7 +34,7 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <a href="{{ formation.lien}}" target='blank'><button mat-raised-button> En savoir plus</button></a>
+                <a href="{{ formation.lien }}" target='blank'><button mat-raised-button> En savoir plus</button></a>
             </mat-card-actions>
         </mat-card>
     </div>

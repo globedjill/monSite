@@ -1,5 +1,5 @@
+import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Formation } from 'src/shared/modeles/formation.interface';
 import { UserSession } from 'src/shared/modeles/userSession.interface';
@@ -22,7 +22,7 @@ export class FormationComponent implements OnInit, OnDestroy {
   constructor(
     private parcourService: ParcourService,
     private userService: UsersService,
-
+    private uploadFileService: UploadFileService
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +50,10 @@ export class FormationComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.tableauDeFormationSubscription.unsubscribe();
     if(this.userSub){this.userSub.unsubscribe()};
+   }
+
+   deleteImageLink(formation){
+     this.uploadFileService.removeFileOfCard(formation.split('/')[3]);
    }
 }
 
