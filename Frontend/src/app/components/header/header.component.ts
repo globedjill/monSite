@@ -33,11 +33,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
         lien: 'parcour',
         fragment: 'parcour'
        },
+       {
+        nom: 'Portfolio',
+        lien: 'portfolio',
+        fragment: 'portfolio'
+      },
       {
         nom: 'Contact',
         lien: 'contact',
         fragment: 'contact'
       }
+
     ];
     this.menuConnect = [
       {

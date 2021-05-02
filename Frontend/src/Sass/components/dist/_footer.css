@@ -1,0 +1,10 @@
+footer {
+  padding: 25px;
+}
+footer div p {
+  margin-left: 10px;
+  margin-right: 2px;
+}
+footer div .fa-copyright {
+  font-size: 0.7rem;
+}

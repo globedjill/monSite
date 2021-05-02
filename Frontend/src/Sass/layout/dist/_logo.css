@@ -1,0 +1,54 @@
+.fab,
+.far,
+.fas {
+  font-size: 2rem;
+  transition: 0.3s;
+}
+
+.fa-html5:hover {
+  color: red;
+}
+
+.fa-css3-alt:hover {
+  color: blue;
+}
+
+.fa-js:hover {
+  color: yellow;
+}
+
+.fa-sass:hover {
+  color: #f603ce;
+}
+
+.typescript:hover {
+  width: 50%;
+  background-color: blue;
+  text-align: end;
+  border-radius: 3px;
+  padding-right: 2px;
+}
+
+.fa-node-js:hover {
+  color: green;
+}
+
+.fa-compass:hover {
+  color: #73f373;
+}
+
+.fa-database:hover {
+  color: #75e7f7;
+}
+
+.fa-angular:hover {
+  color: #830202;
+}
+
+.fa-vuejs:hover {
+  color: #2ef52e;
+}
+
+.fa-bootstrap:hover {
+  color: #5d0434;
+}

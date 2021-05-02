@@ -24,6 +24,11 @@ var HeaderComponent = /** @class */ (function () {
                 fragment: 'parcour'
             },
             {
+                nom: 'Portfolio',
+                lien: 'portfolio',
+                fragment: 'portfolio'
+            },
+            {
                 nom: 'Contact',
                 lien: 'contact',
                 fragment: 'contact'

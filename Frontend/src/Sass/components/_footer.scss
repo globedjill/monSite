@@ -1,0 +1,14 @@
+footer {
+    padding: 25px;
+    background-color: $primaryColors;
+    color: $secondaryColors;
+    & div {
+        & p {
+            margin-left: 10px;
+            margin-right: 2px;
+        }
+        & .fa-copyright {
+            font-size: .7rem;
+        }
+    }
+}

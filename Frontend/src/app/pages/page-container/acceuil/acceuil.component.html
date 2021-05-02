@@ -1,42 +1,75 @@
-<section id='acceuil'>
-    <mat-card fxLayoutAlign='center center' fxLayout='column'>
-        <mat-card-header>
-            <mat-card-title>Mes Infos</mat-card-title>
-            <mat-card-subtitle>Virgil MINGOT</mat-card-subtitle>
-        </mat-card-header>
-        <!-- <img matCardImage src="Card wide image source"> -->
-        <mat-card-content fxLayout='column'>
-            <p fxLayoutAlign='start center'><span class="material-icons">event</span> {{ this.age }} ans</p>
-            <p fxLayoutAlign='start center'><span class="material-icons">
-              phone
-              </span> +33 6 18 83 28 30</p>
-            <p fxLayoutAlign='start center'><span class="material-icons">
-              alternate_email
-              </span> mingot.virgil@gmail.com</p>
-            <p fxLayoutAlign='start center'><span class="material-icons">
-              location_on
-              </span> 24000 PERIGUEUX</p>
-            <p fxLayoutAlign='start center' [routerLink]="['/portfolio']"> Portfolio </p>
-        </mat-card-content>
-        <mat-card-content fxLayout='row' fxLayoutGap='12px'>
-            <a href="https://www.facebook.com/vivi244"><span><img src="../../../../assets/images/facebook.png" alt="logoFacebook" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
-            <a href="https://twitter.com/DjillGlobe"><span><img src="../../../../assets/images/twitter.png" alt="logotwitter" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
-            <a href="https://www.linkedin.com/in/virgil-mingot/"><span><img src="../../../../assets/images/logo-linkedin.png" alt="logoLinkedin" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
-            <a href="https://www.instagram.com/sph3rik/?hl=fr"><span><img src="../../../../assets/images/instagram.png" alt="logoInstagramm" matTooltip='logo realiser par Freepik https://www.freepik.com/'> </span></a>
-        </mat-card-content>
-    </mat-card>
-</section>
-<section>
-    <mat-card fxLayoutAlign='center center' fxLayout='column'>
-        <mat-card-header>
-            <mat-card-title>A propos de moi</mat-card-title>
-            <mat-card-subtitle></mat-card-subtitle>
-        </mat-card-header>
-        <!-- <img matCardImage src="Card wide image source"> -->
-        <mat-card-content fxLayout='column'>
-            <p><span>A</span>De formation spécialisée en produits forestiers, j’ai évolué dans <strong>différents secteurs d’activités</strong> ce qui ma permis d’acquérir de nombreuses compétences et une <strong>expérience professionnelle diversifiée</strong>. Après  plus
-                de 10 ans d’activité dans le domaine du commerce j’ai fait le choix d’une reconversion professionnelle dans le domaine <strong>« digital »</strong> en tant que développeur Web.   Après 6 mois  d’une formation intensive j’ai obtenu mon
-                diplôme , formation qui  m’a permis de maîtriser le codage des différents langages informatiques et l’utilisation des outils nécessaire au développeur Web.<br> Pour la partie front-End <br><strong> - HTML <br>- CSS <br>- JavaScript </strong>                <br><br>Pour la partie Back-End<strong><br>- NodeJS <br>- Express -<br>-   MongoDB </strong><br></p>
-        </mat-card-content>
-    </mat-card>
+<section class='sectionAcceuil' fxLayout='column' fxLayoutAlign='center center'>
+    <article id='acceuil'>
+        <mat-card fxLayout='column' fxLayoutAlign='center center'>
+            <div fxLayout='column'>
+                <mat-card-header fxLayout='row' fxLayoutAlign=' end '>
+                    <mat-card-title>
+                        <h2>MINGOT Virgil</h2>
+                    </mat-card-title>
+                    <div>
+                        <mat-card-subtitle>
+                            <h3><span>Développeur Web</span> FullStack Junior</h3>
+                        </mat-card-subtitle>
+                    </div>
+                </mat-card-header>
+                <mat-card-content fxLayout='row ' fxLayoutAlign='space-evenly center '>
+                    <img class='photoProfil' src="../../../../assets/images/virgil.png" alt="photo de profil">
+                    <div fxLayout='column ' fxLayoutGap='20px ' fxLayoutAlign='center center '>
+                        <div class='profil' fxLayout='column ' fxLayoutAlign='center center'>
+                            <p><span class="material-icons">event</span> {{ this.age }} ans</p>
+                            <p><span class="material-icons">phone</span> +33 6 18 83 28 30</p>
+                            <p><span class="material-icons">alternate_email</span> mingot.virgil@gmail.com</p>
+                            <p><span class="material-icons">location_on</span> 24000 PERIGUEUX</p>
+                        </div>
+                        <div fxLayout='row ' fxLayoutGap='20px '>
+                            <a href="https://www.facebook.com/vivi244"><img src="../../../../assets/images/facebook.png" alt="logoFacebook" matTooltip='logo realiser par Freepik https://www.freepik.com/ '></a>
+                            <a href="https://twitter.com/DjillGlobe"><img src="../../../../assets/images/twitter.png" alt="logotwitter" matTooltip='logo realiser par Freepik https://www.freepik.com/ '></a>
+                            <a href="https://www.linkedin.com/in/virgil-mingot/"><img src="../../../../assets/images/logo-linkedin.png" alt="logoLinkedin" matTooltip='logo realiser par Freepik https://www.freepik.com/ '></a>
+                            <a href="https://www.instagram.com/sph3rik/?hl=fr"><img src="../../../../assets/images/instagram.png" alt="logoInstagramm" matTooltip='logo realiser par Freepik https://www.freepik.com/ '></a>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </div>
+        </mat-card>
+    </article>
+    <article class='articlePresentations'>
+        <mat-card fxLayoutAlign='center center ' fxLayout='column '>
+            <mat-card-header>
+                <mat-card-title>Mon profil en quelques mots</mat-card-title>
+            </mat-card-header>
+            <mat-card-content fxLayout='column '>
+                <p><span class='majPara'>D</span>e formation spécialisée en produits forestiers, j’ai évolué dans <strong>différents secteurs d’activités</strong> ce qui ma permis d’acquérir de nombreuses compétences et une <strong>expérience professionnelle diversifiée</strong>. Après  plus
+                    de 10 ans d’activité dans le domaine du commerce j’ai fait le choix d’une reconversion professionnelle dans le domaine <strong>« digital »</strong> en tant que développeur Web.</p><br>
+                <p><span class='majPara'>A</span>utodidacte, j'ai appris à maitriser les differents outils d'un développeur. Méme si aujourd'hui je n'en suis qu'au balbutiement, je suis capable de réaliser des sites web plus ou moins complexe .</p>
+            </mat-card-content>
+        </mat-card>
+    </article>
+    <article>
+        <mat-card fxLayoutAlign='center center ' fxLayout='column '>
+            <mat-card-header>
+                <mat-card-title>Les outils utilisé </mat-card-title>
+                <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content fxLayout='column '>
+                <div fxLayout='column' fxLayoutAlign='center center'>
+                    <ul fxLayout='row' class='minus' fxLayoutAlign='center center'>
+                        <li><i class="fab fa-html5"></i></li>
+                        <li><i class="fab fa-css3-alt"></i></li>
+                        <li><i class="fab fa-js"></i></li>
+                        <li><i class="fab fa-sass"></i></li>
+                        <li><i class='fab typescript'>Ts</i></li>
+                        <li><i class="fab fa-node-js"></i></li>
+                        <li><i class="far fa-compass"></i></li>
+                        <li><i class="fas fa-database"></i></li>
+                        <li><i class="fab fa-angular"></i></li>
+                        <li><i class="fab fa-vuejs"></i></li>
+                        <li><i class="fab fa-bootstrap"></i></li>
+                        <li><i class="fab fa-angular blue"></i></li>
+                        <li><i class="fab fa-font-awesome-alt"></i></li>
+                        <li><i class="fab fa-google"></i></li>
+                    </ul>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </article>
 </section>

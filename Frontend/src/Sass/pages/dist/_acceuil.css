@@ -1,13 +1,43 @@
-p {
-  min-width: 200px;
+.sectionAcceuil {
+  background: url("../../assets/images/bg_Acceuil.jpeg") center center/cover;
+  height: 100vh;
 }
-
-span {
-  margin-right: 4px;
+.sectionAcceuil article {
+  width: 70%;
 }
-
-img {
+.sectionAcceuil article mat-card {
+  background-color: rgba(15, 31, 27, 0.753);
+  color: white;
+}
+.sectionAcceuil article mat-card mat-card-header mat-card-title {
+  margin-right: 20px;
+}
+.sectionAcceuil article mat-card mat-card-header mat-card-title h2 {
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
+}
+.sectionAcceuil article mat-card mat-card-header div mat-card-subtitle h3 {
+  letter-spacing: 0.15rem;
+  font-style: italic;
+  color: white;
+  font-size: 1.2rem;
+}
+.sectionAcceuil article mat-card mat-card-header div mat-card-subtitle h3 span {
+  color: yellow;
+}
+.sectionAcceuil article mat-card mat-card-content .photoProfil {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  border: 2px solid rgba(178, 178, 179, 0.575);
+  box-shadow: 0 0 6px white;
+}
+.sectionAcceuil article mat-card mat-card-content p .majPara {
+  color: yellow;
+  font-size: 1.3rem;
+}
+.sectionAcceuil article mat-card mat-card-content div a img {
   cursor: pointer;
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
 }

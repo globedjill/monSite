@@ -1,12 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 22px;
+}
+
 html,
 body {
-  height: 100%;
-  background-color: #03f8821f;
-  padding-top: 90px;
+  height: 100vh;
+  background-color: #effdf9;
+  padding-top: 70px;
+  font-family: "Karla", sans-serif;
+}
+
+p {
+  text-align: justify;
+}
+
+a {
+  cursor: pointer;
+}
+
+.container .content {
+  width: 800px;
+}
+.container .content .upload {
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  height: 80px;
+  cursor: copy;
+}
+.container .content .upload .upload-icon {
+  font-size: 30px;
+  color: #ccc;
+}
+.container .content .over {
+  background-color: #eee;
+}
+.container .content .show {
+  display: none;
+}
+.container .file {
+  width: 100%;
+}
+.container .file .fileUpload {
+  width: 100%;
+  padding: 7px;
+  margin: 2px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+.container .file .fileUpload span {
+  width: 20px;
+  margin-right: 3px;
+}
+
+strong {
+  font-weight: 400;
+  color: white;
 }
 
 .mat-tab-label {
-  color: white !important;
+  color: #f2f3f2 !important;
+}
+
+.mat-tab-link {
+  height: 30px !important;
 }
 
 .mat-card {
@@ -16,41 +75,131 @@ body {
   margin: 15px;
 }
 
+.mat-menu {
+  height: 40px;
+}
+
+.mat-form-field {
+  margin: 8px 0;
+}
+
+.mat-divider {
+  width: 80% !important;
+}
+
 header {
-  background-image: url("../../assets/images/bg_header.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-top: 8px;
-  color: white !important;
+  background-color: #00130a;
+  color: #f2f3f2 !important;
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 4;
+  z-index: 1;
+  font-family: "Dancing Script", cursive !important;
 }
-header::before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
+header .logoTitreMenuContainer {
+  padding-top: 20px;
 }
-header div img {
-  height: 100px;
-  width: 100px;
-  border: 1px solid #f3efef;
+header .logoTitreMenuContainer .logoTitre {
+  padding-bottom: 20px;
+}
+header .logoTitreMenuContainer .logoTitre img {
+  height: 80px;
+  width: 80px;
+  border: 3px solid #f3efef;
   border-radius: 60%;
   margin: 10px 30px;
 }
-header .mat-tab-label {
-  font-size: 1.2em !important;
+header .logoTitreMenuContainer .logoTitre h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  cursor: pointer;
 }
-header .mat-tab-label a {
+header .menuNav .menu {
+  margin-right: 20px;
+}
+header .menuNav .menu button {
+  padding-top: 2px;
+  background: #e0f5f8;
+  font-family: "Indie Flower", cursive !important;
+  border-radius: 5px 30% 5px 30%;
+}
+header .menuNav .menu button:hover {
+  transition: 0.4s;
+  background-color: #002a27;
+  color: #e0f5f8;
+  border: 2px solid #e0f5f8;
+  font-weight: 700;
+}
+header .menuNav .menu .mat-menu button {
+  font-family: "Indie Flower", cursive !important;
+}
+header .menuNav nav {
+  padding: 0;
+  margin-top: 5px;
+}
+header .menuNav nav .mat-tab-link {
+  font-size: 1.2rem;
+  padding: 0;
+  color: white;
+  height: 50px !important;
+  border-radius: 30px 30% 0 0;
+}
+header .menuNav nav .mat-tab-link:hover {
+  background-color: #e0f5f8;
+  color: #002a27;
+}
+header .menuNav nav .mat-tab-label-active {
+  background-color: rgba(62, 122, 104, 0.52);
+}
+header .menuNav nav .mat-ink-bar {
+  height: 4px;
+}
+header .menuNav nav a {
+  color: white;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1.2rem;
+  font-family: "Indie Flower", cursive !important;
 }
 
+@media (max-width: 500px) {
+  body,
+html {
+    padding-top: 0;
+    display: flex;
+  }
+
+  header {
+    position: unset;
+  }
+  header .logoTitreMenuContainer {
+    place-content: center center !important;
+    padding-top: 0;
+    flex-wrap: wrap;
+  }
+  header .logoTitreMenuContainer .logoTitre {
+    margin-right: 0 !important;
+  }
+  header .logoTitreMenuContainer .logoTitre img {
+    margin: 10px 30px 0 0;
+  }
+  header .logoTitreMenuContainer .menuNav {
+    width: 100%;
+  }
+  header .logoTitreMenuContainer .menuNav .menu {
+    margin-right: 0;
+    place-content: center center !important;
+  }
+  header .logoTitreMenuContainer .menuNav .mat-tab-links {
+    flex-direction: row;
+    justify-content: space-evenly !important;
+  }
+  header .logoTitreMenuContainer .menuNav .mat-tab-links a {
+    padding: 0 10px;
+  }
+}
 main section h3 {
-  font-size: 4em;
+  margin: 40px 0 20px 0 !important;
+  font-size: 3rem !important;
 }
 main section div .mat-card {
   width: 500px;
@@ -59,16 +208,63 @@ main section div .mat-card .imgBg {
   height: 150px;
 }
 
-p {
-  min-width: 200px;
+.matCardSeCo {
+  max-width: 500px;
 }
 
-span {
-  margin-right: 4px;
+.sectionAcceuil {
+  background: url("../../assets/images/bg_Acceuil.jpeg") center center/cover;
+  height: 100vh;
+  font-weight: 200;
+  line-height: 1.4rem;
 }
-
-img {
+.sectionAcceuil article {
+  width: 70%;
+}
+.sectionAcceuil article mat-card {
+  background-color: rgba(15, 31, 27, 0.753);
+  color: white;
+}
+.sectionAcceuil article mat-card mat-card-header mat-card-title {
+  margin-right: 20px;
+}
+.sectionAcceuil article mat-card mat-card-header mat-card-title h2 {
+  font-size: 1.7rem;
+  letter-spacing: 0.3rem;
+}
+.sectionAcceuil article mat-card mat-card-header div mat-card-subtitle h3 {
+  letter-spacing: 0.15rem;
+  font-style: italic;
+  color: white;
+  font-size: 1.2rem;
+}
+.sectionAcceuil article mat-card mat-card-header div mat-card-subtitle h3 span {
+  color: yellow;
+}
+.sectionAcceuil article mat-card mat-card-content .photoProfil {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  border: 2px solid rgba(178, 178, 179, 0.575);
+  box-shadow: 0 0 6px white;
+}
+.sectionAcceuil article mat-card mat-card-content p .majPara {
+  color: yellow;
+  font-size: 1.6rem;
+  font-family: "Dancing Script", cursive;
+  margin-left: 20px;
+}
+.sectionAcceuil article mat-card mat-card-content div ul {
+  padding: 10px;
+}
+.sectionAcceuil article mat-card mat-card-content div ul li {
+  list-style: none;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.sectionAcceuil article mat-card mat-card-content div a img {
   cursor: pointer;
-  height: 20px;
-  width: 20px;
+  height: 30px;
+  width: 30px;
 }

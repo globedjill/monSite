@@ -1,17 +1,128 @@
-p {
-    min-width: 200px;
+.sectionAcceuil {
+    background: url('../../assets/images/bg_Acceuil.jpeg') center center/cover;
+    height: 120vh;
+    font-weight: 200;
+    line-height: 1.4rem;
+    padding-top: 250px;
+    padding-bottom: 200px;
+    & article {
+        width: 70%;
+        & mat-card {
+            background-color: rgba(15, 31, 27, 0.753);
+            color: rgb(255, 255, 255);
+            & mat-card-header {
+                & mat-card-title {
+                    & h2 {
+                        font-size: 1.7rem;
+                        letter-spacing: .3rem;
+                        margin-right: 20px;
+                    }
+                }
+                & div {
+                    & mat-card-subtitle {
+                        & h3 {
+                            letter-spacing: .15rem;
+                            font-style: italic;
+                            color: white;
+                            font-size: 1.2rem;
+                            & span {
+                                color: yellow
+                            }
+                        }
+                    }
+                }
+            }
+            & mat-card-content {
+                & .photoProfil {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 100%;
+                    border: 2px solid rgba(178, 178, 179, 0.575);
+                    box-shadow: 0 0 6px white;
+                }
+                & .profil {
+                    & p {
+                        margin: 6px;
+                    }
+                }
+                & p {
+                    & .majPara {
+                        color: yellow;
+                        font-size: 1.6rem;
+                        font-family: $fontOpt;
+                        margin-left: 20px;
+                    }
+                }
+                & div {
+                    & h3 {
+                        font-weight: 200;
+                    }
+                    & ul {
+                        flex-wrap: wrap;
+                        padding: 10px;
+                        & li {
+                            list-style: none;
+                            padding: 25px;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+                    & a {
+                        & img {
+                            cursor: pointer;
+                            height: 30px;
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-span {
-    margin-right: 4px;
+.minus li {
+    font-size: .6rem;
+    font-style: italic;
 }
 
-img {
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-}
-
-#acceuil {
-    // background-image: url('../../assets/images/bg_Acceuil.jpeg');
+@media(max-width:500px) {
+    .sectionAcceuil {
+        height: auto;
+        padding-top: 50px;
+        padding-bottom: 20px;
+        & article {
+            width: 100%;
+            & mat-card {
+                margin: 5px;
+                & div {
+                    & mat-card-header {
+                        flex-direction: column !important;
+                        place-content: center center !important;
+                        align-items: center !important;
+                        & mat-card-title {
+                            & h2 {
+                                margin: 0 !important;
+                                font-size: 1.3rem;
+                            }
+                        }
+                        & div {
+                            & mat-card-subtitle {
+                                & h3 {
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                    & mat-card-Content {
+                        flex-wrap: wrap;
+                    }
+                }
+            }
+        }
+    }
+    .articlePresentation {
+        & p {
+            font-size: .8rem;
+        }
+    }
 }

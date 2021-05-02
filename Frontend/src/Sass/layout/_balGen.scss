@@ -7,9 +7,8 @@
 
 html,
 body {
-    height: 100vh;
     background-color: $backGroundColor_Body;
-    padding-top: 70px;
+    padding-top: 50px;
     font-family: $fontPrim;
 }
 
@@ -57,4 +56,9 @@ a {
             }
         }
     }
+}
+
+strong {
+    font-weight: 400;
+    color: rgb(255, 255, 255);
 }
