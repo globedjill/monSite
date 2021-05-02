@@ -1,15 +1,27 @@
 // COLORS
-$primaryColors:#03f8821f;
-$secondaryColors:#8f9480;
+$primaryColors:#00130a;
+$secondaryColors:#ffffff;
 $secondaryColors_trans:#d1f663e1;
 $tercieryColors:#5EF4FF;
 $qatriemeColors:#4AE8D9;
 $firtyColors:#4AE8BD;
-$white:rgb(255, 255, 255);
+$white:rgb(242, 243, 242);
 $black: rgb(34, 34, 34);
 // BACKGROUND COLORS
-$backGroundColor_Body: $primaryColors;
+$backGroundColor_Body: rgb(239, 253, 249);
 $backGroundColor_header: $secondaryColors_trans;
+//BUTTON
+$primColBut: rgb(224, 245, 248);
+$primColButHover: rgb(0, 42, 39);
+//NAV
+$colNav: rgba(62, 122, 104, 0.52);
 //FONTSIZE
-$fontSize_Titre: 3em;
-$fontSize_a: 1.2em;
+$fontSize_Titre: 3rem;
+$fontSize_a: 1.2rem;
+//FONT-FAMILY
+$fontPrim:'Karla',
+sans-serif;
+$fontSec: 'Indie Flower',
+cursive;
+$fontOpt: 'Dancing Script',
+cursive;

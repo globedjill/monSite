@@ -1,63 +1,110 @@
 header {
-    padding: 0;
-    box-sizing: border-box;
-    background-image: url('../../assets/images/bg_header.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 8px;
+    background-color: $primaryColors;
     color: $white !important;
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 4;
-    &::before {
-        // box-shadow: inset 30px 0px 50px 0px rgba(255, 123, 0, 0.397);
-        content: '';
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-    }
-    & div {
-        & img {
-            height: 80px;
-            width: 80px;
-            border: 1px solid rgb(243, 239, 239);
-            border-radius: 60%;
-            margin: 10px 30px;
+    z-index: 1;
+    font-family: $fontOpt !important;
+    & .logoTitreMenuContainer {
+        padding-top: 20px;
+        & .logoTitre {
+            padding-bottom: 20px;
+            & img {
+                height: 80px;
+                width: 80px;
+                border: 3px solid rgb(243, 239, 239);
+                border-radius: 60%;
+                margin: 10px 30px;
+            }
+            & h1 {
+                font-size: 2rem;
+                font-weight: 700;
+                cursor: pointer;
+            }
         }
     }
-    & nav {
-        padding: 0;
-        // margin-left: 150px;
-        // background-color: rgb(126, 250, 44);
-        & .mat-tab-link {
-            font-size: $fontSize_a;
-            color: white;
+    & .menuNav {
+        & .menu {
+            margin-right: 20px;
+            & button {
+                padding-top: 2px;
+                background: $primColBut;
+                font-family: 'Indie Flower', cursive !important;
+                border-radius: 5px 30% 5px 30%;
+                &:hover {
+                    transition: .4s;
+                    background-color: $primColButHover;
+                    color: $primColBut;
+                    border: 2px solid $primColBut;
+                    font-weight: 700;
+                }
+            }
+            & .mat-menu {
+                & button {
+                    font-family: 'Indie Flower', cursive !important;
+                }
+            }
         }
-        .mat-tab-label-active {
-            background-color: tomato;
-        }
-        .mat-ink-bar {
-            height: 4px;
-        }
-        & a {
-            text-decoration: none;
-            font-size: $fontSize_a;
+        & nav {
+            padding: 0;
+            margin-top: 5px;
+            & .mat-tab-link {
+                font-size: $fontSize_a;
+                padding: 0;
+                color: white;
+                height: 50px !important;
+                border-radius: 30px 30% 0 0;
+            }
+            .mat-tab-label-active {
+                background-color: $colNav;
+            }
+            .mat-ink-bar {
+                height: 4px;
+            }
+            & a {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+                font-size: $fontSize_a;
+                font-family: 'Indie Flower', cursive !important;
+            }
         }
     }
 }
 
-header {
-    .logoTitreMenuContainer {
-        // background-color: yellowgreen;
-        width: 100%;
-        .logoTitre {
-            width: 300px;
-        }
-        .menu {
-            // background-color: #2b0261;
-            margin-right: 20px;
+@media(max-width:500px) {
+    body,
+    html {
+        padding-top: 0;
+        display: flex;
+    }
+    header {
+        position: unset;
+        .logoTitreMenuContainer {
+            // flex-direction: column !important;
+            place-content: center center !important;
+            padding-top: 0;
+            flex-wrap: wrap;
+            & .logoTitre {
+                margin-right: 0 !important;
+                & img {
+                    margin: 10px 30px 0 0;
+                }
+            }
+            & .menuNav {
+                width: 100%;
+                & .menu {
+                    margin-right: 0;
+                    place-content: center center !important;
+                }
+                & .mat-tab-links {
+                    flex-direction: row;
+                    justify-content: space-evenly !important;
+                    & a {
+                        padding: 0 10px;
+                    }
+                }
+            }
         }
     }
 }

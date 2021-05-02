@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 22px;
+}
+
+html,
+body {
+  height: 100vh;
+  padding-top: 70px;
+  font-family: "Indie Flower", cursive;
+  font-family: "Karla", sans-serif;
+}
+
+p {
+  text-align: justify;
+}
+
+a {
+  cursor: pointer;
+}
+
+.container .content {
+  width: 800px;
+}
+.container .content .upload {
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  height: 80px;
+  cursor: copy;
+}
+.container .content .upload .upload-icon {
+  font-size: 30px;
+  color: #ccc;
+}
+.container .content .over {
+  background-color: #eee;
+}
+.container .content .show {
+  display: none;
+}
+.container .file {
+  width: 100%;
+}
+.container .file .fileUpload {
+  width: 100%;
+  padding: 7px;
+  margin: 2px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+.container .file .fileUpload span {
+  width: 20px;
+  margin-right: 3px;
+}
