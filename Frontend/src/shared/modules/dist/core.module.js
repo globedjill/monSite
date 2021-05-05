@@ -26,6 +26,8 @@ var formation_form_component_1 = require("src/app/pages/page-container/parcour/f
 var parcour_service_1 = require("../services/parcour.service");
 var users_service_1 = require("../services/users.service");
 var upload_image_form_component_1 = require("src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component");
+var portfolio_component_1 = require("src/app/pages/page-container/portfolio/portfolio.component");
+var portfolio_form_component_1 = require("src/app/pages/page-container/portfolio/portfolio-form/portfolio-form.component");
 var MODULES = [
     header_component_1.HeaderComponent,
     footer_component_1.FooterComponent,
@@ -35,6 +37,8 @@ var MODULES = [
     s_inscrire_component_1.SInscrireComponent,
     page_container_component_1.PageContainerComponent,
     parcour_component_1.ParcourComponent,
+    portfolio_component_1.PortfolioComponent,
+    portfolio_form_component_1.PortfolioFormComponent,
     contact_component_1.ContactComponent,
     formation_component_1.FormationComponent,
     experience_component_1.ExperienceComponent,

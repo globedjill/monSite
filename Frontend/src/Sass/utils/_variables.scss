@@ -1,12 +1,14 @@
 // COLORS
 $primaryColors:#00130a;
 $secondaryColors:#ffffff;
+$transparence:#dee5fbef;
 $secondaryColors_trans:#d1f663e1;
 $tercieryColors:#5EF4FF;
 $qatriemeColors:#4AE8D9;
 $firtyColors:#4AE8BD;
 $white:rgb(242, 243, 242);
 $black: rgb(34, 34, 34);
+$cSpan: yellow;
 // BACKGROUND COLORS
 $backGroundColor_Body: rgb(239, 253, 249);
 $backGroundColor_header: $secondaryColors_trans;
@@ -17,7 +19,11 @@ $primColButHover: rgb(0, 42, 39);
 $colNav: rgba(62, 122, 104, 0.52);
 //FONTSIZE
 $fontSize_Titre: 3rem;
-$fontSize_a: 1.2rem;
+$fsH1: 3rem;
+$fsH2: 2.3rem;
+$fsH3: 1.7rem;
+$fsH4: 1rem;
+$fontSize_a: 1rem;
 //FONT-FAMILY
 $fontPrim:'Karla',
 sans-serif;

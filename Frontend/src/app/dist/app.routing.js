@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.AppRoutingModule = void 0;
+var portfolio_form_component_1 = require("./pages/page-container/portfolio/portfolio-form/portfolio-form.component");
+var portfolio_component_1 = require("./pages/page-container/portfolio/portfolio.component");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var auth_guard_1 = require("src/shared/auth.guard");
@@ -27,6 +29,11 @@ var routes = [
         canActivate: [auth_guard_1.AuthGuard]
     },
     { path: 'parcour', component: parcour_component_1.ParcourComponent },
+    { path: 'portfolio', component: portfolio_component_1.PortfolioComponent },
+    { path: 'portfolioForm', component: portfolio_form_component_1.PortfolioFormComponent },
+    { path: 'portfolio/:id',
+        // canActivate:[AuthGuard],
+        component: portfolio_form_component_1.PortfolioFormComponent },
     { path: 'formation', component: formation_component_1.FormationComponent },
     { path: 'formation/:_id',
         canActivate: [auth_guard_1.AuthGuard],

@@ -1,5 +1,6 @@
 // UTILS
 @import './utils/_variables';
+@import './utils/_frameSpherik';
 // LAYOUT
 @import './layout/_balGen';
 @import './layout/_material';
@@ -9,7 +10,9 @@
 @import './components/_header';
 @import './components/_navbar';
 @import './components/_parcour';
+@import './components/_formation';
 @import './components/_seConnecter';
 @import './components/sInscrire';
+@import './components/portfolio';
 // PAGES
 @import './pages/_acceuil';

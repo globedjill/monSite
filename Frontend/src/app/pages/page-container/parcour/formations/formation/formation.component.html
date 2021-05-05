@@ -1,41 +1,48 @@
-<section>
-    <div>
-        <h3 fxLayoutAlign='center center'> Formation</h3>
-        <button *ngIf='this.userSession.isAuth' mat-raised-button routerLink='/formationForm'>Ajouter une formation</button>
-    </div>
-    <div fxLayout='row wrap' fxLayoutAlign='center start'>
-        <mat-card *ngFor='let formation of parcourTab; let i = index'>
-            <div>
-                <button mat-raised-button *ngIf='this.userSession.isAuth' (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
-                <button mat-raised-button *ngIf='this.userSession.isAuth' (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
-            </div>
-            <mat-card-header>
-                <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>
-                <mat-card-subtitle>
-                    {{ formation.lieu }} <br> {{ formation.adresse }}
-                </mat-card-subtitle>
-            </mat-card-header>
-            <img class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'>
-            <mat-card-content>
-                <div fxLayout='row' fxLayoutAlign='space-around center'>
-                    <p>Date d'entrée : {{ formation.dateEntree | date:'MM/y'}}</p>
-                    <p>Date de Sortie : {{ formation.dateSortie | date:'MM/y'}}</p>
-                </div>
-            </mat-card-content>
-            <mat-card-content>
-                <div>
-                    <p> Contennu de la formation : </p>
-                    <p> {{ formation.contenu}}</p>
-                    <mat-list dense>
-                        <mat-list-item *ngFor="let item of formation.liste">
-                            {{ item }}
-                        </mat-list-item>
-                    </mat-list>
-                </div>
-            </mat-card-content>
-            <mat-card-actions>
-                <a href="{{ formation.lien }}" target='blank'><button mat-raised-button> En savoir plus</button></a>
-            </mat-card-actions>
-        </mat-card>
+<section class='sectionFormation'>
+    <div class='container' fxLayout='column'>
+        <div class='titre' fxLayout='column' fxLayoutAlign='center center'>
+            <h3 class='h3'><span>F</span>ormation</h3>
+            <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>
+        </div>
+        <div fxLayout='row wrap' fxLayoutAlign='center start'>
+            <article *ngFor='let formation of parcourTab; let i = index'>
+                <mat-card fxLayout='column' fxLayoutAlign='space-between end'>
+                    <div>
+                        <div class='btnAlign' fxLayoutAlign='space-evenly center'>
+                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
+                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
+                        </div>
+                        <mat-card-header>
+                            <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>
+                            <mat-card-subtitle>
+                                {{ formation.lieu }} <br> {{ formation.adresse }}
+                            </mat-card-subtitle>
+                        </mat-card-header>
+                        <img class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'>
+                        <mat-card-content>
+                            <div class='content'>
+                                <div class='mtb-10' fxLayout='row' fxLayoutAlign='space-around center'>
+                                    <p>De : {{ formation.dateEntree | date:'MM/y'}}</p>
+                                    <p>à : {{ formation.dateSortie | date:'MM/y'}}</p>
+                                </div>
+                                <div>
+                                    <h4>Contenu de la formation: </h4>
+                                    <p> {{ formation.contenu}}</p>
+                                    <mat-list dense>
+                                        <h4>Les Différents axe:</h4>
+                                        <mat-list-item *ngFor="let item of formation.liste">
+                                            {{ item }}
+                                        </mat-list-item>
+                                    </mat-list>
+                                </div>
+                            </div>
+                        </mat-card-content>
+                    </div>
+                    <mat-card-actions>
+                        <a href="{{ formation.lien }}" target='blank'><button mat-raised-button class='btn'> En savoir plus</button></a>
+                    </mat-card-actions>
+                </mat-card>
+            </article>
+        </div>
     </div>
 </section>

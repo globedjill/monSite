@@ -1,0 +1,63 @@
+.sectionSeConnecter {
+    height: 84vh;
+    & div {
+        & form {
+            & mat-card {
+                & div {
+                    & mat-card-header {
+                        & mat-car-title {}
+                    }
+                    & mat-card-content {
+                        & mat-form-filed {
+                            & mat-label {}
+                            & input {}
+                            & mat-error {}
+                        }
+                    }
+                }
+                & mat-card-actions {
+                    & div {
+                        & mat-error {}
+                        & button {}
+                    }
+                    & .separator {
+                        margin: 10px;
+                        height: 2px;
+                        width: 90%;
+                        background-color: grey;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:500px) {
+    .sectionSeConnecter {
+        & div {
+            & form {
+                & mat-card {
+                    & div {
+                        & mat-card-header {
+                            & mat-car-title {}
+                        }
+                        & mat-card-content {
+                            & mat-form-filed {
+                                & mat-label {}
+                                & input {}
+                                & mat-error {}
+                            }
+                        }
+                    }
+                    & mat-card-actions {
+                        & div {
+                            & mat-error {}
+                            & button {}
+                        }
+                        & mat-divider {}
+                    }
+                }
+            }
+        }
+    }
+}

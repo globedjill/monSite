@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 22px;
+    font-size: 1.2rem;
 }
 
 html,
@@ -20,11 +20,24 @@ a {
     cursor: pointer;
 }
 
+
+/*TITRE*/
+
+h1 {}
+
+h2 {}
+
+h3 {}
+
+h4 {
+    display: block;
+    font-weight: bold;
+    line-height: 2rem;
+}
+
 .container {
     // min-height: 100vh;
     .content {
-        // min-height: 500px;
-        width: 800px;
         .upload {
             border: 1px dashed #ddd;
             border-radius: 5px;

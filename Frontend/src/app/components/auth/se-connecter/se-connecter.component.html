@@ -1,31 +1,38 @@
-<section fxLayoutAlign='center center'>
-    <form [formGroup]='singinForm'>
-        <mat-card class='matCardSeCo' fxFlex='column'>
-            <mat-card-header>
-                <mat-card-title>Se Connecter</mat-card-title>
-            </mat-card-header>
-            <mat-card-content fxLayout='column'>
-                <mat-form-field>
-                    <mat-label name='email'>Email</mat-label>
-                    <input matInput type='email' formControlName='email' />
-                    <mat-error *ngIf=""></mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label name='password'>Mot de passe</mat-label>
-                    <input matInput type='password' formControlName='password' />
-                    <mat-error *ngIf=""></mat-error>
-                </mat-form-field>
-                <button mat-raised-button (click)="goggleConnection()"><span class="material-icons-outlined">
+<section class='sectionSeConnecter' fxLayoutAlign='center center'>
+    <div class='container'>
+        <form [formGroup]='singinForm'>
+            <mat-card class='matCardSeCo' fxFlex='column'>
+                <div>
+                    <mat-card-header>
+                        <mat-card-title>
+                            <h4>Se Connecter</h4>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content fxLayout='column'>
+                        <mat-form-field>
+                            <mat-label name='email'>Email</mat-label>
+                            <input matInput type='email' formControlName='email' />
+                            <mat-error *ngIf=""></mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label name='password'>Mot de passe</mat-label>
+                            <input matInput type='password' formControlName='password' />
+                            <mat-error *ngIf=""></mat-error>
+                        </mat-form-field>
+                        <!-- <button mat-raised-button (click)="goggleConnection()"><span class="material-icons-outlined">
                   g_translate
-                  </span></button>
-            </mat-card-content>
-            <mat-card-actions align="start">
-                <mat-error *ngIf='error'>{{ seconnecterErreur() }}</mat-error>
-                <button mat-raised-button [disabled]='this.singinForm.invalid' (click)='submit()'>Envoyer</button>
-                <button mat-raised-button disabled (click)='goSInscrire()'>Je n'ai pas de compte
-                </button>
-            </mat-card-actions>
-
-        </mat-card>
-    </form>
+                  </span></button> -->
+                    </mat-card-content>
+                </div>
+                <mat-card-actions align="start" fxLayout='column' fxLayoutAlign='center center'>
+                    <div fxLayout='row'>
+                        <mat-error *ngIf='error'>{{ seconnecterErreur() }}</mat-error>
+                        <button mat-raised-button [disabled]='this.singinForm.invalid' (click)='submit()'>Envoyer</button>
+                    </div>
+                    <div class='separator'></div>
+                    <button mat-raised-button disabled (click)='goSInscrire()'>Je n'ai pas de compte </button>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
 </section>

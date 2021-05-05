@@ -1,0 +1,9 @@
+.sectionSeConnecter {
+  height: 84vh;
+}
+.sectionSeConnecter div form mat-card mat-card-actions .separator {
+  margin: 10px;
+  height: 2px;
+  width: 90%;
+  background-color: grey;
+}

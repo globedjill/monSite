@@ -1,0 +1,48 @@
+.sectionPortfolio {
+  background: url("../../assets/images/bg_portfolio.jpeg") center center/cover;
+  min-height: calc(100vh - 175px);
+  padding-top: 100px;
+}
+.sectionPortfolio article {
+  margin-bottom: 30px;
+  width: 80%;
+}
+.sectionPortfolio article mat-card {
+  margin: 16px;
+  padding: 16px 24px 8px 8px;
+  background-color: rgba(255, 219, 188, 0.335);
+}
+.sectionPortfolio article mat-card i {
+  font-size: 1rem;
+}
+.sectionPortfolio article mat-card mat-card-header {
+  width: 50%;
+}
+.sectionPortfolio article mat-card mat-card-header mat-card-title a {
+  text-decoration: none;
+  font-style: italic;
+  color: #333;
+}
+.sectionPortfolio article mat-card mat-card-header mat-card-title a:hover {
+  color: white;
+  font-weight: bold;
+}
+.sectionPortfolio article mat-card mat-card-content {
+  margin-top: 10px;
+}
+.sectionPortfolio article mat-card mat-card-content a {
+  text-decoration: none;
+  font-style: italic;
+  color: #333;
+}
+.sectionPortfolio article mat-card mat-card-content a:hover {
+  color: white;
+  font-weight: bold;
+}
+.sectionPortfolio article mat-card mat-card-actions {
+  width: 300px;
+  margin-top: 8px;
+}
+.sectionPortfolio article mat-card mat-card-actions img {
+  width: 300px;
+}

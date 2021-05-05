@@ -1,0 +1,132 @@
+.sectionFormation,
+.sectionExperience {
+    background: url('../../assets/images/bg_parcour.jpeg') center center /cover fixed;
+    width: 100%;
+    & .container {
+        padding-top: 50px;
+        & .titre {
+            // margin: 30px;
+            & .h3 {
+                width: 100%;
+                text-align: center;
+                margin: auto;
+                padding: auto;
+                font-size: $fsH3;
+                font-family: $fontSec;
+                font-weight: 700;
+                color: $secondaryColors;
+                background-color: rgba(228, 245, 255, 0.377);
+                & span {
+                    font-size: $fsH3*1.2;
+                    color: $cSpan;
+                }
+            }
+            & button {}
+        }
+        & article {
+            padding-bottom: 30px;
+            & mat-card {
+                padding-bottom: 30px !important;
+                background-color: $transparence;
+                width: 480px;
+                min-height: 700px;
+                & .btnAlign {
+                    margin-bottom: 15px;
+                    & button {
+                        & span {
+                            font-size: 1rem !important;
+                            font-weight: 200;
+                        }
+                    }
+                }
+                & mat-card-header {
+                    & mat-car-title {}
+                    & mat-card-subtitle {}
+                }
+                & img {
+                    height: 100px;
+                }
+                & mat-card-content {
+                    & p {
+                        font-size: 1rem;
+                    }
+                    & div {
+                        & h4 {
+                            font-size: $fsH4;
+                        }
+                        & mat-list {
+                            & .mat-list-item-content {
+                                font-size: .9rem;
+                                padding: 0;
+                            }
+                        }
+                    }
+                }
+                & mat-card-actions {
+                    margin-right: 15px;
+                    & .mat-button-wrapper {
+                        font-size: .6rem;
+                    }
+                }
+            }
+            & .mat-card-experience {
+                min-height: 300px !important;
+                & mat-card-subtitle {
+                    & p {
+                        font-size: .7rem;
+                        margin-right: 10px;
+                    }
+                    & div {
+                        margin-right: 15px;
+                    }
+                }
+                & .mat-card-header-text {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:500px) {
+    .sectionFormation {
+        margin-top: 0px;
+        & .container {
+            & .titre {
+                & .h3 {
+                    font-size: $fsH3;
+                    font-family: $fontSec;
+                    font-weight: 700;
+                    & span {}
+                }
+                & button {}
+            }
+            article {
+                & mat-card {
+                    & div {
+                        button {}
+                    }
+                    & mat-car-header {
+                        & mat-car-title {}
+                        & mat-card-subtitle {}
+                    }
+                    & img {}
+                    & mad-card-content {
+                        & .content {
+                            & div {}
+                            & p {}
+                            & mat-list {
+                                & mat-list-item {}
+                            }
+                        }
+                    }
+                    & mat-card-actions {
+                        & a {
+                            & button {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

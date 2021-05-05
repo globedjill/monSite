@@ -1,3 +1,5 @@
+import { PortfolioFormComponent } from './pages/page-container/portfolio/portfolio-form/portfolio-form.component';
+import { PortfolioComponent } from './pages/page-container/portfolio/portfolio.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -23,6 +25,11 @@ const routes: Routes = [
   },
 
   { path: 'parcour', component: ParcourComponent},
+  { path: 'portfolio', component: PortfolioComponent},
+  { path: 'portfolioForm', component: PortfolioFormComponent},
+  { path: 'portfolio/:id',
+    // canActivate:[AuthGuard],
+    component: PortfolioFormComponent},
 
   { path: 'formation', component: FormationComponent},
   { path: 'formation/:_id',

@@ -20,6 +20,8 @@ import { FormationFormComponent } from 'src/app/pages/page-container/parcour/for
 import { ParcourService } from '../services/parcour.service';
 import { UsersService } from '../services/users.service';
 import { UploadImageFormComponent } from 'src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component';
+import { PortfolioComponent } from 'src/app/pages/page-container/portfolio/portfolio.component';
+import { PortfolioFormComponent } from 'src/app/pages/page-container/portfolio/portfolio-form/portfolio-form.component';
 
 
 const MODULES = [
@@ -31,6 +33,8 @@ const MODULES = [
     SInscrireComponent,
     PageContainerComponent,
     ParcourComponent,
+    PortfolioComponent,
+    PortfolioFormComponent,
     ContactComponent,
     FormationComponent,
     ExperienceComponent,
