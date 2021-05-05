@@ -118,7 +118,7 @@ export class FormationFormComponent implements OnInit {
   retour(){
     this.router.navigate(['parcour']);
   }
-
+/* FILE*/
   openFile() {
     this.inputRef.nativeElement.click();
   }

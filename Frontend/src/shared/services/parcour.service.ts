@@ -87,13 +87,11 @@ export class ParcourService  {
   }
 
   supprimerUneExperience(id: String){
-    this.http.delete('/api/experience/' + id ).subscribe(()=> {
+    this.http.delete('/api/experience/' + id ).subscribe
       ((experiences: Experience[]) => {
         this.experienceTab = experiences;
-      })
-    });
+      });
     this.recupExperience();
-    this.emettreLesExperienceRecuperer();
   }
 
 }

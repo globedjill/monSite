@@ -1,7 +1,7 @@
 export interface Portfolio{
-  name: String;
-  lienSite: String;
-  description:String;
-  lienGit?:String;
-  image?: String;
+  name: string;
+  lienSite: string;
+  description:string;
+  lienGit?:string;
+  image?: string;
 }

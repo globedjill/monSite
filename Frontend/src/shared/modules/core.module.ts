@@ -1,3 +1,4 @@
+import { PortfolioService } from './../services/portfolio.service';
 import { AppRoutingModule } from './../../app/app.routing';
 import { NgModule } from '@angular/core';
 
@@ -57,6 +58,7 @@ const MODULES = [
   ],
   providers:[
     ParcourService,
+    PortfolioService,
     UsersService,
   ]
 

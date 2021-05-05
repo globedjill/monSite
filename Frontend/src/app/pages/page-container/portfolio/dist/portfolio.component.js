@@ -9,14 +9,29 @@ exports.__esModule = true;
 exports.PortfolioComponent = void 0;
 var core_1 = require("@angular/core");
 var PortfolioComponent = /** @class */ (function () {
-    function PortfolioComponent(userService) {
+    function PortfolioComponent(userService, portfolioService) {
         this.userService = userService;
+        this.portfolioService = portfolioService;
     }
     PortfolioComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.userSub = this.userService.idSession$.subscribe(function (userSession) {
             _this.userSession = userSession;
         });
+        this.portfoliosub = this.portfolioService.portFolioTab$.subscribe(function (portfolioTab) {
+            _this.portfolioTab = portfolioTab;
+        });
+        this.portfolioService.recupPortfolio();
+    };
+    PortfolioComponent.prototype.editSite = function (site) {
+        this.portfolioService.portfolio = site;
+    };
+    PortfolioComponent.prototype.deleteUnSite = function (id) {
+        this.portfolioService.deleteSite(id);
+    };
+    PortfolioComponent.prototype.ngOnDestroy = function () {
+        this.userSub.unsubscribe();
+        this.portfoliosub.unsubscribe();
     };
     PortfolioComponent = __decorate([
         core_1.Component({

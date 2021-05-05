@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.CoreModule = void 0;
+var portfolio_service_1 = require("./../services/portfolio.service");
 var app_routing_1 = require("./../../app/app.routing");
 var core_1 = require("@angular/core");
 var layout_module_1 = require("./layout.module");
@@ -64,6 +65,7 @@ var CoreModule = /** @class */ (function () {
             ],
             providers: [
                 parcour_service_1.ParcourService,
+                portfolio_service_1.PortfolioService,
                 users_service_1.UsersService,
             ]
         })

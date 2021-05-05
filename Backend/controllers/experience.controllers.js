@@ -13,8 +13,8 @@ exports.experienceList = async(req, res, next) => {
     try {
         const experience = await getExperience();
         res.json(experience);
-        console.log(experience);
     } catch (e) {
+        console.log('erreur dans la recuperation de la liste des experiences');
         next(e);
     }
 }
