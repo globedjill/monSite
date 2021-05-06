@@ -3,5 +3,6 @@ export interface Portfolio{
   lienSite: string;
   description:string;
   lienGit?:string;
-  image?: string;
+  image?: any;
+  alt?: string;
 }

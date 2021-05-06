@@ -34,7 +34,7 @@
                     </mat-form-field>
                 </div>
                 <!-- IMAGE -->
-                <!-- <div fxLayout='column'>
+                <div fxLayout='column'>
                     <div class="container" fxLayout="row" fxLayoutAlign="center center">
                         <div class="content" fxLayout="column" fxLayoutGap="15px">
                             <div class="upload" *ngIf="!this.noFile" [class.over]="over" (click)="openFile()" (drop)="dropFile($event); over = false" (dragover)="$event.preventDefault()" (dragenter)="over = true" (dragleave)="over = false" fxLayout="row" fxLayoutAlign="center center">
@@ -65,7 +65,7 @@
                         <input matInput type="text" formControlName='alt' placeholder='alt'>
                         <mat-error *ngIf=""></mat-error>
                     </mat-form-field>
-                </div> -->
+                </div>
             </mat-card-content>
             <mat-card-actions align="start">
                 <button mat-raised-button (click)="onModifyPorfolio()">modifier
