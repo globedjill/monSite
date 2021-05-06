@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('server:server');
-var https = require('https');
+// var https = require('https');
 var http = require('http');
 
 const fs = require('fs');
@@ -23,23 +23,23 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var serveressai = http.createServer((req, res) => {
-    console.log('http server');
-    res.writeHead('302', { Location: `https://${ req.headers.host }${ req.url }` })
-    res.end();
-}).listen(80);
+// var serveressai = http.createServer((req, res) => {
+//     console.log('http server');
+//     res.writeHead('302', { Location: `https://${ req.headers.host }${ req.url }` })
+//     res.end();
+// }).listen(80);
 
 
-var serverHTTPS = https.createServer({
-    // cle priver pour crypter l'information
-    key: fs.readFileSync(path.join(__dirname, '../ssl/ssl.perso/localhost.key')),
-    cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.perso/local.crt'))
-}, app);
+// var serverHTTPS = https.createServer({
+//     // cle priver pour crypter l'information
+//     key: fs.readFileSync(path.join(__dirname, '../ssl/ssl.perso/localhost.key')),
+//     cert: fs.readFileSync(path.join(__dirname, '../ssl/ssl.perso/local.crt'))
+// }, app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-serverHTTPS.listen(443);
+// serverHTTPS.listen(443);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
