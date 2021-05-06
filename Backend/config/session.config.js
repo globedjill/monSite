@@ -15,7 +15,8 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 14 // 14 jours
     },
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://virgil_admin:Evan25082010@cluster0.z3wus.mongodb.net/monSite?retryWrites=true&w=majority',
+        mongoUrl: 'mongodb+srv://virgil_admin:Ser0t7aTsqhXGdRH@cluster0.z3wus.mongodb.net/monSite?retryWrites=true&w=majority',
         ttl: 60 * 60 * 24 * 14 // Durée de la connection
     })
+
 }))
