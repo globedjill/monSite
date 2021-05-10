@@ -33,10 +33,10 @@ const routes: Routes = [
 
   { path: 'formation', component: FormationComponent},
   { path: 'formation/:_id',
-    canActivate:[AuthGuard],
+    // canActivate:[AuthGuard],
     component: FormationFormComponent},
   { path: 'formationForm',
-    canActivate:[AuthGuard],
+    // canActivate:[AuthGuard],
     component: FormationFormComponent},
 
   { path: 'experience', component: ExperienceComponent},

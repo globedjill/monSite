@@ -19,11 +19,17 @@ export class FormationFormComponent implements OnInit {
   public id: string;
   public formation: Formation;
   public formationForm: FormGroup;
-  public index: number;
-  public imageVal: string;
-  public noFile: number;
 
-  @ViewChild('fileinput', { static: false }) inputRef: ElementRef;
+  public imageVal: string;
+  private imageLocal: string = 'imageRecup';
+  private imageDefault: string = 'http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png';
+
+  public index: number;
+  public noFile: boolean = true;
+  public imageInstanceAModifier: boolean = true;
+  public setValueANull: string;
+
+  @ViewChild('fileInput') inputRef: ElementRef;
 
   public filesHolder$: Observable<{
     file: File,
@@ -48,17 +54,30 @@ export class FormationFormComponent implements OnInit {
           const formationRecup = this.parcourService.formation;
           if(this.id){
             this.initForm(formationRecup);
-          }else{
+            if( formationRecup.image === this.imageDefault) {
+              localStorage.setItem(this.imageLocal, formationRecup.image);
+              this.imageVal = localStorage.getItem(this.imageLocal);
+              this.imageInstanceAModifier = false;
+              this.formationForm.controls.image.setValue(null);
+            } else if ( formationRecup.image !== null){
+              this.formationForm.controls.image.setValue(formationRecup.image);
+              this.imageVal = formationRecup.image;
+              localStorage.setItem(this.imageLocal , formationRecup.image);
+              this.imageInstanceAModifier = true;
+              this.noFile = false;
+              this.formationForm.controls.image.setValue(this.imageVal);
+            }
+          }else {
             this.initForm(this.formation);
           }
-        });
-  }
+        })
+      }
 
   initForm(
     formation: Formation = {
     nomFormation:null,
     option:null,
-    image: '',
+    image: null,
     alt: null,
     lieu: null,
     adresse: null,
@@ -73,7 +92,7 @@ export class FormationFormComponent implements OnInit {
     this.formationForm = this.fb.group({
       nomFormation: [formation.nomFormation, Validators.required],
       option: [formation.option, Validators.minLength(3)],
-      image: [''],
+      image: [formation.image],
       alt: [formation.alt, Validators.minLength(3)],
       lieu: [formation.lieu, Validators.required],
       adresse: [formation.adresse, Validators.minLength(3)],
@@ -95,7 +114,6 @@ export class FormationFormComponent implements OnInit {
   // ACTION SUR LE SERVICE
   onSaveFormation(){
   this.formationForm.controls.image.setValue(this.imageVal);
-
   this.parcourService.createNewFormation(this.formationForm.value);
 
   const files = this.upLoadFileService.filesHolder$.value.slice();
@@ -106,16 +124,21 @@ export class FormationFormComponent implements OnInit {
 
   onModify(){
     this.formationForm.controls.image.setValue(this.imageVal);
-
     this.parcourService.updateFormation(this.formationForm.value, this.id);
 
     const files = this.upLoadFileService.filesHolder$.value.slice();
     files.splice(this.index, 1);
     this.upLoadFileService.filesHolder$.next(files);
     this.router.navigate(['parcour']);
+    this.noFile = false;
   }
 
   retour(){
+   if(localStorage.getItem(this.imageLocal)!== this.imageLocal){
+     this.deleteFile(0);
+     this.imageVal === localStorage.getItem(this.imageLocal);
+     localStorage.clear();
+   }
     this.router.navigate(['parcour']);
   }
 /* FILE*/
@@ -125,15 +148,25 @@ export class FormationFormComponent implements OnInit {
 
   addFile($event){
     this.imageVal ='http://localhost:3000/' + $event.target.files[0].name;
-    const file = $event.target.files;
+    let file = $event.target.files;
     this.upLoadFileService.addFile(file);
-    this.noFile = this.upLoadFileService.filesHolder$.value.length;
+    this.noFile = false
   }
 
   deleteFile(index:number){
     this.upLoadFileService.removeFile(index);
-    this.noFile = this.upLoadFileService.filesHolder$.value.length;
+    this.imageVal = this.imageDefault;
+    this.noFile = true;
   }
+
+  supprImgLinkmodif(image: string){     // Si l'utilisateur supprime une image pour en mettre une autre
+  this.upLoadFileService.removeFileOfCard(image.split('/')[3]);
+  this.parcourService.updateExperience(this.formationForm.value, this.id);
+  this.imageVal = this.imageDefault;
+  this.formationForm.controls.image.setValue('null');
+  this.noFile = true;
+  this.imageInstanceAModifier =  false;
+}
 
   dropFile($event){
     if($event.dataTransfer){

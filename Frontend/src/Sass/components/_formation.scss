@@ -43,8 +43,14 @@
                     & mat-car-title {}
                     & mat-card-subtitle {}
                 }
-                & img {
+                & img,
+                .divImgDefault {
                     height: 100px;
+                }
+                .divImgDefault {
+                    width: calc(100% + 32px);
+                    background-color: #92929252;
+                    margin: 0 -16px 16px -16px;
                 }
                 & mat-card-content {
                     & p {

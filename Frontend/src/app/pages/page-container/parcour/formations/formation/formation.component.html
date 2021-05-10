@@ -2,15 +2,15 @@
     <div class='container' fxLayout='column'>
         <div class='titre' fxLayout='column' fxLayoutAlign='center center'>
             <h3 class='h3'><span>F</span>ormation</h3>
-            <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>
+            <button mat-raised-button class='btn' routerLink='/formationForm'>Ajouter une formation</button>
         </div>
         <div fxLayout='row wrap' fxLayoutAlign='center start'>
             <article *ngFor='let formation of parcourTab; let i = index'>
-                <mat-card fxLayout='column' fxLayoutAlign='space-between end'>
+                <mat-card fxLayout='column' fxLayoutAlign='space-between'>
                     <div>
                         <div class='btnAlign' fxLayoutAlign='space-evenly center'>
-                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
-                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
+                            <button class='btn' mat-raised-button (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
+                            <button class='btn' mat-raised-button (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
                         </div>
                         <mat-card-header>
                             <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>
@@ -18,7 +18,8 @@
                                 {{ formation.lieu }} <br> {{ formation.adresse }}
                             </mat-card-subtitle>
                         </mat-card-header>
-                        <img class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'>
+                        <img *ngIf='formation.image' class='imgBg' matCardImage src="{{ formation.image }}" alt='{{formation.alt}}'>
+                        <div class='divImgDefault' *ngIf='!formation.image'></div>
                         <mat-card-content>
                             <div class='content'>
                                 <div class='mtb-10' fxLayout='row' fxLayoutAlign='space-around center'>

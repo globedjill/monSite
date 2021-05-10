@@ -13,19 +13,26 @@ import { Observable } from 'rxjs';
 })
 export class PortfolioFormComponent implements OnInit {
 
-  public id : string;
-  public portfolioForm: FormGroup;
-  public site: Portfolio;
-  public noFile: number;
-  public imageVal: string;
-  public index: number;
-
-  @ViewChild('fileinput') inputRef: ElementRef;
-
   public filesHolder$: Observable<{
     file:File,
     progress$:Observable<number>
   }[]> = this.upLoadFileService.filesHolder$.asObservable();
+
+  public id : string;
+  public portfolioForm: FormGroup;
+  public site: Portfolio;
+
+  public imageVal: string;
+  private imageLocal: string = 'imageRecup';
+  private imageDefault: string = "http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png";
+
+  public index: number;
+  public noFile: boolean = true;
+  public imageInstanceAModifier: boolean = true;
+  public setValueANull: string;
+
+  @ViewChild('fileInput') inputRef: ElementRef;
+
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +48,19 @@ export class PortfolioFormComponent implements OnInit {
       const siteRecup = this.portfolioService.portfolio;
       if(this.id){
         this.initForm(siteRecup);
+        if( siteRecup.image === this.imageDefault){
+          localStorage.setItem(this.imageLocal , siteRecup.image);
+          this.imageVal = localStorage.getItem(this.imageLocal);
+          this.imageInstanceAModifier = false;
+          this.portfolioForm.controls.image.setValue(null);
+        }else if (siteRecup.image !== null ){
+          // this.portfolioForm.controls.image.setValue(siteRecup.image);
+          this.imageVal = siteRecup.image;
+          localStorage.setItem(this.imageLocal, siteRecup.image);
+          this.imageInstanceAModifier = true;
+          this.noFile = false;
+          this.portfolioForm.controls.image.setValue(this.imageVal);
+        }
       }
       else{
         this.initForm(this.site);
@@ -55,7 +75,7 @@ export class PortfolioFormComponent implements OnInit {
       lienGit: null,
       image: '',
       alt: null
-    }){
+    }): void {
       this.portfolioForm = this.fb.group({
         name:[site.name, Validators.required ],
         lienSite:[site.lienSite ],
@@ -66,21 +86,8 @@ export class PortfolioFormComponent implements OnInit {
       })
     }
 
-    onModifyPorfolio(){
-      this.portfolioForm.controls.image.setValue(this.imageVal);
-
-      this.portfolioService.updateSiteOfPortfolio(this.portfolioForm.value, this.id);
-
-      const files = this.upLoadFileService.filesHolder$.value.slice();
-      files.splice(this.index, 1);
-      this.upLoadFileService.filesHolder$.next(files);
-      this.router.navigate(['portfolio']);
-    }
-
-
     onSavePortfolio(){
       this.portfolioForm.controls.image.setValue(this.imageVal);
-
       this.portfolioService.createPortfolio(this.portfolioForm.value);
 
       const files = this.upLoadFileService.filesHolder$.value.slice();
@@ -89,7 +96,23 @@ export class PortfolioFormComponent implements OnInit {
       this.router.navigate(['portfolio']);
     }
 
+    onModifyPorfolio(){
+      this.portfolioForm.controls.image.setValue(this.imageVal);
+      this.portfolioService.updateSiteOfPortfolio(this.portfolioForm.value, this.id);
+
+      const files = this.upLoadFileService.filesHolder$.value.slice();
+      files.splice(this.index, 1);
+      this.upLoadFileService.filesHolder$.next(files);
+      this.router.navigate(['portfolio']);
+      this.noFile = false;
+    }
+
     retour(){
+      if(this.imageDefault !== this.imageVal){
+          this.deleteFile(0);
+          this.imageVal === localStorage.getItem(this.imageLocal);
+          localStorage.clear();
+      }
       this.router.navigate(['portfolio']);
     }
 
@@ -102,12 +125,21 @@ export class PortfolioFormComponent implements OnInit {
     this.imageVal ='http://localhost:3000/' + $event.target.files[0].name;
     const file = $event.target.files;
     this.upLoadFileService.addFile(file);
-    this.noFile = this.upLoadFileService.filesHolder$.value.length;
+    this.noFile = false;
   }
 
   deleteFile(index:number){
     this.upLoadFileService.removeFile(index);
-    this.noFile = this.upLoadFileService.filesHolder$.value.length;
+    this.noFile = true;
+  }
+
+  supprImgLinkmodif(image: string){
+    // this.upLoadFileService.removeFileOfCard(image.split('/')[3]);
+    // this.imageVal = this.imageDefault;
+    // this.portfolioForm.controls.image.setValue(this.imageDefault);
+    // this.portfolioService.updateSiteOfPortfolio(this.portfolioForm.value, this.id);
+    // this.noFile = true;
+    // this.imageInstanceAModifier = false;
   }
 
   dropFile($event){
@@ -116,6 +148,4 @@ export class PortfolioFormComponent implements OnInit {
       this.upLoadFileService.addFile(file)
     }
   }
-
-
 }

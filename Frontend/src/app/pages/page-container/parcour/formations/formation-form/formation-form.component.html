@@ -20,38 +20,48 @@
                 </div>
                 <!-- IMAGE -->
                 <div fxLayout='column'>
-                    <!-- <app-upload-image-form></app-upload-image-form> -->
-                    <div class="container" fxLayout="row" fxLayoutAlign="center center">
-                        <div class="content" fxLayout="column" fxLayoutGap="15px">
-                            <div class="upload" *ngIf="!this.noFile" [class.over]="over" (click)="openFile()" (drop)="dropFile($event); over = false" (dragover)="$event.preventDefault()" (dragenter)="over = true" (dragleave)="over = false" fxLayout="row" fxLayoutAlign="center center">
-                                <mat-label>Ajouter une image</mat-label>
-                                <input (change)='addFile($event)' #fileinput formControlName='image' type="file" fxHide="true" />
-                                <mat-icon> <span class="material-icons-outlined">
-                                file_download
-                                </span></mat-icon>
-                            </div>
-                            <div class="file" fxLayout='column' *ngIf="this.noFile " fxLayoutAlign="center center">
-                                <div class="fileUpload" *ngFor='let fileHolder of (filesHolder$ | async); let i = index' fxLayout='row' fxLayoutAlign="space-between center">
-                                    <div class="fileName" fxLayoutAlign="space-arround center" fxLayout='row'>
-                                        <span fxFill>{{ fileHolder.file.name }}</span>
-                                        <div fxLayout='row' *ngIf='fileHolder.progress$ | async ; let progress '>
-                                            <span>{{ progress }}%</span>
-                                            <mat-progress-bar style=" width:150px " mode="determinate" [value]='progress'>
-                                            </mat-progress-bar>
+                    <div class='container' fxLayout='row' fxLayoutAlign='center center'>
+                        <!-- S'affiche si nouvelle experience -->
+                        <div class='image' *ngIf='!this.id || this.imageInstanceAModifier === false'>
+                            <div class='content' fxLayout='column' fxGap='15px'>
+                                <div *ngIf="this.noFile === true" class='upload' fxLayout='row' fxLayoutAlign='center center' (click)="openFile()">
+                                    <mat-label>Ajouter une image</mat-label>
+                                    <input (change)='addFile($event)' type="file" fxHide='true' formControlName='image' #fileInput>
+                                    <mat-icon><span class="material-icons-outlined">file_download</span></mat-icon>
+                                </div>
+                                <div *ngIf='this.noFile === false'>
+                                    <div class='file' *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='column' fxLayoutAlign='center center'>
+                                        <div class='fileUpload' *ngIf='fileHolder.progress$ | async; let progress ' fxLayout='column'>
+                                            <div class='fileUpload' fxLayout='row' fxLayoutAlign='space-between center'>
+                                                <span>{{ fileHolder.file.name }}</span>
+                                                <span>{{ progress }}%</span>
+                                                <span *ngIf='progress === 100'> Fichier enregistré </span>
+                                                <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
+                                            </div>
+                                            <mat-progress-bar style="min-width: 150px;" mode='determinate' [value]='progress'></mat-progress-bar>
                                         </div>
                                     </div>
-                                    <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- S'affiche si id experience pour modification -->
+                        <div class='content' *ngIf='this.id' fxLayout='column' fxGap='15px'>
+                            <!-- S'affiche lors de la modification apres recuperation des données -->
+                            <div *ngIf='this.imageInstanceAModifier === true' class='fileUpload' fxLayout='column'>
+                                <div class='fileUpload' fxLayout='row' fxLayoutAlign='space-between center'>
+                                    <span>{{this.imageVal.split('/')[3]}}</span>
+                                    <mat-icon><span class="material-icons" (click)='supprImgLinkmodif(this.imageVal)'>clear</span></mat-icon>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                     <mat-form-field appearance='fill'>
                         <mat-label>Description Image</mat-label>
                         <input matInput type="text" formControlName='alt' placeholder='alt'>
                         <mat-error *ngIf=""></mat-error>
                     </mat-form-field>
                 </div>
+
                 <!-- LOCALISATION -->
                 <div fxLayout='column'>
                     <mat-form-field appearance='fill'>
@@ -112,8 +122,7 @@
                 <button *ngIf='!this.id' mat-raised-button ngSubmit (click)="onSaveFormation()">Enregistrer</button>
                 <button mat-raised-button (click)="retour()">Annuler</button>
             </mat-card-actions>
-            <mat-card-footer>
-            </mat-card-footer>
+
         </mat-card>
     </form>
 </section>

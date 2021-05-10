@@ -51,7 +51,9 @@ export class ExperienceComponent implements OnInit {
   }
 
   deleteLinkImage(experienceImage: String){
+    if(experienceImage !== null){
     this.uploadService.removeFileOfCard(experienceImage.split('/')[3]);
+    }
   }
 
   ngOnDestroy(): void {

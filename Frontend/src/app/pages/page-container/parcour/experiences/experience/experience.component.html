@@ -2,16 +2,16 @@
     <div class='container' fxLayout='column'>
         <div class='titre' fxLayout='column' fxLayoutAlign='center center'>
             <h3 class='h3'><span>E</span>xpérience Professionnelle</h3>
-            <button mat-raised-button *ngIf='this.userSession.isAuth' class='btn' routerLink='/experienceForm'>Ajouter une expérience</button>
+            <button mat-raised-button class='btn' routerLink='/experienceForm'>Ajouter une expérience</button>
         </div>
-
+        <!-- *ngIf='this.userSession.isAuth' -->
         <div fxLayout='row wrap' fxLayoutAlign='center start'>
             <article *ngFor='let xp of experienceTab'>
-                <mat-card class='mat-card-experience' fxLayout='column' fxLayoutAlign='space-between end'>
+                <mat-card class='mat-card-experience' fxLayout='column' fxLayoutAlign='space-between'>
                     <div>
                         <div class='btnAlign' fxLayoutAlign='space-evenly center'>
-                            <button class='btn' mat-raised-button *ngIf='this.userSession.isAuth' (click)='deleteLinkImage(xp.image)' (click)="deleteExperience(xp._id)">Supprimer</button>
-                            <button class='btn' mat-raised-button *ngIf='this.userSession.isAuth' (click)="editExperience(xp)" [routerLink]="['/experience',xp._id]">Modifier</button>
+                            <button class='btn' mat-raised-button (click)='deleteLinkImage(xp.image)' (click)="deleteExperience(xp._id)">Supprimer</button>
+                            <button class='btn' mat-raised-button (click)="editExperience(xp)" [routerLink]="['/experience',xp._id]">Modifier</button>
                         </div>
                         <mat-card-header>
                             <div fxFlex='column'>
@@ -25,7 +25,8 @@
                                 </mat-card-subtitle>
                             </div>
                         </mat-card-header>
-                        <img class='imgBg' matCardImage src="{{xp.image}}" alt='{{ xp.alt }}'>
+                        <img *ngIf='xp.image' class='imgBg' matCardImage src="{{xp.image}}" alt='{{ xp.alt }}'>
+                        <div class='divImgDefault' *ngIf='!xp.image'></div>
                         <mat-card-content>
                             <div fxLayout='row' class='mtb-10'>
                                 <p> {{ xp.typeContrat }} </p>

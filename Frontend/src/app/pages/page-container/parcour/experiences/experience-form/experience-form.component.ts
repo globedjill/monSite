@@ -1,7 +1,7 @@
 import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { Experience } from './../../../../../../shared/modeles/experience.interface';
 import { ParcourService } from 'src/shared/services/parcour.service';
-import { Component, OnInit, ViewChild, ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -21,9 +21,16 @@ export class ExperienceFormComponent implements OnInit {
   public id: string;
   public experienceForm: FormGroup;
   public experience: Experience;
+
   public imageVal: string;
+  private imageLocal: string = 'imageRecup';
+  private imageModif: string = 'imageModif';
+  private imageDefault: string = "http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png";
+
   public index: number;
-  public noFile: number;
+  public noFile: boolean = true; // Vrai si il n'y as pas de fichier
+  public imageInstanceAModifier: boolean = true; // Vrai si image a modifier
+  public setValueANull: string;
 
   public typeContrat: string[];
 
@@ -42,8 +49,7 @@ export class ExperienceFormComponent implements OnInit {
       'Contrat d\'apprentissage',
       'Contrat de Professionnalissation',
       'Contrat Unique d\'insertion'
-    ]
-
+    ];
   }
 
   ngOnInit(): void {
@@ -52,6 +58,22 @@ export class ExperienceFormComponent implements OnInit {
       const xpRecup = this.parcourService.experience;
       if(this.id){
         this.initFormExperience(xpRecup);
+        if( xpRecup.image ===  this.imageDefault ) {
+          localStorage.setItem(this.imageLocal , xpRecup.image);
+
+          // this.imageVal = this.imageLocal;
+          this.imageVal = localStorage.getItem(this.imageLocal);
+          this.imageInstanceAModifier = false;
+          this.experienceForm.controls.image.setValue(null);
+        }else if(xpRecup.image !== null){
+          console.log('il y as bien une image ici' + xpRecup.image);
+          this.experienceForm.controls.image.setValue(xpRecup.image);
+          this.imageVal = xpRecup.image;
+          localStorage.setItem(this.imageLocal , xpRecup.image);
+          this.imageInstanceAModifier = true;
+          this.noFile = false;
+          this.experienceForm.controls.image.setValue(this.imageVal);
+        }
       }
       else{
         this.initFormExperience(this.experience);
@@ -61,9 +83,9 @@ export class ExperienceFormComponent implements OnInit {
 
   initFormExperience(
     experience: Experience = {
-      dateEntree: null,
-      dateSortie: null,
-      image: '',
+      dateEntree: new Date,
+      dateSortie: new Date,
+      image: null,
       alt: null,
       typeContrat: null,
       enseigne: null,
@@ -75,7 +97,7 @@ export class ExperienceFormComponent implements OnInit {
     this.experienceForm = this.fb.group({
       dateEntree: [experience.dateEntree, Validators.required],
       dateSortie: [experience.dateSortie, Validators.required],
-      image: [''],
+      image: [experience.image],
       alt: [experience.alt, Validators.required],
       typeContrat: [experience.typeContrat, Validators.required],
       enseigne: [experience.enseigne, Validators.required],
@@ -96,12 +118,28 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   onModifyExperience(){
+    this.experienceForm.controls.image.setValue(this.imageVal);
     this.parcourService.updateExperience(this.experienceForm.value, this.id);
+
+    const files = this.uploadService.filesHolder$.value.slice();
+    files.splice(this.index,1);
+    this.uploadService.filesHolder$.next(files);
     this.router.navigate(['parcour']);
+    this.noFile = false;
   }
 
-  retour(){
-    this.router.navigate(['parcour']);
+  retour(imageval:string){
+    // Si l'image du depart et la meme que lorque l'on apui sur le bouton retour
+    if(localStorage.getItem(this.imageLocal) === this.imageVal){
+        console.log('rien na changée');
+  }else if(localStorage.getItem(this.imageLocal) !== this.imageVal ) {
+    console.log('les images sont differentes');
+    this.deleteFile(0);
+    // this.imageVal === this.imageLocal;
+    this.imageVal === localStorage.getItem(this.imageLocal);
+    localStorage.clear();
+  }
+  this.router.navigate(['parcour']);
   }
 
   openFile(){
@@ -109,14 +147,23 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   addFile($event){
-    this.imageVal = 'http://localhost:3000/' + $event.target.files[0].name;
-    const file = $event.target.files;
-    this.uploadService.addFile(file);
-    this.noFile = this.uploadService.filesHolder$.value.length;
+      this.imageVal = 'http://localhost:3000/' + $event.target.files[0].name;
+      let file = $event.target.files;
+      this.uploadService.addFile(file);
+      this.noFile = false;
   }
 
   deleteFile(index:number){
     this.uploadService.removeFile(index);
-    this.noFile = this.uploadService.filesHolder$.value.length;
+    this.imageVal = this.imageDefault;
+    this.noFile = true;
+  }
+  supprImgLinkmodif(image: string){     // Si l'utilisateur supprime une image pour en mettre une autre
+    this.uploadService.removeFileOfCard(image.split('/')[3]);
+    this.parcourService.updateExperience(this.experienceForm.value, this.id);
+    this.imageVal =  this.imageDefault;
+    this.experienceForm.controls.image.setValue("null");
+    this.noFile = true;
+    this.imageInstanceAModifier = false;
   }
 }
