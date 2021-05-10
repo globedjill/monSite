@@ -1,3 +1,5 @@
+import { AlertSupprImgComponent } from 'src/app/components/alert/alert-suppr-img/alert-suppr-img.component';
+import { MatDialog } from '@angular/material/dialog';
 import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { PortfolioService } from './../../../../../shared/services/portfolio.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -40,6 +42,7 @@ export class PortfolioFormComponent implements OnInit {
     private portfolioService: PortfolioService,
     private activatedRoute: ActivatedRoute,
     private upLoadFileService: UploadFileService,
+    public matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -134,12 +137,20 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   supprImgLinkmodif(image: string){
-    // this.upLoadFileService.removeFileOfCard(image.split('/')[3]);
-    // this.imageVal = this.imageDefault;
-    // this.portfolioForm.controls.image.setValue(this.imageDefault);
-    // this.portfolioService.updateSiteOfPortfolio(this.portfolioForm.value, this.id);
-    // this.noFile = true;
-    // this.imageInstanceAModifier = false;
+    const dialogRef = this.matDialog.open(AlertSupprImgComponent
+     );
+
+    dialogRef.afterClosed().subscribe(result =>{
+       console.log(result);
+      if(result === true){
+        this.upLoadFileService.removeFileOfCard(image.split('/')[3]);
+        this.imageVal = this.imageDefault;
+        this.portfolioForm.controls.image.setValue(this.imageDefault);
+        this.portfolioService.updateSiteOfPortfolio(this.portfolioForm.value, this.id);
+        this.noFile = true;
+        this.imageInstanceAModifier = false;
+      }
+     });
   }
 
   dropFile($event){

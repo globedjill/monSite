@@ -23,6 +23,7 @@ import { UsersService } from '../services/users.service';
 import { UploadImageFormComponent } from 'src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component';
 import { PortfolioComponent } from 'src/app/pages/page-container/portfolio/portfolio.component';
 import { PortfolioFormComponent } from 'src/app/pages/page-container/portfolio/portfolio-form/portfolio-form.component';
+import { AlertSupprImgComponent } from 'src/app/components/alert/alert-suppr-img/alert-suppr-img.component';
 
 
 const MODULES = [
@@ -41,7 +42,8 @@ const MODULES = [
     ExperienceComponent,
     FormationFormComponent,
     ExperienceFormComponent,
-    UploadImageFormComponent
+    UploadImageFormComponent,
+    AlertSupprImgComponent,
 ];
 
 @NgModule({

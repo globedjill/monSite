@@ -1,3 +1,4 @@
+import { UploadFileService } from './../../../../shared/services/upload-file.service';
 import { PortfolioService } from './../../../../shared/services/portfolio.service';
 import { Subscription } from 'rxjs';
 import { UserSession } from './../../../../shared/modeles/userSession.interface';
@@ -21,6 +22,7 @@ export class PortfolioComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UsersService,
     private portfolioService: PortfolioService,
+    private uploadFileService: UploadFileService
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +47,10 @@ export class PortfolioComponent implements OnInit, OnDestroy {
 
   deleteUnSite(id: String){
     this.portfolioService.deleteSite(id);
+  }
+
+  deleteImageLink(formation){
+    this.uploadFileService.removeFileOfCard(formation.split('/')[3]);
   }
 
   ngOnDestroy(){

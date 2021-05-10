@@ -13,7 +13,7 @@
                 <mat-card fxLayout='column'>
                     <div class='btnModifSuppr' fxLayout='row' fxLayoutAlign='space-evenly center'>
                         <button mat-raised-button class='btn' (click)='editSite(site)' [routerLink]="['/portfolio', site._id]">Modifier</button>
-                        <button mat-raised-button class='btn' (click)='deleteUnSite(site._id)'>Supprimer</button>
+                        <button mat-raised-button class='btn' (click)='deleteImageLink(site.image)' (click)='deleteUnSite(site._id)'>Supprimer</button>
                     </div>
                     <div fxLayout='row' fxLayoutAlign='space-between start'>
                         <mat-card-header fxLayout='column' fxLayoutAlign='start start'>

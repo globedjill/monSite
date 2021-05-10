@@ -62,8 +62,8 @@
 }
 
 .mlr-10 {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
 }
 
 .mlr-20 {
@@ -362,10 +362,6 @@ strong {
   height: 30px !important;
 }
 
-.mat-card {
-  margin: 15px;
-}
-
 .mat-menu {
   height: 40px;
 }
@@ -633,8 +629,17 @@ header .menuNav nav a {
 }
 
 .sectionFormation .container article mat-card img,
-.sectionExperience .container article mat-card img {
+.sectionFormation .container article mat-card .divImgDefault,
+.sectionExperience .container article mat-card img,
+.sectionExperience .container article mat-card .divImgDefault {
   height: 100px;
+}
+
+.sectionFormation .container article mat-card .divImgDefault,
+.sectionExperience .container article mat-card .divImgDefault {
+  width: calc(100% + 32px);
+  background-color: #92929252;
+  margin: 0 -16px 16px -16px;
 }
 
 .sectionFormation .container article mat-card mat-card-content p,
