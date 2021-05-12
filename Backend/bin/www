@@ -10,9 +10,9 @@ const env = require(`../environment/${ process.env.NODE_ENV}`);
 
 
 http.createServer((req, res) => {
-    res.writeHead('301', { Location: `https://${req.headers.host}${req.url}` })
+    res.writeHead('301', { Location: `https://${ req.headers.host.split(':')[0] + ':' + env.portHTTPs }${ req.url }` })
     res.end()
-}).listen(80);
+}).listen(env.portHTTP);
 
 
 const server = https.createServer({
@@ -21,7 +21,7 @@ const server = https.createServer({
 }, app);
 // serverHTTPS.listen(port2) //https
 
-const portHttps = normalizePort(process.env.PORT || '443');
+const portHttps = normalizePort(process.env.PORT || env.portHTTPs);
 app.set('port', portHttps);
 
 server.listen(portHttps) //http
