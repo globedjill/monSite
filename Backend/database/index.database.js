@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const env = require(`../environment/${ process.env.NODE_ENV}`);
 
-exports.clientPromise = mongoose.connect('mongodb+srv://virgil_admin:Ser0t7aTsqhXGdRH@cluster0.z3wus.mongodb.net/monSite?retryWrites=true&w=majority', {
+exports.clientPromise = mongoose.connect(env.dbUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
