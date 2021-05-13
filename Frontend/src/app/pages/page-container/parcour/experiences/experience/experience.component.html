@@ -1,8 +1,11 @@
 <section class='sectionExperience'>
     <div class='container' fxLayout='column'>
-        <div class='titre' fxLayout='column' fxLayoutAlign='center center'>
-            <h3 class='h3'><span>E</span>xpérience Professionnelle</h3>
-            <button mat-raised-button class='btn' routerLink='/experienceForm'>Ajouter une expérience</button>
+        <div class='titre formationSticky' fxLayout='column' fxLayoutAlign='center center'>
+            <div class='h3' fxLayout='row' fxLayoutAlign='center start'>
+                <span>E</span>
+                <h3>xpérience Professionnelle</h3>
+            </div>
+            <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/experienceForm'>Ajouter une expérience</button>
         </div>
         <!-- *ngIf='this.userSession.isAuth' -->
         <div fxLayout='row wrap' fxLayoutAlign='center start'>
@@ -10,8 +13,8 @@
                 <mat-card class='mat-card-experience' fxLayout='column' fxLayoutAlign='space-between'>
                     <div>
                         <div class='btnAlign' fxLayoutAlign='space-evenly center'>
-                            <button class='btn' mat-raised-button (click)='deleteLinkImage(xp.image)' (click)="deleteExperience(xp._id)">Supprimer</button>
-                            <button class='btn' mat-raised-button (click)="editExperience(xp)" [routerLink]="['/experience',xp._id]">Modifier</button>
+                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='deleteLinkImage(xp.image)' (click)="deleteExperience(xp._id)">Supprimer</button>
+                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)="editExperience(xp)" [routerLink]="['/experience',xp._id]">Modifier</button>
                         </div>
                         <mat-card-header>
                             <div fxFlex='column'>

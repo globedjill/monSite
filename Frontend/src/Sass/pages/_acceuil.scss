@@ -1,17 +1,17 @@
 .sectionAcceuil {
     background: url('../../assets/images/bg_Acceuil.jpeg') center center/cover;
-    height: 120vh;
+    height: calc(100vh);
     font-weight: 200;
     line-height: 1.4rem;
     padding-top: 250px;
-    padding-bottom: 200px;
-    & article {
+    article {
         width: 70%;
-        & mat-card {
+        mat-card {
             background-color: rgba(15, 31, 27, 0.753);
             color: rgb(255, 255, 255);
-            & mat-card-header {
-                & mat-card-title {
+            margin-bottom: 2rem;
+            mat-card-header {
+                mat-card-title {
                     & h2 {
                         font-size: 1.7rem;
                         letter-spacing: .3rem;
@@ -88,7 +88,7 @@
 @media(max-width:500px) {
     .sectionAcceuil {
         height: auto;
-        padding-top: 50px;
+        padding-top: 20px;
         padding-bottom: 20px;
         & article {
             width: 100%;

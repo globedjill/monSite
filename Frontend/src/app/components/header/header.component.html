@@ -1,20 +1,20 @@
-<header>
-    <div class='logoTitreMenuContainer' fxLayout='row' fxLayoutAlign='space-between end' fxLayoutGap='15px'>
+<header class='plr-10'>
+    <div class='logoTitreMenuContainer' fxLayout='row' fxLayoutAlign='space-between center' fxLayoutGap='15px'>
         <div class='logoTitre' fxLayout='row' fxLayoutAlign='none center'>
             <img src="./../../../assets/images/logo_sph3rik.png" alt="logo">
             <h1 routerLink='acceuil'>Sph3rik</h1>
         </div>
-        <div class='menuNav'>
-            <div class='menu' fxLayout='row' fxLayoutAlign='end center'>
-                <button mat-raised-button *ngIf='!this.userSession.isAuth' [matMenuTriggerFor]="menuRef">Se Connecter</button>
-                <mat-menu #menuRef="matMenu">
-                    <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>
-                </mat-menu>
-                <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>
-            </div>
-            <nav mat-tab-nav-bar>
-                <a mat-tab-link *ngFor="let link of listeMenu" [routerLink]='link.lien' (click)="activeLink = link.lien" [active]='activeLink == link.lien'> {{ link.lien }}</a>
-            </nav>
+        <div class='menu' fxLayout='row' fxLayoutAlign='end center'>
+            <button mat-raised-button *ngIf='!this.userSession.isAuth' [matMenuTriggerFor]="menuRef">Se Connecter</button>
+            <mat-menu #menuRef="matMenu">
+                <button mat-menu-item *ngFor='let menu of menuConnect' [routerLink]='menu.lien'>{{ menu.titre }}</button>
+            </mat-menu>
+            <button mat-raised-button *ngIf='this.userSession.isAuth' routerLink='acceuil' (click)='loggout()'>Se Deconnecter</button>
         </div>
     </div>
 </header>
+<div class='menuNav' fxLayout='row' fxLayoutAlign='center center'>
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let link of listeMenu" [routerLink]='link.lien' (click)="activeLink = link.lien" [active]='activeLink == link.lien'> {{ link.lien }}</a>
+    </nav>
+</div>

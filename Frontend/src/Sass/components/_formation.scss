@@ -2,30 +2,36 @@
 .sectionExperience {
     background: url('../../assets/images/bg_parcour.jpeg') center center /cover fixed;
     width: 100%;
-    & .container {
-        padding-top: 50px;
-        & .titre {
-            // margin: 30px;
-            & .h3 {
+    .container {
+        padding-top: 20px;
+        .titre {
+            margin-bottom: 30px;
+            .h3 {
+                font-size: $fsH3 !important;
+                font-family: $fontSec;
                 width: 100%;
                 text-align: center;
-                margin: auto;
-                padding: auto;
-                font-size: $fsH3;
-                font-family: $fontSec;
+                margin-bottom: 30px;
+                padding: 25px 0px 25px 0;
                 font-weight: 700;
+                letter-spacing: .3rem;
                 color: $secondaryColors;
-                background-color: rgba(228, 245, 255, 0.377);
-                & span {
-                    font-size: $fsH3*1.2;
+                background-color: rgba(1, 45, 71, 0.397);
+                span {
+                    font-size: $fsH3*1.3;
                     color: $cSpan;
                 }
             }
-            & button {}
+            button {}
         }
-        & article {
-            padding-bottom: 30px;
-            & mat-card {
+        .formationSticky {
+            position: sticky;
+            top: 120px;
+            z-index: 1;
+        }
+        article {
+            padding: 30px;
+            mat-card {
                 padding-bottom: 30px !important;
                 background-color: $transparence;
                 width: 480px;
@@ -106,6 +112,11 @@
                     & span {}
                 }
                 & button {}
+            }
+            .formationSticky {
+                position: sticky;
+                top: 0px;
+                z-index: 1;
             }
             article {
                 & mat-card {

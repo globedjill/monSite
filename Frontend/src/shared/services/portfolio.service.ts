@@ -38,7 +38,7 @@ export class PortfolioService {
         this.portFolioTab = portfolio;
         this.emmetreLePortFolio();
       }
-    )
+    );
   }
 
   updateSiteOfPortfolio(site: Portfolio, id: String){

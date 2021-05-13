@@ -25,6 +25,7 @@ exports.updateFormation = async(req, res, next) => {
 
 exports.formationList = async(req, res, next) => {
     try {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         const formations = await getFormations();
         res.json(formations);
     } catch (e) {

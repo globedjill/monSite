@@ -2,13 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 1.2rem;
 }
 
 html,
 body {
     background-color: $backGroundColor_Body;
-    padding-top: 50px;
+    // padding-top: 50px;
     font-family: $fontPrim;
 }
 
@@ -23,12 +22,6 @@ a {
 
 /*TITRE*/
 
-h1 {}
-
-h2 {}
-
-h3 {}
-
 h4 {
     display: block;
     font-weight: bold;
@@ -36,7 +29,6 @@ h4 {
 }
 
 .container {
-    // min-height: 100vh;
     .content {
         .upload {
             border: 1px dashed #ddd;

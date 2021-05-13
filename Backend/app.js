@@ -28,9 +28,10 @@ app.use(express.static(path.join(__dirname, 'public/img')));
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + './../public/index.html'));
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
     // res.sendFile(path.join(__dirname + './../Frontend/src/index.html'));
 });
-
 
 const multer = require('multer');
 const upload = multer({

@@ -12,10 +12,9 @@ exports.savePortfolio = async(req, res, next) => {
 
 exports.listPortfolio = async(req, res, next) => {
     try {
+        res.setHeader('Access-Control-Allow-Origin', '*');
         const recupList = await recupTouLePortFolio();
-        const essai = res.json(recupList);
-        console.log(essai);
-
+        res.json(recupList);
     } catch (e) {
         console.log('erreur de recuperation de la liste du portfolio');
         next(e);

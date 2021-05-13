@@ -1,8 +1,8 @@
 <section class='sectionPortfolio' fxLayout='column' fxLayoutAlign='start center'>
     <div class='container'>
-        <div fxLayout='column' fxLayoutAlign='start center'>
+        <div class='titre' fxLayout='column' fxLayoutAlign='start center'>
             <h2>Les <span>B</span>asiques</h2>
-            <button mat-raised-button class='btn' routerLink='/portfolioForm'>Ajouter un site</button>
+            <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/portfolioForm'>Ajouter un site</button>
             <div fxLayout='row'>
                 <p>Technologie Utilisée:</p>
                 <p> <i class="fab fa-html5 mlr-10"></i><i class="fab fa-css3-alt mlr-10"></i></p>
@@ -10,32 +10,26 @@
         </div>
         <div class='contentArticle' fxLayout='column' fxLayoutAlign='center center'>
             <article *ngFor='let site of portfolioTab; let i = index'>
-                <mat-card fxLayout='column'>
+                <mat-card fxLayout='column' class='p10'>
                     <div class='btnModifSuppr' fxLayout='row' fxLayoutAlign='space-evenly center'>
-                        <button mat-raised-button class='btn' (click)='editSite(site)' [routerLink]="['/portfolio', site._id]">Modifier</button>
-                        <button mat-raised-button class='btn' (click)='deleteImageLink(site.image)' (click)='deleteUnSite(site._id)'>Supprimer</button>
+                        <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' (click)='editSite(site)' [routerLink]="['/portfolio', site._id]">Modifier</button>
+                        <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' (click)='deleteImageLink(site.image)' (click)='deleteUnSite(site._id)'>Supprimer</button>
                     </div>
-                    <div fxLayout='row' fxLayoutAlign='space-between start'>
-                        <mat-card-header fxLayout='column' fxLayoutAlign='start start'>
-                            <mat-card-title>
-                                <div fxLayout='row' fxLayoutAlign='start center'>
+                    <div fxLayout='column'>
+                        <mat-card-content fxLayout='row' fxLayoutAlign='space-between'>
+                            <div fxLayout='column' fxLayoutAlign='start stretch'>
+                                <a href="{{ site.lienSite }}" target='blanck' fxLayout='row' fxLayoutAlign=' center center'>
                                     <i class="fas fa-link mlr-10"></i>
-                                    <a href="{{ site.lienSite }}" target='blanck'>
-                                        <h3>{{ site.name }}</h3>
-                                    </a>
-                                </div>
-                            </mat-card-title>
-                            <mat-card-subtitle>
-                                <h4> {{ site.description }}</h4>
-                            </mat-card-subtitle>
-                        </mat-card-header>
-                        <mat-card-content class='mlr-100' fxLayout='row' fxLayoutAlign='start center'>
-                            <i class="fab fa-github  mlr-10"> </i> <a href="{{ site.lienGit }}" target='blanck'>Github</a>
-
+                                    <h3>{{ site.name }}</h3>
+                                </a>
+                                <p class='mlr-35 mtb-10'> {{ site.description }}</p>
+                                <a href="{{ site.lienGit }}" target='blanck' fxLayout='row' fxLayoutAlign='start flex-end' class='flex1'>
+                                    <i class="fab fa-github  mlr-10"></i>
+                                    <h3>Github</h3>
+                                </a>
+                            </div>
+                            <img matCardImage src="{{ site.image }}" alt="{{ site.alt }}">
                         </mat-card-content>
-                        <mat-card-actions fxLayout='row' fxLayoutAlign='center center'>
-                            <img matCardImage src="{{ site.image }}">
-                        </mat-card-actions>
                     </div>
                 </mat-card>
             </article>

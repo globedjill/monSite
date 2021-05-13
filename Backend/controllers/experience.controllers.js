@@ -12,6 +12,7 @@ exports.saveExperience = async(req, res, next) => {
 exports.experienceList = async(req, res, next) => {
     try {
         const experience = await getExperience();
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.json(experience);
     } catch (e) {
         console.log('erreur dans la recuperation de la liste des experiences');
