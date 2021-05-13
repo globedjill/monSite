@@ -130,12 +130,9 @@ export class ExperienceFormComponent implements OnInit {
 
   retour(imageval:string){
     // Si l'image du depart et la meme que lorque l'on apui sur le bouton retour
-    if(localStorage.getItem(this.imageLocal) === this.imageVal){
-        console.log('rien na changée');
-  }else if(localStorage.getItem(this.imageLocal) !== this.imageVal ) {
+    if(localStorage.getItem(this.imageLocal) !== this.imageVal && this.imageLocal === undefined) {
     console.log('les images sont differentes');
     this.deleteFile(0);
-    // this.imageVal === this.imageLocal;
     this.imageVal === localStorage.getItem(this.imageLocal);
     localStorage.clear();
   }

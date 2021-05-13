@@ -3,6 +3,7 @@ import { UsersService } from './../../../shared/services/users.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserSession } from 'src/shared/modeles/userSession.interface';
+import { FonctionGeneralService } from 'src/shared/services/fonction-general.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private userService: UsersService,
+    private fGService: FonctionGeneralService
     )
   {
     this.listeMenu = [
@@ -56,13 +58,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
    ];
     this.activeLink = this.listeMenu[0];
+
+
   }
 
   ngOnInit(): void {
     this.subscription = this.userService.idSession$.subscribe((userSession: UserSession)=> {
       this.userSession = userSession;
     })
+    this.fGService.addPosSticky(60);
   }
+
 
   loggout(){
     this.userService.loggout().subscribe(()=>{

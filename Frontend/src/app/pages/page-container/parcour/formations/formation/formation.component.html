@@ -1,19 +1,20 @@
 <section class='sectionFormation'>
     <div class='container' fxLayout='column'>
         <div class='titre formationSticky' fxLayout='column' fxLayoutAlign='center center'>
-            <div class='h3' fxLayout='row' fxLayoutAlign='center start'>
+            <div class='h3 ' fxLayout='row' fxLayoutAlign='center start'>
                 <span>F</span>
                 <h3>ormation</h3>
             </div>
-            <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>
         </div>
+        <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>
+
         <div fxLayout='row wrap' fxLayoutAlign='center start'>
             <article *ngFor='let formation of parcourTab; let i = index'>
                 <mat-card fxLayout='column' fxLayoutAlign='space-between'>
                     <div>
                         <div class='btnAlign' fxLayoutAlign='space-evenly center'>
-                            <button class='btn' mat-raised-button *ngIf='this.userSession.isAuth' (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
-                            <button class='btn' mat-raised-button *ngIf='this.userSession.isAuth' (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
+                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='deleteImageLink(formation.image)' (click)="deleteFormation(formation._id)">Supprimer</button>
+                            <button class='btn' *ngIf='this.userSession.isAuth' mat-raised-button (click)='editFormation(formation)' [routerLink]="['/formation',formation._id]">Modifier</button>
                         </div>
                         <mat-card-header>
                             <mat-card-title>{{ formation.nomFormation }} - {{ formation.option }}</mat-card-title>

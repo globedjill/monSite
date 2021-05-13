@@ -5,6 +5,7 @@ import { Formation } from 'src/shared/modeles/formation.interface';
 import { UserSession } from 'src/shared/modeles/userSession.interface';
 import { ParcourService } from 'src/shared/services/parcour.service';
 import { UsersService } from 'src/shared/services/users.service';
+import { FonctionGeneralService } from 'src/shared/services/fonction-general.service';
 
 @Component({
   selector: 'app-formation',
@@ -22,7 +23,7 @@ export class FormationComponent implements OnInit, OnDestroy {
   constructor(
     private parcourService: ParcourService,
     private userService: UsersService,
-    private uploadFileService: UploadFileService
+    private uploadFileService: UploadFileService,
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +36,6 @@ export class FormationComponent implements OnInit, OnDestroy {
       (formationTab: Formation[]) => {
         this.parcourTab = formationTab;
     });
-
     this.parcourService.recupFormations();
   }
 

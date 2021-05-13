@@ -20,6 +20,22 @@
     height: 40px;
 }
 
+.mat-menu-panel {
+    background-color: $primColBut;
+    border-radius: 30% 5px 30% 5px !important;
+    border: 2px black solid;
+    &:hover {
+        background-color: $primColButHover;
+    }
+    .mat-menu-content {
+        button {
+            &:hover {
+                color: $primColBut;
+            }
+        }
+    }
+}
+
 //FORMULAIRE
 .mat-form-field {
     margin: 8px 0

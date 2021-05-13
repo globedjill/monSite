@@ -13,7 +13,7 @@
         </div>
     </div>
 </header>
-<div class='menuNav' fxLayout='row' fxLayoutAlign='center center'>
+<div id='navi' class='menuNav' fxLayout='row' fxLayoutAlign='center center'>
     <nav mat-tab-nav-bar>
         <a mat-tab-link *ngFor="let link of listeMenu" [routerLink]='link.lien' (click)="activeLink = link.lien" [active]='activeLink == link.lien'> {{ link.lien }}</a>
     </nav>

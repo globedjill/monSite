@@ -1,1 +1,33 @@
-<p>contact works!</p>
+<section class='contactForm' fxLayoutAlign='center center'>
+    <div class='container'>
+        <form [formGroup]='contactForm'>
+            <mat-card class='matCardSeCo' fxFlex='column'>
+                <div>
+                    <mat-card-header>
+                        <mat-card-title>
+                            <h4>Plus d'infos ?</h4>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content fxLayout='column'>
+                        <mat-form-field>
+                            <mat-label name='email'>Email</mat-label>
+                            <input matInput type='email' formControlName='email' />
+                            <mat-error *ngIf=""></mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label name='password'>Mot de passe</mat-label>
+                            <input matInput type='password' formControlName='password' />
+                            <mat-error *ngIf=""></mat-error>
+                        </mat-form-field>
+                    </mat-card-content>
+                </div>
+                <mat-card-actions align="start" fxLayout='column' fxLayoutAlign='center center'>
+                    <div fxLayout='row'>
+                        <mat-error *ngIf=''>{{ seconnecterErreur() }}</mat-error>
+                        <button mat-raised-button [disabled]='this.contactForm.invalid' (click)='submit()'>Envoyer</button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </form>
+    </div>
+</section>

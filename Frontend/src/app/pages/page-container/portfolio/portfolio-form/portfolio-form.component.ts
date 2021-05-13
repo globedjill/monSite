@@ -111,7 +111,7 @@ export class PortfolioFormComponent implements OnInit {
     }
 
     retour(){
-      if(this.imageDefault !== this.imageVal){
+      if(this.imageDefault !== this.imageVal && this.imageLocal === undefined){
           this.deleteFile(0);
           this.imageVal === localStorage.getItem(this.imageLocal);
           localStorage.clear();

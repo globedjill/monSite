@@ -2,7 +2,8 @@
     <div class='container'>
         <div class='titre' fxLayout='column' fxLayoutAlign='start center'>
             <h2>Les <span>B</span>asiques</h2>
-            <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/portfolioForm'>Ajouter un site</button>
+            <!-- *ngIf='this.userSession.isAuth' -->
+            <button mat-raised-button class='btn' routerLink='/portfolioForm'>Ajouter un site</button>
             <div fxLayout='row'>
                 <p>Technologie Utilisée:</p>
                 <p> <i class="fab fa-html5 mlr-10"></i><i class="fab fa-css3-alt mlr-10"></i></p>

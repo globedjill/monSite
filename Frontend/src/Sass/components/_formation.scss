@@ -5,7 +5,7 @@
     .container {
         padding-top: 20px;
         .titre {
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
             .h3 {
                 font-size: $fsH3 !important;
                 font-family: $fontSec;
@@ -26,7 +26,7 @@
         }
         .formationSticky {
             position: sticky;
-            top: 120px;
+            top: 30px;
             z-index: 1;
         }
         article {
@@ -101,7 +101,8 @@
 }
 
 @media(max-width:500px) {
-    .sectionFormation {
+    .sectionFormation,
+    .sectionExperience {
         margin-top: 0px;
         & .container {
             & .titre {
@@ -119,7 +120,9 @@
                 z-index: 1;
             }
             article {
+                padding: 5px;
                 & mat-card {
+                    width: auto;
                     & div {
                         button {}
                     }
@@ -144,6 +147,28 @@
                     }
                 }
             }
+        }
+    }
+}
+
+
+/*FORMATION FORMULAIRE*/
+
+.formationForm,
+.experienceForm,
+.portfolioForm {
+    min-width: 500px;
+    max-width: 600px;
+}
+
+@media(max-width:500px) {
+    .formationForm,
+    .experienceForm,
+    .portfolioForm {
+        min-width: auto;
+        max-width: auto;
+        form {
+            width: 99%;
         }
     }
 }

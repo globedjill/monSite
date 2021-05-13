@@ -24,6 +24,7 @@ import { UploadImageFormComponent } from 'src/app/pages/page-container/parcour/f
 import { PortfolioComponent } from 'src/app/pages/page-container/portfolio/portfolio.component';
 import { PortfolioFormComponent } from 'src/app/pages/page-container/portfolio/portfolio-form/portfolio-form.component';
 import { AlertSupprImgComponent } from 'src/app/components/alert/alert-suppr-img/alert-suppr-img.component';
+import { FonctionGeneralService } from '../services/fonction-general.service';
 
 
 const MODULES = [
@@ -62,6 +63,7 @@ const MODULES = [
     ParcourService,
     PortfolioService,
     UsersService,
+    FonctionGeneralService
   ]
 
 })

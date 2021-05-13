@@ -134,7 +134,8 @@ export class FormationFormComponent implements OnInit {
   }
 
   retour(){
-   if(localStorage.getItem(this.imageLocal)!== this.imageLocal){
+    console.log(this.imageLocal);
+   if(localStorage.getItem(this.imageLocal)!== this.imageLocal && this.imageLocal === undefined){
      this.deleteFile(0);
      this.imageVal === localStorage.getItem(this.imageLocal);
      localStorage.clear();
