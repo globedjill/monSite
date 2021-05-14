@@ -8,6 +8,9 @@ import { map } from 'rxjs/operators';
 })
 export class UploadFileService {
 
+  urlImg: string = 'https://217.160.194.66/';
+  imgDefault: string = 'http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png'
+
   public filesHolder$: BehaviorSubject<{
     file: File,
     progress$: Observable<number>

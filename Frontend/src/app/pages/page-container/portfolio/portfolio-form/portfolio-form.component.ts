@@ -26,7 +26,6 @@ export class PortfolioFormComponent implements OnInit {
 
   public imageVal: string;
   private imageLocal: string = 'imageRecup';
-  private imageDefault: string = "http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png";
 
   public index: number;
   public noFile: boolean = true;
@@ -51,7 +50,7 @@ export class PortfolioFormComponent implements OnInit {
       const siteRecup = this.portfolioService.portfolio;
       if(this.id){
         this.initForm(siteRecup);
-        if( siteRecup.image === this.imageDefault){
+        if( siteRecup.image === this.upLoadFileService.imgDefault){
           localStorage.setItem(this.imageLocal , siteRecup.image);
           this.imageVal = localStorage.getItem(this.imageLocal);
           this.imageInstanceAModifier = false;
@@ -111,7 +110,7 @@ export class PortfolioFormComponent implements OnInit {
     }
 
     retour(){
-      if(this.imageDefault !== this.imageVal && this.imageLocal === undefined){
+      if(this.upLoadFileService.imgDefault !== this.imageVal && this.imageLocal === undefined){
           this.deleteFile(0);
           this.imageVal === localStorage.getItem(this.imageLocal);
           localStorage.clear();
@@ -125,7 +124,7 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   addFile($event){
-    this.imageVal ='http://localhost:3000/' + $event.target.files[0].name;
+    this.imageVal = this.upLoadFileService.urlImg + $event.target.files[0].name;
     const file = $event.target.files;
     this.upLoadFileService.addFile(file);
     this.noFile = false;
@@ -144,8 +143,8 @@ export class PortfolioFormComponent implements OnInit {
        console.log(result);
       if(result === true){
         this.upLoadFileService.removeFileOfCard(image.split('/')[3]);
-        this.imageVal = this.imageDefault;
-        this.portfolioForm.controls.image.setValue(this.imageDefault);
+        this.imageVal = this.upLoadFileService.imgDefault;
+        this.portfolioForm.controls.image.setValue(this.upLoadFileService.imgDefault);
         this.portfolioService.updateSiteOfPortfolio(this.portfolioForm.value, this.id);
         this.noFile = true;
         this.imageInstanceAModifier = false;

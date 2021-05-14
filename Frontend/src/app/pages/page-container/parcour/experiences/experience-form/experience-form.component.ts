@@ -24,8 +24,6 @@ export class ExperienceFormComponent implements OnInit {
 
   public imageVal: string;
   private imageLocal: string = 'imageRecup';
-  private imageModif: string = 'imageModif';
-  private imageDefault: string = "http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png";
 
   public index: number;
   public noFile: boolean = true; // Vrai si il n'y as pas de fichier
@@ -58,7 +56,7 @@ export class ExperienceFormComponent implements OnInit {
       const xpRecup = this.parcourService.experience;
       if(this.id){
         this.initFormExperience(xpRecup);
-        if( xpRecup.image ===  this.imageDefault ) {
+        if( xpRecup.image ===  this.uploadService.imgDefault ) {
           localStorage.setItem(this.imageLocal , xpRecup.image);
 
           // this.imageVal = this.imageLocal;
@@ -144,7 +142,7 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   addFile($event){
-      this.imageVal = 'http://localhost:3000/' + $event.target.files[0].name;
+      this.imageVal = this.uploadService.urlImg + $event.target.files[0].name;
       let file = $event.target.files;
       this.uploadService.addFile(file);
       this.noFile = false;
@@ -152,13 +150,13 @@ export class ExperienceFormComponent implements OnInit {
 
   deleteFile(index:number){
     this.uploadService.removeFile(index);
-    this.imageVal = this.imageDefault;
+    this.imageVal = this.uploadService.imgDefault;
     this.noFile = true;
   }
   supprImgLinkmodif(image: string){     // Si l'utilisateur supprime une image pour en mettre une autre
     this.uploadService.removeFileOfCard(image.split('/')[3]);
     this.parcourService.updateExperience(this.experienceForm.value, this.id);
-    this.imageVal =  this.imageDefault;
+    this.imageVal =  this.uploadService.imgDefault;
     this.experienceForm.controls.image.setValue("null");
     this.noFile = true;
     this.imageInstanceAModifier = false;
