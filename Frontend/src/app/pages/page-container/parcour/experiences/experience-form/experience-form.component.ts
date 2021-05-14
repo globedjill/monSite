@@ -142,7 +142,7 @@ export class ExperienceFormComponent implements OnInit {
   }
 
   addFile($event){
-      this.imageVal = this.uploadService.urlImg + $event.target.files[0].name;
+      this.imageVal = $event.target.files[0].name;
       let file = $event.target.files;
       this.uploadService.addFile(file);
       this.noFile = false;

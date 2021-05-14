@@ -124,7 +124,7 @@ export class PortfolioFormComponent implements OnInit {
   }
 
   addFile($event){
-    this.imageVal = this.upLoadFileService.urlImg + $event.target.files[0].name;
+    this.imageVal = $event.target.files[0].name;
     const file = $event.target.files;
     this.upLoadFileService.addFile(file);
     this.noFile = false;
