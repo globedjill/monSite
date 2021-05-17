@@ -7,8 +7,12 @@
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
+<<<<<<< Updated upstream
                     "style": "scss",
                     "skipTests": true
+=======
+                    "style": "scss"
+>>>>>>> Stashed changes
                 },
                 "@schematics/angular:application": {
                     "strict": false
