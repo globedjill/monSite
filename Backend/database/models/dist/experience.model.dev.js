@@ -11,7 +11,8 @@ var experienceSchema = schema({
     type: Date
   },
   image: {
-    type: String
+    type: String,
+    "default": 'image_default_experience-min.png'
   },
   alt: {
     type: String
@@ -28,6 +29,8 @@ var experienceSchema = schema({
   fonction: {
     type: String
   }
+}, {
+  timestamps: true
 });
 var Experience = mongoose.model('experience', experienceSchema);
-module.exports = Experience;
+module.exports = Experience; // http://localhost:3000/

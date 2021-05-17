@@ -29,6 +29,10 @@ var users_service_1 = require("../services/users.service");
 var upload_image_form_component_1 = require("src/app/pages/page-container/parcour/formations/upload-image-form/upload-image-form.component");
 var portfolio_component_1 = require("src/app/pages/page-container/portfolio/portfolio.component");
 var portfolio_form_component_1 = require("src/app/pages/page-container/portfolio/portfolio-form/portfolio-form.component");
+var alert_suppr_img_component_1 = require("src/app/components/alert/alert-suppr-img/alert-suppr-img.component");
+var fonction_general_service_1 = require("../services/fonction-general.service");
+var ngx_google_places_autocomplete_1 = require("ngx-google-places-autocomplete");
+var google_places_component_1 = require("src/app/components/googleApi/google-places/google-places.component");
 var MODULES = [
     header_component_1.HeaderComponent,
     footer_component_1.FooterComponent,
@@ -45,7 +49,9 @@ var MODULES = [
     experience_component_1.ExperienceComponent,
     formation_form_component_1.FormationFormComponent,
     experience_form_component_1.ExperienceFormComponent,
-    upload_image_form_component_1.UploadImageFormComponent
+    upload_image_form_component_1.UploadImageFormComponent,
+    alert_suppr_img_component_1.AlertSupprImgComponent,
+    google_places_component_1.GooglePlacesComponent,
 ];
 var CoreModule = /** @class */ (function () {
     function CoreModule() {
@@ -58,6 +64,7 @@ var CoreModule = /** @class */ (function () {
             imports: [
                 app_routing_1.AppRoutingModule,
                 layout_module_1.LayoutModule,
+                ngx_google_places_autocomplete_1.GooglePlaceModule
             ],
             exports: [
                 MODULES,
@@ -67,6 +74,7 @@ var CoreModule = /** @class */ (function () {
                 parcour_service_1.ParcourService,
                 portfolio_service_1.PortfolioService,
                 users_service_1.UsersService,
+                fonction_general_service_1.FonctionGeneralService
             ]
         })
     ], CoreModule);

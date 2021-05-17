@@ -25,7 +25,8 @@ import { PortfolioComponent } from 'src/app/pages/page-container/portfolio/portf
 import { PortfolioFormComponent } from 'src/app/pages/page-container/portfolio/portfolio-form/portfolio-form.component';
 import { AlertSupprImgComponent } from 'src/app/components/alert/alert-suppr-img/alert-suppr-img.component';
 import { FonctionGeneralService } from '../services/fonction-general.service';
-
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { GooglePlacesComponent } from 'src/app/components/googleApi/google-places/google-places.component';
 
 const MODULES = [
     HeaderComponent,
@@ -45,6 +46,8 @@ const MODULES = [
     ExperienceFormComponent,
     UploadImageFormComponent,
     AlertSupprImgComponent,
+    GooglePlacesComponent,
+
 ];
 
 @NgModule({
@@ -54,6 +57,7 @@ const MODULES = [
   imports: [
     AppRoutingModule,
     LayoutModule,
+    GooglePlaceModule
   ],
   exports: [
     MODULES,

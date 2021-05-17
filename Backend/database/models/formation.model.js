@@ -10,7 +10,7 @@ const formationSchema = schema({
         // index: Number
     },
     option: { type: String },
-    image: { type: String, default: '' },
+    image: { type: String, default: 'image_default_formation-min.jpeg' },
     alt: { type: String },
     lieu: { type: String },
     adresse: { type: String },

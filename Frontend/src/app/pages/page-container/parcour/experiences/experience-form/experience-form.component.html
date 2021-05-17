@@ -1,5 +1,5 @@
 <section class='experienceForm' fxLayoutAlign='center center'>
-    <form [formGroup]='experienceForm' (ngSubmit)='onSaveExperience()'>
+    <form [formGroup]='experienceForm' class='mtb-20' (ngSubmit)='onSaveExperience()' fxLayoutAlign='center center'>
         <mat-card>
             <mat-card-header>
                 <mat-card-title *ngIf='!this.id'>Nouvelle Experience</mat-card-title>

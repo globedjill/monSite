@@ -5,30 +5,50 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Formation } from 'src/shared/modeles/formation.interface';
 import { ParcourService } from 'src/shared/services/parcour.service';
 
-import {  ViewChild, ElementRef } from '@angular/core';
+import { ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UploadFileService } from 'src/shared/services/upload-file.service';
+import { FonctionGeneralService } from 'src/shared/services/fonction-general.service';
+import { GooglePlacesComponent } from 'src/app/components/googleApi/google-places/google-places.component';
 
 @Component({
   selector: 'app-formation-form',
   templateUrl: './formation-form.component.html',
   styleUrls: ['./formation-form.component.sass']
 })
-export class FormationFormComponent implements OnInit {
+export class FormationFormComponent implements OnInit{
 
+  /*VARIABLE*/
   public id: string;
   public formation: Formation;
   public formationForm: FormGroup;
 
   public imageVal: string;
   private imageLocal: string = 'imageRecup';
+  public imageDefault: string = this.upLoadFileService.imgDefault;
 
   public index: number;
   public noFile: boolean = true;
   public imageInstanceAModifier: boolean = true;
   public setValueANull: string;
 
+  public nomFormation: any;
+  public option: any;
+  public image: any;
+  public alt: any;
+  public lieu: any;
+  public adresse: any;
+  public dateEntree: any;
+  public dateSortie: any;
+  public contenu: any;
+  public lien: any;
+
+  public maxDate: Date = new Date(Date.now());
+
+  public localImage: string = localStorage.getItem(this.imageLocal);
+
   @ViewChild('fileInput') inputRef: ElementRef;
+  @ViewChild('googlePlacesComponent') googlePlace: ElementRef<GooglePlacesComponent>;
 
   public filesHolder$: Observable<{
     file: File,
@@ -40,7 +60,8 @@ export class FormationFormComponent implements OnInit {
     private router: Router,
     private parcourService: ParcourService,
     private activatedRoute: ActivatedRoute,
-    private upLoadFileService: UploadFileService,
+    public upLoadFileService: UploadFileService,
+    public fGservice: FonctionGeneralService
   ) {}
 
     get liste(){
@@ -69,19 +90,31 @@ export class FormationFormComponent implements OnInit {
           }else {
             this.initForm(this.formation);
           }
-        })
+        });
+        this.nomFormation = this.formationForm.get('nomFormation');
+        this.option = this.formationForm.get('option');
+        this.image = this.formationForm.get('image');
+        this.alt = this.formationForm.get('alt');
+        this.lieu = this.formationForm.get('lieu');
+        this.adresse = this.formationForm.get('adresse');
+        this.dateEntree = this.formationForm.get('dateEntree');
+        this.dateSortie = this.formationForm.get('dateSortie');
+        this.contenu = this.formationForm.get('contenu');
+        this.lien = this.formationForm.get('lien');
+
       }
 
+  /*FONCTIONS*/
   initForm(
     formation: Formation = {
     nomFormation:null,
     option:null,
     image: null,
-    alt: null,
+    alt: "image par defaut",
     lieu: null,
     adresse: null,
-    dateEntree: new Date,
-    dateSortie: new Date,
+    dateEntree: null,
+    dateSortie: null,
     contenu: null,
     liste:[],
     lien: null
@@ -89,10 +122,10 @@ export class FormationFormComponent implements OnInit {
 
   ): void {
     this.formationForm = this.fb.group({
-      nomFormation: [formation.nomFormation, Validators.required],
+      nomFormation: [formation.nomFormation, [Validators.required, Validators.minLength(3)]],
       option: [formation.option, Validators.minLength(3)],
       image: [formation.image],
-      alt: [formation.alt, Validators.minLength(3)],
+      alt: [formation.alt, [Validators.minLength(3), Validators.required]],
       lieu: [formation.lieu, Validators.required],
       adresse: [formation.adresse, Validators.minLength(3)],
       dateEntree: [formation.dateEntree, Validators.required],
@@ -118,6 +151,7 @@ export class FormationFormComponent implements OnInit {
   const files = this.upLoadFileService.filesHolder$.value.slice();
   files.splice(this.index, 1);
   this.upLoadFileService.filesHolder$.next(files);
+  localStorage.clear();
   this.router.navigate(['parcour']);
   }
 
@@ -128,12 +162,12 @@ export class FormationFormComponent implements OnInit {
     const files = this.upLoadFileService.filesHolder$.value.slice();
     files.splice(this.index, 1);
     this.upLoadFileService.filesHolder$.next(files);
+    localStorage.clear();
     this.router.navigate(['parcour']);
     this.noFile = false;
   }
 
   retour(){
-    console.log(this.imageLocal);
    if(localStorage.getItem(this.imageLocal)!== this.imageLocal && this.imageLocal === undefined){
      this.deleteFile(0);
      this.imageVal === localStorage.getItem(this.imageLocal);
@@ -150,12 +184,14 @@ export class FormationFormComponent implements OnInit {
     this.imageVal = $event.target.files[0].name;
     let file = $event.target.files;
     this.upLoadFileService.addFile(file);
-    this.noFile = false
+    this.noFile = false;
+    this.formationForm.controls.alt.setValue(null);
   }
 
   deleteFile(index:number){
     this.upLoadFileService.removeFile(index);
     this.imageVal = this.upLoadFileService.imgDefault;
+    this.formationForm.controls.alt.setValue('image par default');
     this.noFile = true;
   }
 
@@ -172,6 +208,19 @@ export class FormationFormComponent implements OnInit {
     if($event.dataTransfer){
       const file = $event.dataTransfer.files;
       this.upLoadFileService.addFile(file)
+    }
+  }
+  maxiDate($event){
+    console.log($event);
+    this.dateEntree.value = $event;
+  }
+
+
+  getErrorMessage(nom: any){
+    if(nom.hasError('required') || nom.value === "" ){
+      return this.fGservice.messageErreur.required;
+    }else if( nom.hasError('minlength')){
+      return this.fGservice.messageErreur.minLenght(3);
     }
   }
 }

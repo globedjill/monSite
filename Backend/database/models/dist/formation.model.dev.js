@@ -18,7 +18,7 @@ var formationSchema = schema(_defineProperty({
   },
   image: {
     type: String,
-    "default": ''
+    "default": 'image_default_formation-min.jpeg'
   },
   alt: {
     type: String

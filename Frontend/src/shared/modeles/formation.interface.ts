@@ -5,7 +5,7 @@ export interface Formation {
   alt: string;
   lieu: string;
   adresse?: string;
-  dateEntree: Date;
+  dateEntree: any;
   dateSortie: Date;
   contenu: string;
   liste?: string[];

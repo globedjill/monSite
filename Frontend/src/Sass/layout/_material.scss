@@ -38,7 +38,12 @@
 
 //FORMULAIRE
 .mat-form-field {
-    margin: 8px 0
+    margin: 8px 0;
+    width: 100%;
+}
+
+.mat-form-field-wrapper {
+    width: 100%;
 }
 
 //Divider

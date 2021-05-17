@@ -95,6 +95,7 @@ export class PortfolioFormComponent implements OnInit {
       const files = this.upLoadFileService.filesHolder$.value.slice();
       files.splice(this.index, 1);
       this.upLoadFileService.filesHolder$.next(files);
+      localStorage.clear();
       this.router.navigate(['portfolio']);
     }
 

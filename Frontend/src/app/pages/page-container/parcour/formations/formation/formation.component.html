@@ -6,7 +6,8 @@
                 <h3>ormation</h3>
             </div>
         </div>
-        <button mat-raised-button class='btn' *ngIf='this.userSession.isAuth' routerLink='/formationForm'>Ajouter une formation</button>
+        <!-- *ngIf='this.userSession.isAuth' -->
+        <button mat-raised-button class='btn' routerLink='/formationForm'>Ajouter une formation</button>
 
         <div fxLayout='row wrap' fxLayoutAlign='center start'>
             <article *ngFor='let formation of parcourTab; let i = index'>

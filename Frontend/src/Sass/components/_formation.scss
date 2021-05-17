@@ -157,8 +157,25 @@
 .formationForm,
 .experienceForm,
 .portfolioForm {
-    min-width: 500px;
-    max-width: 600px;
+    form {
+        width: 100%;
+    }
+    mat-card {
+        width: 80%;
+        .image {
+            width: 100%;
+            .fileUpload {
+                span {
+                    .w30 {
+                        width: 100px !important;
+                    }
+                }
+            }
+        }
+        .listeAxes {
+            .btnDeleteAxe {}
+        }
+    }
 }
 
 @media(max-width:500px) {
