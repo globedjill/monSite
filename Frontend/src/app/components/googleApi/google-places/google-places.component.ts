@@ -10,10 +10,6 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 })
 export class GooglePlacesComponent implements OnInit {
 
-
-
-
-
   constructor(
     private fb: FormBuilder
   ) { }

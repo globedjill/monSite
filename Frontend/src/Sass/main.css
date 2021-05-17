@@ -189,6 +189,11 @@
   min-height: 100vh;
 }
 
+/*Width*/
+.w30 {
+  width: 30%;
+}
+
 /*Taile Page*/
 .page90 {
   min-height: 100vh;
@@ -357,7 +362,6 @@ h4 {
 }
 
 .container .file .fileUpload span {
-  width: 20px;
   margin-right: 3px;
 }
 
@@ -378,8 +382,27 @@ strong {
   height: 40px;
 }
 
+.mat-menu-panel {
+  background-color: #e0f5f8;
+  border-radius: 30% 5px 30% 5px !important;
+  border: 2px black solid;
+}
+
+.mat-menu-panel:hover {
+  background-color: #002a27;
+}
+
+.mat-menu-panel .mat-menu-content button:hover {
+  color: #e0f5f8;
+}
+
 .mat-form-field {
   margin: 8px 0;
+  width: 100%;
+}
+
+.mat-form-field-wrapper {
+  width: 100%;
 }
 
 .mat-divider {
@@ -469,7 +492,7 @@ header .logoTitreMenuContainer .logoTitre img {
   width: 40px;
   border: 3px solid #f3efef;
   border-radius: 60%;
-  margin: 10px 30px;
+  margin: 10px;
 }
 
 header .logoTitreMenuContainer .logoTitre h1 {
@@ -479,11 +502,10 @@ header .logoTitreMenuContainer .logoTitre h1 {
 }
 
 header .logoTitreMenuContainer .menu {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 header .logoTitreMenuContainer .menu button {
-  padding-top: 2px;
   background: #e0f5f8;
   font-family: 'Indie Flower', cursive !important;
   border-radius: 5px 30% 5px 30%;
@@ -502,11 +524,14 @@ header .logoTitreMenuContainer .menu .mat-menu button {
   font-family: 'Indie Flower', cursive !important;
 }
 
-.menuNav {
-  position: -webkit-sticky;
-  position: sticky;
+.navi {
+  position: fixed;
   top: 0;
-  z-index: 9;
+  z-index: 5;
+  width: 100%;
+}
+
+.menuNav {
   background-color: #00130a;
 }
 
@@ -528,6 +553,7 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 
 .menuNav nav .mat-tab-label-active {
   background-color: rgba(62, 122, 104, 0.52);
+  border-radius: 3px;
 }
 
 .menuNav nav .mat-ink-bar {
@@ -542,18 +568,8 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 }
 
 @media (max-width: 500px) {
-  body,
-  html {
-    padding-top: 0;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-  }
-  header {
-    position: unset;
-  }
   header .logoTitreMenuContainer {
-    place-content: center center !important;
+    place-content: center space-arround !important;
     padding-top: 0;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
@@ -564,14 +580,14 @@ header .logoTitreMenuContainer .menu .mat-menu button {
   header .logoTitreMenuContainer .logoTitre img {
     margin: 10px 30px 0 0;
   }
-  header .logoTitreMenuContainer .menuNav {
-    width: 100%;
+  .menuNav {
+    padding-top: 4px;
   }
-  header .logoTitreMenuContainer .menuNav .menu {
+  .menuNav .menu {
     margin-right: 0;
     place-content: center center !important;
   }
-  header .logoTitreMenuContainer .menuNav .mat-tab-links {
+  .menuNav .mat-tab-links {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
@@ -580,7 +596,7 @@ header .logoTitreMenuContainer .menu .mat-menu button {
         -ms-flex-pack: space-evenly !important;
             justify-content: space-evenly !important;
   }
-  header .logoTitreMenuContainer .menuNav .mat-tab-links a {
+  .menuNav .mat-tab-links a {
     padding: 0 10px;
   }
 }
@@ -594,11 +610,6 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 .sectionFormation .container,
 .sectionExperience .container {
   padding-top: 20px;
-}
-
-.sectionFormation .container .titre,
-.sectionExperience .container .titre {
-  margin-bottom: 30px;
 }
 
 .sectionFormation .container .titre .h3,
@@ -625,7 +636,7 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 .sectionExperience .container .formationSticky {
   position: -webkit-sticky;
   position: sticky;
-  top: 120px;
+  top: 30px;
   z-index: 1;
 }
 
@@ -715,19 +726,69 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 }
 
 @media (max-width: 500px) {
-  .sectionFormation {
+  .sectionFormation,
+  .sectionExperience {
     margin-top: 0px;
   }
-  .sectionFormation .container .titre .h3 {
+  .sectionFormation .container .titre .h3,
+  .sectionExperience .container .titre .h3 {
     font-size: 1.7rem;
     font-family: "Indie Flower", cursive;
     font-weight: 700;
   }
-  .sectionFormation .container .formationSticky {
+  .sectionFormation .container .formationSticky,
+  .sectionExperience .container .formationSticky {
     position: -webkit-sticky;
     position: sticky;
     top: 0px;
     z-index: 1;
+  }
+  .sectionFormation .container article,
+  .sectionExperience .container article {
+    padding: 5px;
+  }
+  .sectionFormation .container article mat-card,
+  .sectionExperience .container article mat-card {
+    width: auto;
+  }
+}
+
+/*FORMATION FORMULAIRE*/
+.formationForm form,
+.experienceForm form,
+.portfolioForm form {
+  width: 100%;
+}
+
+.formationForm mat-card,
+.experienceForm mat-card,
+.portfolioForm mat-card {
+  width: 80%;
+}
+
+.formationForm mat-card .image,
+.experienceForm mat-card .image,
+.portfolioForm mat-card .image {
+  width: 100%;
+}
+
+.formationForm mat-card .image .fileUpload span .w30,
+.experienceForm mat-card .image .fileUpload span .w30,
+.portfolioForm mat-card .image .fileUpload span .w30 {
+  width: 100px !important;
+}
+
+@media (max-width: 500px) {
+  .formationForm,
+  .experienceForm,
+  .portfolioForm {
+    min-width: auto;
+    max-width: auto;
+  }
+  .formationForm form,
+  .experienceForm form,
+  .portfolioForm form {
+    width: 99%;
   }
 }
 
@@ -805,7 +866,7 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 @media (max-width: 500px) {
   .sectionPortfolio {
     background: url("../../assets/images/bg_portfolio.jpeg") center center/cover;
-    min-height: calc(100vh - 270px);
+    min-height: calc(100vh - 150px);
     padding-top: 20px;
   }
   .sectionPortfolio .titre {
@@ -940,7 +1001,7 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 @media (max-width: 500px) {
   .sectionAcceuil {
     height: auto;
-    padding-top: 50px;
+    padding-top: 20px;
     padding-bottom: 20px;
   }
   .sectionAcceuil article {
@@ -973,5 +1034,9 @@ header .logoTitreMenuContainer .menu .mat-menu button {
   .articlePresentation p {
     font-size: .8rem;
   }
+}
+
+.contactForm {
+  height: calc(100vh - 150px);
 }
 /*# sourceMappingURL=main.css.map */

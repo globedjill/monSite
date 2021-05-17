@@ -55,10 +55,10 @@ exports.__esModule = true;
  * Zone JS is required by default for Angular itself.
  */
 require("zone.js/dist/zone"); // Included with Angular CLI.
-window.process = {
-    env: { DEBUG: undefined }
-};
-window.global = window;
+// (window as any).process = {
+//   env: { DEBUG: undefined },
+// };
+// (window as any).global = window;
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */

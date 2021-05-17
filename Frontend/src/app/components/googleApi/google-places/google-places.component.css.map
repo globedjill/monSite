@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "google-places.component.sass"
+    ],
+    "names": [],
+    "file": "google-places.component.css"
+}
