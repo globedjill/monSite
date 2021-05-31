@@ -1,4 +1,3 @@
-import { postalCode } from 'codes-postaux';
 import { Injectable, ViewChild } from '@angular/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
