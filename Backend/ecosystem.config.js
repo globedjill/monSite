@@ -5,7 +5,7 @@ module.exports = {
         watch: '.',
         instances: 'max',
         autorestart: true,
-        env: {
+        env_dev: {
             NODE_ENV: 'dev'
         },
         env_production: {
