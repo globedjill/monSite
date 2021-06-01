@@ -22,18 +22,20 @@ var FormationFormComponent = /** @class */ (function () {
         this.imageDefault = this.upLoadFileService.imgDefault;
         this.noFile = true;
         this.imageInstanceAModifier = true;
+        this.maxDate = new Date(Date.now());
         this.localImage = localStorage.getItem(this.imageLocal);
-        this.valueLieu = {
-            name: '',
-            cp: '',
-            dept: '',
-            lieu: ''
-        };
         this.filesHolder$ = this.upLoadFileService.filesHolder$.asObservable();
     }
     Object.defineProperty(FormationFormComponent.prototype, "liste", {
         get: function () {
             return this.formationForm.get('liste');
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(FormationFormComponent.prototype, "ecoles", {
+        get: function () {
+            return this.formationForm.get('ecoles');
         },
         enumerable: false,
         configurable: true
@@ -45,71 +47,62 @@ var FormationFormComponent = /** @class */ (function () {
             var formationRecup = _this.parcourService.formation;
             if (_this.id) {
                 _this.initForm(formationRecup);
-                if (formationRecup.image === _this.upLoadFileService.imgDefault) {
-                    localStorage.setItem(_this.imageLocal, formationRecup.image);
-                    _this.imageVal = localStorage.getItem(_this.imageLocal);
-                    _this.imageInstanceAModifier = false;
-                    _this.formationForm.controls.image.setValue(null);
-                }
-                else if (formationRecup.image !== null) {
-                    _this.formationForm.controls.image.setValue(formationRecup.image);
-                    _this.imageVal = formationRecup.image;
-                    localStorage.setItem(_this.imageLocal, formationRecup.image);
-                    _this.imageInstanceAModifier = true;
-                    _this.noFile = false;
-                    _this.formationForm.controls.image.setValue(_this.imageVal);
-                }
+                // if( formationRecup.image === this.upLoadFileService.imgDefault) {
+                //   localStorage.setItem(this.imageLocal, formationRecup.image);
+                //   this.imageVal = localStorage.getItem(this.imageLocal);
+                //   this.imageInstanceAModifier = false;
+                //   this.formationForm.controls.image.setValue(null);
+                // } else if ( formationRecup.image !== null){
+                //   this.formationForm.controls.image.setValue(formationRecup.image);
+                //   this.imageVal = formationRecup.image;
+                //   localStorage.setItem(this.imageLocal , formationRecup.image);
+                //   this.imageInstanceAModifier = true;
+                //   this.noFile = false;
+                //   this.formationForm.controls.image.setValue(this.imageVal);
+                // }
             }
             else {
                 _this.initForm(_this.formation);
             }
         });
-        this.nomFormation = this.formationForm.get('nomFormation');
-        this.option = this.formationForm.get('option');
-        this.image = this.formationForm.get('image');
-        this.alt = this.formationForm.get('alt');
-        this.lieu = this.formationForm.get('lieu');
-        this.adresse = this.formationForm.get('adresse');
-        this.dateEntree = this.formationForm.get('dateEntree');
-        this.dateSortie = this.formationForm.get('dateSortie');
-        this.contenu = this.formationForm.get('contenu');
-        this.lien = this.formationForm.get('lien');
-    };
-    FormationFormComponent.prototype.handleAddressChange = function (address) {
-        this.valueLieu.cp = address.address_components[5].long_name.split('')[0] + address.address_components[5].long_name.split('')[1];
-        this.valueLieu.dept = address.address_components[0].types[0];
-        this.valueLieu.lieu = address.address_components[1].long_name;
-        this.valueLieu.name = address.name;
-        console.log(this.valueLieu);
-        console.log(address);
+        // this.nomFormation = this.formationForm.get('nomFormation');
+        // this.option = this.formationForm.get('option');
+        // this.image = this.formationForm.get('image');
+        // this.alt = this.formationForm.get('alt');
+        // this.lieu = this.formationForm.get('lieu');
+        // this.adresse = this.formationForm.get('adresse');
+        // this.dateEntree = this.formationForm.get('dateEntree');
+        // this.dateSortie = this.formationForm.get('dateSortie');
+        // this.contenu = this.formationForm.get('contenu');
+        // this.lien = this.formationForm.get('lien');
     };
     /*FONCTIONS*/
     FormationFormComponent.prototype.initForm = function (formation) {
         if (formation === void 0) { formation = {
+            diplome: null,
             nomFormation: null,
             option: null,
-            image: null,
-            alt: "image par defaut",
-            lieu: null,
-            adresse: null,
-            dateEntree: new Date,
-            dateSortie: new Date,
+            // image: null,
+            // alt: "image par defaut",
+            ecoles: [],
+            // adresse: null,
+            // dateEntree: null,
+            // dateSortie: null,
             contenu: null,
-            liste: [],
-            lien: null
+            liste: []
         }; }
         this.formationForm = this.fb.group({
+            diplome: [formation.diplome],
             nomFormation: [formation.nomFormation, [forms_1.Validators.required, forms_1.Validators.minLength(3)]],
             option: [formation.option, forms_1.Validators.minLength(3)],
-            image: [formation.image],
-            alt: [formation.alt, [forms_1.Validators.minLength(3), forms_1.Validators.required]],
-            lieu: [formation.lieu, forms_1.Validators.required],
-            adresse: [formation.adresse, forms_1.Validators.minLength(3)],
-            dateEntree: [formation.dateEntree, forms_1.Validators.required],
-            dateSortie: [formation.dateSortie, forms_1.Validators.required],
+            // image: [formation.image],
+            // alt: [formation.alt, [Validators.minLength(3), Validators.required]],
+            ecoles: this.fb.array([]),
+            // adresse: [formation.adresse, Validators.minLength(3)],
+            // dateEntree: [formation.dateEntree, Validators.required],
+            // dateSortie: [formation.dateSortie, Validators.required],
             contenu: [formation.contenu, forms_1.Validators.required],
-            liste: this.fb.array(formation.liste),
-            lien: [formation.lien]
+            liste: this.fb.array(formation.liste)
         });
     };
     FormationFormComponent.prototype.addAxeListe = function () {
@@ -117,6 +110,21 @@ var FormationFormComponent = /** @class */ (function () {
     };
     FormationFormComponent.prototype.deleteAxe = function (i) {
         this.liste.removeAt(i);
+    };
+    FormationFormComponent.prototype.addListeEcole = function () {
+        this.ecoles.push(this.fb.group({
+            nomEcole: [null],
+            image: [null],
+            alt: [null],
+            departement: [null],
+            cp: [null],
+            dateEntree: [new Date()],
+            dateSortie: [new Date()],
+            lien: [null]
+        }));
+    };
+    FormationFormComponent.prototype.deleteEcole = function (i) {
+        this.ecoles.removeAt(i);
     };
     // ACTION SUR LE SERVICE
     FormationFormComponent.prototype.onSaveFormation = function () {
@@ -139,7 +147,6 @@ var FormationFormComponent = /** @class */ (function () {
         this.noFile = false;
     };
     FormationFormComponent.prototype.retour = function () {
-        console.log(this.imageLocal);
         if (localStorage.getItem(this.imageLocal) !== this.imageLocal && this.imageLocal === undefined) {
             this.deleteFile(0);
             this.imageVal === localStorage.getItem(this.imageLocal);
@@ -178,8 +185,12 @@ var FormationFormComponent = /** @class */ (function () {
             this.upLoadFileService.addFile(file);
         }
     };
+    FormationFormComponent.prototype.maxiDate = function ($event) {
+        console.log($event);
+        this.dateEntree.value = $event;
+    };
     FormationFormComponent.prototype.getErrorMessage = function (nom) {
-        if (nom.hasError('required')) {
+        if (nom.hasError('required') || nom.value === "") {
             return this.fGservice.messageErreur.required;
         }
         else if (nom.hasError('minlength')) {
@@ -190,8 +201,8 @@ var FormationFormComponent = /** @class */ (function () {
         core_2.ViewChild('fileInput')
     ], FormationFormComponent.prototype, "inputRef");
     __decorate([
-        core_2.ViewChild('placeRef')
-    ], FormationFormComponent.prototype, "placesRef");
+        core_2.ViewChild('googlePlacesComponent')
+    ], FormationFormComponent.prototype, "googlePlace");
     FormationFormComponent = __decorate([
         core_1.Component({
             selector: 'app-formation-form',

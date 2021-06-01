@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { FonctionGeneralService } from 'src/shared/services/fonction-general.service';
 import { GooglePlacesComponent } from 'src/app/components/googleApi/google-places/google-places.component';
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-formation-form',
@@ -68,71 +69,77 @@ export class FormationFormComponent implements OnInit{
       return this.formationForm.get('liste') as FormArray;
     }
 
+    get ecoles(){
+      return this.formationForm.get('ecoles') as FormArray;
+    }
+
   ngOnInit(): void {
         this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
           this.id = paramMap.get('_id');
           const formationRecup = this.parcourService.formation;
           if(this.id){
             this.initForm(formationRecup);
-            if( formationRecup.image === this.upLoadFileService.imgDefault) {
-              localStorage.setItem(this.imageLocal, formationRecup.image);
-              this.imageVal = localStorage.getItem(this.imageLocal);
-              this.imageInstanceAModifier = false;
-              this.formationForm.controls.image.setValue(null);
-            } else if ( formationRecup.image !== null){
-              this.formationForm.controls.image.setValue(formationRecup.image);
-              this.imageVal = formationRecup.image;
-              localStorage.setItem(this.imageLocal , formationRecup.image);
-              this.imageInstanceAModifier = true;
-              this.noFile = false;
-              this.formationForm.controls.image.setValue(this.imageVal);
-            }
+            // if( formationRecup.image === this.upLoadFileService.imgDefault) {
+            //   localStorage.setItem(this.imageLocal, formationRecup.image);
+            //   this.imageVal = localStorage.getItem(this.imageLocal);
+            //   this.imageInstanceAModifier = false;
+            //   this.formationForm.controls.image.setValue(null);
+            // } else if ( formationRecup.image !== null){
+            //   this.formationForm.controls.image.setValue(formationRecup.image);
+            //   this.imageVal = formationRecup.image;
+            //   localStorage.setItem(this.imageLocal , formationRecup.image);
+            //   this.imageInstanceAModifier = true;
+            //   this.noFile = false;
+            //   this.formationForm.controls.image.setValue(this.imageVal);
+            // }
           }else {
             this.initForm(this.formation);
           }
         });
-        this.nomFormation = this.formationForm.get('nomFormation');
-        this.option = this.formationForm.get('option');
-        this.image = this.formationForm.get('image');
-        this.alt = this.formationForm.get('alt');
-        this.lieu = this.formationForm.get('lieu');
-        this.adresse = this.formationForm.get('adresse');
-        this.dateEntree = this.formationForm.get('dateEntree');
-        this.dateSortie = this.formationForm.get('dateSortie');
-        this.contenu = this.formationForm.get('contenu');
-        this.lien = this.formationForm.get('lien');
+        // this.nomFormation = this.formationForm.get('nomFormation');
+        // this.option = this.formationForm.get('option');
+        // this.image = this.formationForm.get('image');
+        // this.alt = this.formationForm.get('alt');
+        // this.lieu = this.formationForm.get('lieu');
+        // this.adresse = this.formationForm.get('adresse');
+        // this.dateEntree = this.formationForm.get('dateEntree');
+        // this.dateSortie = this.formationForm.get('dateSortie');
+        // this.contenu = this.formationForm.get('contenu');
+        // this.lien = this.formationForm.get('lien');
 
       }
 
   /*FONCTIONS*/
   initForm(
     formation: Formation = {
+    diplome: null,
     nomFormation:null,
     option:null,
-    image: null,
-    alt: "image par defaut",
-    lieu: null,
-    adresse: null,
-    dateEntree: null,
-    dateSortie: null,
+    // image: null,
+    // alt: "image par defaut",
+    ecoles: [],
+    // adresse: null,
+    // dateEntree: null,
+    // dateSortie: null,
     contenu: null,
-    liste:[],
-    lien: null
+    liste: [],
+    // lien: null
   }
 
   ): void {
     this.formationForm = this.fb.group({
+      diplome: [formation.diplome],
       nomFormation: [formation.nomFormation, [Validators.required, Validators.minLength(3)]],
       option: [formation.option, Validators.minLength(3)],
-      image: [formation.image],
-      alt: [formation.alt, [Validators.minLength(3), Validators.required]],
-      lieu: [formation.lieu, Validators.required],
-      adresse: [formation.adresse, Validators.minLength(3)],
-      dateEntree: [formation.dateEntree, Validators.required],
-      dateSortie: [formation.dateSortie, Validators.required],
+      // image: [formation.image],
+      // alt: [formation.alt, [Validators.minLength(3), Validators.required]],
+      ecoles: this.fb.array([]),
+      // adresse: [formation.adresse, Validators.minLength(3)],
+      // dateEntree: [formation.dateEntree, Validators.required],
+      // dateSortie: [formation.dateSortie, Validators.required],
       contenu: [formation.contenu, Validators.required],
       liste: this.fb.array(formation.liste),
-      lien: [formation.lien]
+      // lien: [formation.lien]
     });
   }
 
@@ -141,6 +148,23 @@ export class FormationFormComponent implements OnInit{
   }
   deleteAxe(i){
     this.liste.removeAt(i)
+  }
+
+  addListeEcole(){
+    this.ecoles.push(this.fb.group({
+      nomEcole: [null],
+      image: [null],
+      alt: [null],
+      departement: [null],
+      cp: [null],
+      dateEntree: [new Date()],
+      dateSortie: [new Date()],
+      lien: [null],
+    }));
+  }
+
+  deleteEcole(i){
+    this.ecoles.removeAt(i);
   }
 
   // ACTION SUR LE SERVICE
@@ -214,7 +238,6 @@ export class FormationFormComponent implements OnInit{
     console.log($event);
     this.dateEntree.value = $event;
   }
-
 
   getErrorMessage(nom: any){
     if(nom.hasError('required') || nom.value === "" ){

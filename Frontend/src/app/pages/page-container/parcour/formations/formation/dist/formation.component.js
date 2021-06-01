@@ -25,7 +25,6 @@ var FormationComponent = /** @class */ (function () {
         this.parcourService.recupFormations();
     };
     FormationComponent.prototype.editFormation = function (formation) {
-        console.log(formation);
         this.parcourService.formation = formation;
     };
     FormationComponent.prototype.deleteFormation = function (id) {

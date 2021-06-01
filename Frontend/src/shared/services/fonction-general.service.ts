@@ -65,4 +65,12 @@ export class FonctionGeneralService {
       }
     }
   }
+
+  afficheNomEcole(i: number){
+    if(this.valueLieu.name !== ''){
+      return 'Ecole : ' + this.valueLieu.name;
+    }else {
+      return 'Ecole n° : '+ i+1;
+    }
+  }
 }

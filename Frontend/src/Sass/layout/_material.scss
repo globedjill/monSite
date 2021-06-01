@@ -8,11 +8,9 @@
 }
 
 //CARD
-.mat-card {
-    // margin: 15px;
-    // &-content {
-    //     margin: 15px;
-    // }
+.mat-card-image {
+    width: calc(100%) !important;
+    margin: 0 -16px 0px 0px !important;
 }
 
 //MENU
@@ -49,4 +47,9 @@
 //Divider
 .mat-divider {
     width: 80% !important;
+}
+
+//MAT-LIST
+.mat-list-item {
+    height: 70px !important;
 }

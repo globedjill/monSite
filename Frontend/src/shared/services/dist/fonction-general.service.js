@@ -54,6 +54,14 @@ var FonctionGeneralService = /** @class */ (function () {
             }
         }
     };
+    FonctionGeneralService.prototype.afficheNomEcole = function (i) {
+        if (this.valueLieu.name !== '') {
+            return 'Ecole : ' + this.valueLieu.name;
+        }
+        else {
+            return 'Ecole n° : ' + i + 1;
+        }
+    };
     __decorate([
         core_1.ViewChild('placeRef')
     ], FonctionGeneralService.prototype, "placesRef");

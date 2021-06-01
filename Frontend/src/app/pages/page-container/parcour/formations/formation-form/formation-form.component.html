@@ -8,98 +8,138 @@
             <mat-card-content>
                 <div fxLayout='column'>
                     <mat-form-field appearance='fill'>
+                        <mat-label>Diplôme</mat-label>
+                        <input matInput type="text" formControlName='diplome' placeholder="nom du diplome" required>
+                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(nomFormation)}}</mat-error> -->
+                    </mat-form-field>
+                    <mat-form-field appearance='fill'>
                         <mat-label>Formation</mat-label>
                         <input matInput type="text" formControlName='nomFormation' placeholder="Nom de la formation" required>
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(nomFormation)}}</mat-error>
+                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(nomFormation)}}</mat-error> -->
                     </mat-form-field>
                     <mat-form-field appearance='fill'>
                         <mat-label>Option de la Formation</mat-label>
                         <input matInput type="text" placeholder="option" formControlName='option'>
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(option) }}</mat-error>
-                    </mat-form-field>
-                </div>
-                <!-- IMAGE -->
-                <div fxLayout='column'>
-                    <div class='container' fxLayout='row' fxLayoutAlign='center'>
-                        <!-- S'affiche si nouvelle experience -->
-                        <div class='image' *ngIf='!this.id || this.imageInstanceAModifier === false'>
-                            <div class='content' fxLayout='column' fxGap='15px'>
-                                <div *ngIf="this.noFile === true" class='upload' fxLayout='row' fxLayoutAlign='center center' (click)="openFile()">
-                                    <mat-label>Ajouter une image</mat-label>
-                                    <input (change)='addFile($event)' type="file" fxHide='true' formControlName='image' #fileInput>
-                                    <mat-icon><span class="material-icons-outlined">file_download</span></mat-icon>
-                                </div>
-                                <div *ngIf='this.noFile === false'>
-                                    <div class='file' *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='column' fxLayoutAlign='center center'>
-                                        <div class='fileUpload' *ngIf='fileHolder.progress$ | async; let progress ' fxLayout='column'>
-                                            <div class='fileUpload' fxLayout='row' fxLayoutAlign='space-between center'>
-                                                <span class='w30'>{{ fileHolder.file.name }}</span>
-                                                <span>{{ progress }}%</span>
-                                                <span *ngIf='progress === 100'> Fichier enregistré </span>
-                                                <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
-                                            </div>
-                                            <mat-progress-bar style="min-width: 150px;" mode='determinate' [value]='progress'></mat-progress-bar>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- S'affiche si id experience pour modification -->
-                        <div class='content' *ngIf='this.id' fxLayout='column' fxGap='15px'>
-                            <!-- S'affiche lors de la modification apres recuperation des données -->
-                            <div *ngIf='this.imageInstanceAModifier === true' class='fileUpload' fxLayout='column'>
-                                <div class='fileUpload' fxLayout='row' fxLayoutAlign='space-between center'>
-                                    <span>{{this.imageVal.split('/')[3]}}</span>
-                                    <mat-icon><span class="material-icons" (click)='supprImgLinkmodif(this.imageVal)'>clear</span></mat-icon>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <mat-form-field appearance='fill'>
-                        <mat-label>Description Image</mat-label>
-                        <input matInput type="text" formControlName='alt' placeholder='image par default' required>
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(alt)}}</mat-error>
+                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(option) }}</mat-error> -->
                     </mat-form-field>
                 </div>
 
-                <!-- LOCALISATION -->
-                <div fxLayout='column'>
-                    <div>
-                        <mat-form-field appearance='fill'>
-                            <mat-label>Nom de l'école</mat-label>
-                            <input ngx-google-places-autocomplete [value]='this.fGservice.valueLieu.name' matInput #placesRef formControlName='adresse' (onAddressChange)="this.fGservice.handleAddressChange($event)" />
-                            <mat-error *ngIf=""></mat-error>
-                        </mat-form-field>
+                <!-- AJOUT ECOLE -->
+
+
+                <div class='listeAxes' formArrayName='ecoles' fxLayout='column'>
+                    <div [formGroupName]='i' *ngFor='let ecole of ecoles.controls; let i = index' fxLayout='column' fxLayoutAlign='center stretch'>
+
+                        <mat-accordion displayMode="default" [multi]="true" [hideToggle]="false">
+                            <mat-expansion-panel style='background-color: azure; margin:20px 0' [hideToggle]="false">
+                                <mat-expansion-panel-header>{{this.fGservice.afficheNomEcole(i)}}</mat-expansion-panel-header>
+                                <!-- LOCALISATION -->
+                                <div fxLayout='column'>
+                                    <div>
+                                        <mat-form-field appearance='fill'>
+                                            <mat-label>Nom de l'école</mat-label>
+                                            <input ngx-google-places-autocomplete [value]='this.fGservice.valueLieu.name' matInput #placesRef formControlName='nomEcole' (onAddressChange)="this.fGservice.handleAddressChange($event)" />
+                                            <mat-error *ngIf=""></mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <mat-form-field appearance='fill'>
+                                        <mat-label>Commune</mat-label>
+                                        <input type="text" matInput formControlName='departement' [value]='this.fGservice.valueLieu.dept' placeholder="lieu">
+                                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(lieu) }}</mat-error> -->
+                                    </mat-form-field>
+                                    <mat-form-field appearance='fill'>
+                                        <mat-label>Departement</mat-label>
+                                        <input type="text" matInput formControlName='cp' [value]='this.fGservice.valueLieu.cp' placeholder="lieu">
+                                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(lieu) }}</mat-error> -->
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- DATE -->
+                                <div fxLayout='column'>
+                                    <mat-form-field appearance='fill'>
+                                        <mat-label>Date d'entrée</mat-label>
+                                        <input matInput [matDatepicker]='picker' formControlName='dateEntree' disabled>
+                                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>
+                                        <mat-datepicker #picker disabled='false'></mat-datepicker>
+                                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(dateEntree) }}</mat-error> -->
+                                    </mat-form-field>
+                                    <mat-form-field appearance='fill'>
+                                        <mat-label>Date de sortie</mat-label>
+                                        <input matInput [matDatepicker]='pickerSortie' formControlName='dateSortie' disabled>
+                                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerSortie disabled='false'></mat-datepicker>
+                                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(dateSortie) }}</mat-error> -->
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- LIEN -->
+                                <mat-form-field appearance='fill' fxLAyoutAlign='start center'>
+                                    <mat-label>Lien vers le site </mat-label>
+                                    <input type='text' matInput placeholder="Liens" [value]='this.fGservice.valueLieu.lien' formControlName='lien' />
+                                    <mat-error *ngIf=""></mat-error>
+                                </mat-form-field>
+
+                                <!-- IMAGE -->
+                                <div fxLayout='column'>
+                                    <div class='container' fxLayout='row' fxLayoutAlign='center'>
+                                        <!-- S'affiche si nouvelle experience -->
+                                        <div class='image' *ngIf='!this.id || this.imageInstanceAModifier === false'>
+                                            <div class='content' fxLayout='column' fxGap='15px'>
+                                                <div *ngIf="this.noFile === true" class='upload' fxLayout='row' fxLayoutAlign='center center' (click)="openFile()">
+                                                    <mat-label>Ajouter une image</mat-label>
+                                                    <input (change)='addFile($event)' type="file" fxHide='true' formControlName='image' #fileInput>
+                                                    <mat-icon><span class="material-icons-outlined">file_download</span></mat-icon>
+                                                </div>
+                                                <div *ngIf='this.noFile === false'>
+                                                    <div class='file' *ngFor='let fileHolder of (filesHolder$ | async ); let i = index' fxLayout='column' fxLayoutAlign='center center'>
+                                                        <div class='fileUpload' *ngIf='fileHolder.progress$ | async; let progress ' fxLayout='column'>
+                                                            <div class='fileUpload' fxLayout='row' fxLayoutAlign='space-between center'>
+                                                                <span class='w30'>{{ fileHolder.file.name }}</span>
+                                                                <span>{{ progress }}%</span>
+                                                                <span *ngIf='progress === 100'> Fichier enregistré </span>
+                                                                <mat-icon><span class="material-icons" (click)='deleteFile(i)'>clear</span></mat-icon>
+                                                            </div>
+                                                            <mat-progress-bar style="min-width: 150px;" mode='determinate' [value]='progress'></mat-progress-bar>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- S'affiche si id experience pour modification -->
+                                        <div class='content' *ngIf='this.id' fxLayout='column' fxGap='15px'>
+                                            <!-- S'affiche lors de la modification apres recuperation des données -->
+                                            <div *ngIf='this.imageInstanceAModifier === true' class='fileUpload' fxLayout='column'>
+                                                <div class='fileUpload' fxLayout='row' fxLayoutAlign='space-between center'>
+                                                    <span>{{this.imageVal.split('/')[3]}}</span>
+                                                    <mat-icon><span class="material-icons" (click)='supprImgLinkmodif(this.imageVal)'>clear</span></mat-icon>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <mat-form-field appearance='fill'>
+                                        <mat-label>Description Image</mat-label>
+                                        <input matInput type="text" formControlName='alt' placeholder='image par default' required>
+                                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(alt)}}</mat-error> -->
+                                    </mat-form-field>
+                                </div>
+
+                                <button class='btnDeleteAxe' mat-raised-button (click)="deleteEcole(i)">-</button>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+
+
                     </div>
-                    <mat-form-field appearance='fill'>
-                        <mat-label>Departement</mat-label>
-                        <input type="text" matInput formControlName='lieu' [value]='this.fGservice.valueLieu.dept + " " +  this.fGservice.valueLieu.cp' placeholder="lieu">
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(lieu) }}</mat-error>
-                    </mat-form-field>
                 </div>
-                <!-- DATE -->
-                <div fxLayout='column'>
-                    <mat-form-field appearance='fill'>
-                        <mat-label>Date d'entrée</mat-label>
-                        <input matInput [matDatepicker]='picker' formControlName='dateEntree' [max]='this.dateEntree.value || this.fGservice.dateDeMaintenant' disabled>
-                        <mat-datepicker-toggle matSuffix [for]='picker'></mat-datepicker-toggle>
-                        <mat-datepicker #picker disabled='false' [startAt]='this.maxDate'></mat-datepicker>
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(dateEntree) }}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance='fill'>
-                        <mat-label>Date de sortie</mat-label>
-                        <input matInput [matDatepicker]='pickerSortie' (ngModelChange)='maxiDate($event)' formControlName='dateSortie' [min]='this.dateEntree.value' [max]='this.fGservice.dateDeMaintenant' disabled>
-                        <mat-datepicker-toggle matSuffix [for]='pickerSortie'></mat-datepicker-toggle>
-                        <mat-datepicker #pickerSortie disabled='false'></mat-datepicker>
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(dateSortie) }}</mat-error>
-                    </mat-form-field>
-                </div>
+
+                <button mat-raised-button (click)='addListeEcole()'>Ajouter une Ecole</button>
+
                 <!-- COMPLEMENT -->
                 <div fxLayout='column'>
                     <mat-form-field appearance='fill'>
                         <mat-label>Contenu de la formation</mat-label>
                         <textarea matInput placeholder="De quoi est fait la formation" formControlName='contenu'></textarea>
-                        <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(contenu) }}</mat-error>
+                        <!-- <mat-error *ngIf="this.formationForm.invalid">{{ getErrorMessage(contenu) }}</mat-error> -->
                     </mat-form-field>
 
                     <div class='listeAxes' formArrayName='liste' fxLayout='column'>
@@ -117,11 +157,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <mat-form-field appearance='fill' fxLAyoutAlign='start center'>
-                        <mat-label>Lien vers le site </mat-label>
-                        <input type='text' matInput placeholder="Liens" [value]='this.fGservice.valueLieu.lien' formControlName='lien' />
-                        <mat-error *ngIf=""></mat-error>
-                    </mat-form-field>
+
                 </div>
             </mat-card-content>
             <mat-card-actions align="start">

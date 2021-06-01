@@ -5,7 +5,6 @@ import { Formation } from 'src/shared/modeles/formation.interface';
 import { UserSession } from 'src/shared/modeles/userSession.interface';
 import { ParcourService } from 'src/shared/services/parcour.service';
 import { UsersService } from 'src/shared/services/users.service';
-import { FonctionGeneralService } from 'src/shared/services/fonction-general.service';
 
 @Component({
   selector: 'app-formation',
