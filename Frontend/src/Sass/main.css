@@ -378,6 +378,11 @@ strong {
   height: 30px !important;
 }
 
+.mat-card-image {
+  width: calc(100%) !important;
+  margin: 0 -16px 0px 0px !important;
+}
+
 .mat-menu {
   height: 40px;
 }
@@ -407,6 +412,10 @@ strong {
 
 .mat-divider {
   width: 80% !important;
+}
+
+.mat-list-item {
+  height: 70px !important;
 }
 
 .fab,
@@ -643,14 +652,13 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 .sectionFormation .container article,
 .sectionExperience .container article {
   padding: 30px;
+  width: 480px;
 }
 
 .sectionFormation .container article mat-card,
 .sectionExperience .container article mat-card {
-  padding-bottom: 30px !important;
   background-color: #dee5fbef;
-  width: 480px;
-  min-height: 700px;
+  padding: 0 !important;
 }
 
 .sectionFormation .container article mat-card .btnAlign,
@@ -669,13 +677,6 @@ header .logoTitreMenuContainer .menu .mat-menu button {
 .sectionExperience .container article mat-card img,
 .sectionExperience .container article mat-card .divImgDefault {
   height: 100px;
-}
-
-.sectionFormation .container article mat-card .divImgDefault,
-.sectionExperience .container article mat-card .divImgDefault {
-  width: calc(100% + 32px);
-  background-color: #92929252;
-  margin: 0 -16px 16px -16px;
 }
 
 .sectionFormation .container article mat-card mat-card-content p,
