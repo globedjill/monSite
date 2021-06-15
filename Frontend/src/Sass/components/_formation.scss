@@ -96,6 +96,13 @@
     }
 }
 
+//Formulaire
+.niveau {
+    min-width: 120px;
+    max-width: 120px;
+    margin-right: 10px;
+}
+
 @media(max-width:500px) {
     .sectionFormation,
     .sectionExperience {

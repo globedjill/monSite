@@ -1,16 +1,11 @@
 export interface Formation {
+  niveau: NiveauGroup;
   diplome: string;
   nomFormation: string;
   option?: string;
-  // image?: string;
-  // alt: string;
   ecoles: Lieu[];
-  // adresse?: string;
-  // dateEntree: any;
-  // dateSortie: Date;
   contenu: string;
   liste?: string[];
-  // lien?: string;
 }
 
 export interface Lieu {
@@ -22,4 +17,22 @@ export interface Lieu {
   dateEntree: Date;
   dateSortie:  Date;
   lien?: string;
+}
+
+export interface NiveauGroup{
+  name: string;
+  lastName: string;
+  niveau: Niveau[];
+}
+
+export interface Niveau{
+  value: string;
+  viewValue: string;
+}
+
+export interface ValueLieu{
+  name: string;
+  cp: string;
+  dept: string;
+  lien: string;
 }

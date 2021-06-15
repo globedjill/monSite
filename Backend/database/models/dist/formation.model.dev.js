@@ -6,6 +6,12 @@ var mongoose = require('mongoose');
 
 var schema = mongoose.Schema;
 var formationSchema = schema(_defineProperty({
+  niveau: {
+    type: String
+  },
+  diplome: {
+    type: String
+  },
   nomFormation: {
     type: String // maxlenght: 140,
     // minlenght: 3,

@@ -1,8 +1,9 @@
+import { ValueLieu } from './../../../../../../shared/modeles/formation.interface';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵɵtrustConstantResourceUrl } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Formation } from 'src/shared/modeles/formation.interface';
+import { Formation, NiveauGroup } from 'src/shared/modeles/formation.interface';
 import { ParcourService } from 'src/shared/services/parcour.service';
 
 import { ViewChild, ElementRef } from '@angular/core';
@@ -10,8 +11,6 @@ import { Observable } from 'rxjs';
 import { UploadFileService } from 'src/shared/services/upload-file.service';
 import { FonctionGeneralService } from 'src/shared/services/fonction-general.service';
 import { GooglePlacesComponent } from 'src/app/components/googleApi/google-places/google-places.component';
-import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
-
 @Component({
   selector: 'app-formation-form',
   templateUrl: './formation-form.component.html',
@@ -24,14 +23,14 @@ export class FormationFormComponent implements OnInit{
   public formation: Formation;
   public formationForm: FormGroup;
 
-  public imageVal: string;
+  public imageVal: string [] = [];
   private imageLocal: string = 'imageRecup';
   public imageDefault: string = this.upLoadFileService.imgDefault;
 
   public index: number;
   public noFile: boolean = true;
   public imageInstanceAModifier: boolean = true;
-  public setValueANull: string;
+  public setValueANull: boolean [] = [];
 
   public nomFormation: any;
   public option: any;
@@ -47,6 +46,71 @@ export class FormationFormComponent implements OnInit{
   public maxDate: Date = new Date(Date.now());
 
   public localImage: string = localStorage.getItem(this.imageLocal);
+
+  public niveauTab: NiveauGroup[] = [
+    {
+      name:'Niveau 3',
+      lastName: '-',
+      niveau: [
+        {value: 'CAP' , viewValue: 'CAP'},
+        {value: 'BEP' , viewValue: 'BEP'}
+      ]
+    },
+    {
+      name:'Niveau 4',
+      lastName: 'Bac',
+      niveau: [
+        {value: 'Bac' , viewValue: 'Baccalaureat'},
+      ]
+    },
+    {
+      name:'Niveau 5',
+      lastName: 'Bac +2',
+      niveau: [
+        {value: 'DEUG' , viewValue: 'DEUG'},
+        {value: 'BTS' , viewValue: 'BTS'},
+        {value: 'DUT' , viewValue: 'DUT'},
+        {value: 'DEUST' , viewValue: 'DEUST'},
+      ]
+    },
+    {
+      name:'Niveau 6',
+      lastName: 'Bac +3',
+      niveau: [
+        {value: 'License' , viewValue: 'Licence'},
+        {value: 'LicensePro' , viewValue: 'License Pro'},
+      ]
+    },
+    {
+      name:'Niveau 6',
+      lastName: 'Bac +4',
+      niveau: [
+        {value: 'Maitrise' , viewValue: 'Maitrise'},
+        {value: 'Master1' , viewValue: 'Master1'},
+      ]
+    },
+    {
+      name:'Niveau 7',
+      lastName: 'Bac +5',
+      niveau: [
+        {value: 'Master' , viewValue: 'Master'},
+        {value: 'Diplome d\'étude approfondue' , viewValue: 'Diplome d\'étude approfondue'},
+        {value: 'Diplome étude approfondie' , viewValue: 'Diplome étude approfondie spécialisées'},
+        {value: 'Ingénieur' , viewValue: 'Ingenieur'},
+      ]
+    },
+    {
+      name:'Niveau 8',
+      lastName: 'Bac +8',
+      niveau: [
+        {value: 'Doctorat' , viewValue: 'Doctorat'},
+        {value: 'Chercheur' , viewValue: 'Chercheur'},
+      ]
+    },
+  ];
+
+  public initMajuscule: string;
+  public forcerMajFirstLetter: string;
 
   @ViewChild('fileInput') inputRef: ElementRef;
   @ViewChild('googlePlacesComponent') googlePlace: ElementRef<GooglePlacesComponent>;
@@ -96,50 +160,29 @@ export class FormationFormComponent implements OnInit{
             this.initForm(this.formation);
           }
         });
-        // this.nomFormation = this.formationForm.get('nomFormation');
-        // this.option = this.formationForm.get('option');
-        // this.image = this.formationForm.get('image');
-        // this.alt = this.formationForm.get('alt');
-        // this.lieu = this.formationForm.get('lieu');
-        // this.adresse = this.formationForm.get('adresse');
-        // this.dateEntree = this.formationForm.get('dateEntree');
-        // this.dateSortie = this.formationForm.get('dateSortie');
-        // this.contenu = this.formationForm.get('contenu');
-        // this.lien = this.formationForm.get('lien');
-
       }
 
   /*FONCTIONS*/
   initForm(
     formation: Formation = {
+    niveau: null,
     diplome: null,
     nomFormation:null,
     option:null,
-    // image: null,
-    // alt: "image par defaut",
     ecoles: [],
-    // adresse: null,
-    // dateEntree: null,
-    // dateSortie: null,
     contenu: null,
     liste: [],
-    // lien: null
   }
 
   ): void {
     this.formationForm = this.fb.group({
+      niveau:[formation.niveau],
       diplome: [formation.diplome],
       nomFormation: [formation.nomFormation, [Validators.required, Validators.minLength(3)]],
       option: [formation.option, Validators.minLength(3)],
-      // image: [formation.image],
-      // alt: [formation.alt, [Validators.minLength(3), Validators.required]],
       ecoles: this.fb.array([]),
-      // adresse: [formation.adresse, Validators.minLength(3)],
-      // dateEntree: [formation.dateEntree, Validators.required],
-      // dateSortie: [formation.dateSortie, Validators.required],
       contenu: [formation.contenu, Validators.required],
       liste: this.fb.array(formation.liste),
-      // lien: [formation.lien]
     });
   }
 
@@ -154,22 +197,33 @@ export class FormationFormComponent implements OnInit{
     this.ecoles.push(this.fb.group({
       nomEcole: [null],
       image: [null],
-      alt: [null],
+      alt: ['image par default'],
       departement: [null],
       cp: [null],
       dateEntree: [new Date()],
       dateSortie: [new Date()],
       lien: [null],
     }));
+    this.setValueANull.push(true);
+    this.fGservice.tabAdress.push({
+      name: null,
+      dept:null,
+      cp:null,
+      lien:null
+    });
   }
 
   deleteEcole(i){
     this.ecoles.removeAt(i);
+    this.imageVal.splice(i,1);
+    this.setValueANull.splice(i,1);
+    this.fGservice.tabAdress.splice(i,1);
   }
 
   // ACTION SUR LE SERVICE
   onSaveFormation(){
-  this.formationForm.controls.image.setValue(this.imageVal);
+  console.log(this.formationForm.value);
+  // this.formationForm.controls.image.setValue(this.imageVal);
   this.parcourService.createNewFormation(this.formationForm.value);
 
   const files = this.upLoadFileService.filesHolder$.value.slice();
@@ -188,43 +242,56 @@ export class FormationFormComponent implements OnInit{
     this.upLoadFileService.filesHolder$.next(files);
     localStorage.clear();
     this.router.navigate(['parcour']);
-    this.noFile = false;
+    // this.noFile = false;
   }
 
   retour(){
    if(localStorage.getItem(this.imageLocal)!== this.imageLocal && this.imageLocal === undefined){
      this.deleteFile(0);
-     this.imageVal === localStorage.getItem(this.imageLocal);
+    //  this.imageVal === localStorage.getItem(this.imageLocal);
      localStorage.clear();
    }
     this.router.navigate(['parcour']);
   }
 /* FILE*/
-  openFile() {
+  openFile(i) {
     this.inputRef.nativeElement.click();
   }
 
-  addFile($event){
-    this.imageVal = $event.target.files[0].name;
+  addFile($event, i){
     let file = $event.target.files;
     this.upLoadFileService.addFile(file);
-    this.noFile = false;
-    this.formationForm.controls.alt.setValue(null);
+    // this.noFile = false;
+    if(this.imageVal[i] === null){
+      console.log('modif de l\'image');
+      this.imageVal.splice(i,1, $event.target.files[0].name);
+      this.ecoles.controls[i].get('alt').setValue(this.imageVal[i]);
+    } else if($event.target.files[0].name !== null ){
+      this.imageVal.push($event.target.files[0].name);
+      this.ecoles.controls[i].get('alt').setValue(this.imageVal[i]);
+    }
+    this.setValueANull[i] = false;
+
+    console.log(this.imageVal);
+    console.log(this.setValueANull);
   }
 
   deleteFile(index:number){
-    this.upLoadFileService.removeFile(index);
-    this.imageVal = this.upLoadFileService.imgDefault;
-    this.formationForm.controls.alt.setValue('image par default');
-    this.noFile = true;
+    if(this.upLoadFileService.filesHolder$.value.length > 0){
+      this.upLoadFileService.removeFile(index);
+      this.imageVal.splice(index,1,null);
+      this.setValueANull[index] = true;
+      this.ecoles.controls[index].get('alt').setValue('image par default');
+      this.ecoles.controls[index].get('image').setValue('');
+    }
   }
 
   supprImgLinkmodif(image: string){     // Si l'utilisateur supprime une image pour en mettre une autre
   this.upLoadFileService.removeFileOfCard(image.split('/')[3]);
   this.parcourService.updateExperience(this.formationForm.value, this.id);
-  this.imageVal = this.upLoadFileService.imgDefault;
+  // this.imageVal = this.upLoadFileService.imgDefault;
   this.formationForm.controls.image.setValue('null');
-  this.noFile = true;
+  // this.noFile = true;
   this.imageInstanceAModifier =  false;
 }
 
@@ -245,6 +312,34 @@ export class FormationFormComponent implements OnInit{
     }else if( nom.hasError('minlength')){
       return this.fGservice.messageErreur.minLenght(3);
     }
+  }
+
+  recupPremiereLettre(){
+    const tabFirstLetter = [];
+    const tabMajFirstLetter = [];
+    if(this.formationForm.value.nomFormation !== null && this.formationForm.value.nomFormation !== undefined ){
+      const maString = this.formationForm.value.nomFormation.split(' ');
+      if(maString.length > 1){
+        for (let index = 0; index < maString.length; index++) {
+          if(maString[index].length > 1 && maString[index].length <= 3){
+            tabMajFirstLetter.push(maString[index].toString());
+          } else if(maString[index].length > 3){
+            if(maString[index].toString().includes('\'')){
+              let recupMaj = maString[index].split("'")[1].toString().charAt(0).toUpperCase();
+              // console.log(maString.concat(maString[index].split("'")[1],maString[index].split("'")[1].substring(1)));
+              tabFirstLetter.push(recupMaj);
+              tabMajFirstLetter.push(maString[index].split("'")[0].concat("'", recupMaj , maString[index].split("'")[1].substring(1)));
+            }else{
+              let recupMaj = maString[index].toString().charAt(0).toUpperCase();
+              tabFirstLetter.push(recupMaj);
+              tabMajFirstLetter.push(recupMaj.concat(maString[index].substring(1)));
+            }
+          }
+          this.forcerMajFirstLetter = tabMajFirstLetter.join(' ');
+        }
+      }
+    }
+    this.initMajuscule = tabFirstLetter.join('');
   }
 }
 

@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const formationSchema = schema({
+    niveau: { type: String },
+    diplome: { type: String },
     nomFormation: {
         type: String,
         // maxlenght: 140,

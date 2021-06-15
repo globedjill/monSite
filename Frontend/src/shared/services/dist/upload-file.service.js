@@ -21,6 +21,8 @@ var operators_1 = require("rxjs/operators");
 var UploadFileService = /** @class */ (function () {
     function UploadFileService(http) {
         this.http = http;
+        this.urlImg = '';
+        this.imgDefault = 'http://localhost:3000/Capture d’écran 2021-04-05 à 16.26.17.png';
         this.filesHolder$ = new rxjs_1.BehaviorSubject([]);
     }
     UploadFileService.prototype.addFile = function (files) {
@@ -57,6 +59,7 @@ var UploadFileService = /** @class */ (function () {
         this.http["delete"]("/api/upload/" + files[index].file.name).subscribe();
         files.splice(index, 1);
         this.filesHolder$.next(files);
+        console.log(files);
     };
     UploadFileService.prototype.removeFileOfCard = function (nom) {
         this.http["delete"]("/api/upload/" + nom).subscribe();
